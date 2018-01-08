@@ -5,7 +5,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 
-import com.example.skyadapters3.ToolbarAdapter;
+
+import com.example.skyadapters4.ToolbarAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

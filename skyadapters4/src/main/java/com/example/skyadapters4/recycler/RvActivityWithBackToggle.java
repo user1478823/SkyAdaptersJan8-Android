@@ -5,9 +5,10 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
-import com.example.skyadapters3.RxBackground;
-import com.example.skyadapters3.ToolbarAdapter;
-import com.example.skyadapters3.ToolbarCustomizer;
+
+import com.example.skyadapters4.RxBackground;
+import com.example.skyadapters4.ToolbarAdapter;
+import com.example.skyadapters4.ToolbarCustomizer;
 
 import java.util.ArrayList;
 import java.util.List;
