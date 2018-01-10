@@ -1,1 +1,1 @@
-include ':app', ':skyadapters4'
+include ':app', ':skyadapters'
