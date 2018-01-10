@@ -2,6 +2,8 @@ package com.danilo.skyadapters.recycler;
 
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -38,8 +40,14 @@ public abstract class RvBase extends AppCompatActivity {
     public void populateRv(List value) {
         if (list == null) {
             list = value;
+            ViewGroup vg = (ViewGroup) getLayoutInflater().inflate(getRvCustomRow_holderIDS().get(0), null);
+            ArrayList<Integer> ids = new ArrayList();
+            for (int i = 0; i < vg.getChildCount(); i++) {
+                ids.add(vg.getChildAt(i).getId());
+            }
             adapter = new RvAdapter(list,
-                    getRvCustomRow_holderIDS().subList(1, getRvCustomRow_holderIDS().size()),
+                    /*getRvCustomRow_holderIDS().subList(1, getRvCustomRow_holderIDS().size())*/
+                    ids,
                     getRvCustomRow_holderIDS().get(0),
                     getRvOnBind());
             rv.setAdapter(adapter);
