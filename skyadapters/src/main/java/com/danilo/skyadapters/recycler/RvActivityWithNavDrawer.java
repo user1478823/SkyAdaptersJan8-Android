@@ -11,7 +11,9 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 
-
+import com.danilo.skyadapters.RxBackground;
+import com.danilo.skyadapters.ToolbarAdapter;
+import com.danilo.skyadapters.ToolbarCustomizer;
 
 import java.util.ArrayList;
 import java.util.List;

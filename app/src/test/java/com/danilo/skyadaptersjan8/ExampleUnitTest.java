@@ -1,4 +1,4 @@
-package com.danilo.skyadapters;
+package com.danilo.skyadaptersjan8;
 
 import org.junit.Test;
 

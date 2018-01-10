@@ -1,4 +1,4 @@
-package com.danilo.skyadapters;
+package com.danilo.skyadaptersjan8;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.example.skyadapters4.test", appContext.getPackageName());
+        assertEquals("com.example.skyadaptersjan8", appContext.getPackageName());
     }
 }
