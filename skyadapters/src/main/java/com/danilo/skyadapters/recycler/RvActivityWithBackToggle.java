@@ -17,7 +17,7 @@ import java.util.List;
  * Created by ttlnisoffice on 12/20/17.
  */
 
-public abstract class RvActivityWithBackToggle extends RvBase implements RxBackground.RxBackgroundInterface {
+public abstract class RvActivityWithBackToggle extends RvBase {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -54,8 +54,10 @@ public abstract class RvActivityWithBackToggle extends RvBase implements RxBackg
         }
 
         initRv(rvID);
-        new RxBackground().executeInBackground(this, this);
+        new RxBackground().executeInBackground(this, getRxBackgroundInterface());
     }
+
+    protected abstract RxBackground.RxBackgroundInterface getRxBackgroundInterface();
 
     public abstract int getActivityView();
 
@@ -85,17 +87,4 @@ public abstract class RvActivityWithBackToggle extends RvBase implements RxBackg
     public RvAdapter.RvInterface getRvOnBind() {
         return rvOnBind();
     }
-
-    @Override
-    public List getDoInBackground() {
-        return doInBackground();
-    }
-
-    @Override
-    public void getOnResultReceived(List value) {
-        onResultReceived(value);
-    }
-
-    public abstract List doInBackground();
-    public abstract void onResultReceived(List value);
 }
