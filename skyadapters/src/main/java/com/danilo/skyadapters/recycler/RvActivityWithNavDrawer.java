@@ -16,13 +16,12 @@ import com.danilo.skyadapters.ToolbarAdapter;
 import com.danilo.skyadapters.ToolbarCustomizer;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by ttlnisoffice on 12/22/17.
  */
 
-public abstract class RvActivityWithNavDrawer extends RvBase implements RxBackground.RxBackgroundInterface {
+public abstract class RvActivityWithNavDrawer extends RvBase /*implements RxBackground.RxBackgroundInterface*/ {
 
     private ActionBarDrawerToggle toggle;
 
@@ -59,7 +58,7 @@ public abstract class RvActivityWithNavDrawer extends RvBase implements RxBackgr
         }
 
         initRv(rvs.get(0));
-        new RxBackground().executeInBackground(this, this);
+        new RxBackground().executeInBackground(this, getRxBackgroundInterface());
 
         ToolbarAdapter toolbarAdapter = new ToolbarAdapter(this, getActivityView());
         toggle = toolbarAdapter.buildToolbarWithNavDrawer(
@@ -90,6 +89,8 @@ public abstract class RvActivityWithNavDrawer extends RvBase implements RxBackgr
             }
         }
     }
+
+    protected abstract RxBackground.RxBackgroundInterface getRxBackgroundInterface();
 
     public abstract int getActivityView();
 
@@ -128,22 +129,7 @@ public abstract class RvActivityWithNavDrawer extends RvBase implements RxBackgr
     public boolean onOptionsItemSelected(MenuItem item) {
         if (this.getClass().getSimpleName().contains("MainActivity") && toggle.onOptionsItemSelected(item)) {
             return true;
-        } else {
-            return false;
-        }
+        } else return false;
     }
-
-    @Override
-    public List getDoInBackground() {
-        return doInBackground();
-    }
-
-    @Override
-    public void getOnResultReceived(List value) {
-        onResultReceived(value);
-    }
-
-    public abstract List doInBackground();
-    public abstract void onResultReceived(List value);
 }
 
