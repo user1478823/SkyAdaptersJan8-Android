@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.widget.LinearLayout;
 
+import com.danilo.skyadapters.ErrorNotifications;
 import com.danilo.skyadapters.R;
 
 
@@ -29,9 +30,13 @@ public class SkyDrawerRecycler extends RecyclerView {
                 (attrs, R.styleable.SkyDrawerRecycler, 0, 0);
 
         customRow = ta.getResourceId(R.styleable.SkyDrawerRecycler_drawerCustomRow, 0);
-        menuID = ta.getResourceId(R.styleable.SkyDrawerRecycler_drawerMenu, 0);
 
-        int span = ta.getInt(R.styleable.SkyDrawerRecycler_drawerLayoutManager, 0);
+        menuID = ta.getResourceId(R.styleable.SkyDrawerRecycler_drawerMenu, 0);
+        if (customRow.equals(0)) {
+            new ErrorNotifications().displayError(context, "Add app:drawerMenu= into SkyDrawerRecycler xml");
+        }
+
+        int span = ta.getInt(R.styleable.SkyDrawerRecycler_drawerNumberOfRows, 1);
 
         layoutManager = new GridLayoutManager(context, span);
 
