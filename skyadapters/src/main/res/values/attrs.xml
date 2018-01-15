@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="RecyclerView">
-        <attr name="customRow" format="reference" />
-    </declare-styleable>
     <declare-styleable name="SkyDrawerRecycler">
         <attr name="drawerCustomRow"     format="reference" />
         <attr name="drawerMenu"          format="reference" />
