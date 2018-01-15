@@ -8,6 +8,7 @@ import android.util.AttributeSet;
 
 import com.danilo.skyadapters.R;
 
+
 /**
  * Created by ttlnisoffice on 1/15/18.
  */
