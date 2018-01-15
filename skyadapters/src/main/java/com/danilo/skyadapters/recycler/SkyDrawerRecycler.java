@@ -37,15 +37,6 @@ public class SkyDrawerRecycler extends RecyclerView {
 
         layoutManager = new GridLayoutManager(context, span);
 
-        /*if (sLayoutManager.contains("linear")) {
-            layoutManager = new LinearLayoutManager(context);
-        }
-
-        if (sLayoutManager.contains("grid")) {
-            int intLayoutManager = ta.getInt(R.styleable.SkyDrawerRecycler_drawerLayoutManager, 0);
-            layoutManager = new GridLayoutManager(context, intLayoutManager);
-        }*/
-
         ta.recycle();
     }
 

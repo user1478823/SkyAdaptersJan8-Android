@@ -35,7 +35,11 @@ public class RvAdapter extends RecyclerView.Adapter<RvAdapter.ViewHolder> {
         a.getMenuInflater().inflate(rv.getMenuID(), this.menu);
 
         rv.setLayoutManager(rv.getLayoutManager());
-        rv.setAdapter(this);
+        if (rv.getDrawerCustomRow() == 0) {
+            new ErrorNotifications().displayError(a, "Add app:drawerCustomRow= into SkyDrawerRecycler xml");
+        } else {
+            rv.setAdapter(this);
+        }
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
