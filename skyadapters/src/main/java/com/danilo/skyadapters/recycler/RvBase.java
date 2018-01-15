@@ -2,9 +2,6 @@ package com.danilo.skyadapters.recycler;
 
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -22,11 +19,11 @@ public abstract class RvBase extends AppCompatActivity {
 
     public  List list = null;
     public  RvAdapter adapter;
-    private SkyRecycler rv;
+    private RecyclerView rv;
 
     public void initRv(Integer rvID) {
         if (rvID != null) {
-            rv = (SkyRecycler) findViewById(rvID);
+            rv = (RecyclerView) findViewById(rvID);
             rv.setLayoutManager(getLayoutManager());
             if (getEndlessRecyclerOnScrollListener() != null) {
                 rv.addOnScrollListener(getEndlessRecyclerOnScrollListener());
@@ -43,8 +40,7 @@ public abstract class RvBase extends AppCompatActivity {
             list = value;
             adapter = new RvAdapter(list,
                     getRvCustomRow_holderIDS().subList(1, getRvCustomRow_holderIDS().size()),
-                    rv.getCustomRow()
-                    /*getRvCustomRow_holderIDS().get(0)*/ ,
+                    getRvCustomRow_holderIDS().get(0),
                     getRvOnBind());
             rv.setAdapter(adapter);
         } else {
