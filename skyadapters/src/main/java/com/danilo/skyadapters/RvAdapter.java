@@ -34,7 +34,7 @@ public class RvAdapter extends RecyclerView.Adapter<RvAdapter.ViewHolder> {
         this.menu = new PopupMenu(a, null).getMenu();
         a.getMenuInflater().inflate(rv.getMenuID(), this.menu);
 
-        rv.setLayoutManager(layoutManager);
+        rv.setLayoutManager(rv.getLayoutManager());
         rv.setAdapter(this);
     }
 
