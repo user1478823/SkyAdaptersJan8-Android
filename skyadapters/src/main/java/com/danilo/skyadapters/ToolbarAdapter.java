@@ -121,12 +121,10 @@ public class ToolbarAdapter {
         return toggleBtn;
     } */
 
-    public ActionBarDrawerToggle buildToolbarWithNavDrawer(
-                                                           Intent[] activitiesToLaunch,
-                                                           RecyclerView.LayoutManager layoutManager,
+    public ActionBarDrawerToggle buildToolbarWithNavDrawer(Intent[] activitiesToLaunch,
                                                            int drawerItemColor, Integer drawerRvID){
 
-        RvAdapter rvAdapter = new RvAdapter(a, activitiesToLaunch, layoutManager, drawerItemColor, drawerRvID);
+        RvAdapter rvAdapter = new RvAdapter(a, activitiesToLaunch, drawerItemColor, drawerRvID);
 
         ActionBarDrawerToggle toggleBtn = null;
         if (drawerLayout != null) {
