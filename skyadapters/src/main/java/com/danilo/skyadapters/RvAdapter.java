@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.danilo.skyadapters.recycler.SkyDrawerRecycler;
+
 public class RvAdapter extends RecyclerView.Adapter<RvAdapter.ViewHolder> {
 
     private Activity a;
@@ -18,6 +20,7 @@ public class RvAdapter extends RecyclerView.Adapter<RvAdapter.ViewHolder> {
     //private Class[] activities;
     private int color;
     private Menu menu;
+    private SkyDrawerRecycler rv;
 
     private Intent[] intents;
 
@@ -43,7 +46,7 @@ public class RvAdapter extends RecyclerView.Adapter<RvAdapter.ViewHolder> {
         this.customLayoutID = customLayoutID;
         this.color          = color;
 
-        RecyclerView rv = (RecyclerView) a.findViewById(drawerRvID);
+        rv = (SkyDrawerRecycler) a.findViewById(drawerRvID);
         rv.setLayoutManager(layoutManager);
         rv.setAdapter(this);
     }
@@ -54,7 +57,7 @@ public class RvAdapter extends RecyclerView.Adapter<RvAdapter.ViewHolder> {
 
         ViewHolder(View itemView) {
             super(itemView);
-            ViewGroup vg = (ViewGroup) a.getLayoutInflater().inflate(customLayoutID,null);
+            ViewGroup vg = (ViewGroup) a.getLayoutInflater().inflate(rv.getCustomRow(),null);
             for (int i = 0; i < vg.getChildCount(); i++) {
                 if (vg.getChildAt(i) instanceof TextView) {
                     txt = (TextView) itemView.findViewById(vg.getChildAt(i).getId());

@@ -3,4 +3,7 @@
     <declare-styleable name="SkyRecycler">
         <attr name="customRow" format="reference" />
     </declare-styleable>
+    <declare-styleable name="SkyDrawerRecycler">
+        <attr name="customRow" format="reference" />
+    </declare-styleable>
 </resources>
