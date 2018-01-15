@@ -31,7 +31,7 @@ public class SkyDrawerRecycler extends RecyclerView {
 
         customRow = ta.getResourceId(R.styleable.SkyDrawerRecycler_drawerCustomRow, 0);
 
-        menuID = ta.getResourceId(R.styleable.SkyDrawerRecycler_drawerMenu, 0);
+        menuID = ta.getResourceId(R.styleable.SkyDrawerRecycler_drawerMenu, R.menu.default_drawer_items);
         if (customRow.equals(0)) {
             new ErrorNotifications().displayError(context, "Add app:drawerMenu= into SkyDrawerRecycler xml");
         }
