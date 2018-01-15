@@ -2,6 +2,7 @@ package com.danilo.skyadapters;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -41,7 +42,7 @@ public class RvAdapter extends RecyclerView.Adapter<RvAdapter.ViewHolder> {
     public RvAdapter(final Activity a, Menu menu, Intent[] intents, int customLayoutID,
                      RecyclerView.LayoutManager layoutManager, int color, Integer drawerRvID) {
         this.a              = a;
-        this.menu           = menu;
+        //this.menu           = menu;
         this.intents        = intents;
         this.customLayoutID = customLayoutID;
         this.color          = color;
@@ -49,6 +50,10 @@ public class RvAdapter extends RecyclerView.Adapter<RvAdapter.ViewHolder> {
         rv = (SkyDrawerRecycler) a.findViewById(drawerRvID);
         rv.setLayoutManager(layoutManager);
         rv.setAdapter(this);
+
+        this.menu = new PopupMenu(a, null).getMenu();
+        a.getMenuInflater().inflate(rv.getMenuID(), menu);
+
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {

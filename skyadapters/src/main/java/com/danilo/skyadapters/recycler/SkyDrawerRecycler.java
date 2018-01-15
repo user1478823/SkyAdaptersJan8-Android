@@ -16,6 +16,7 @@ import com.danilo.skyadapters.R;
 public class SkyDrawerRecycler extends RecyclerView {
 
     private Integer customRow;
+    private Integer menuID;
 
     public SkyDrawerRecycler(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
@@ -25,9 +26,15 @@ public class SkyDrawerRecycler extends RecyclerView {
 
         customRow = ta.getResourceId(R.styleable.SkyDrawerRecycler_drawerCustomRow, 0);
         ta.recycle();
+
+        menuID = ta.getResourceId(R.styleable.SkyDrawerRecycler_drawerMenu, 0);
     }
 
     public Integer getDrawerCustomRow() {
         return customRow;
+    }
+
+    public Integer getMenuID() {
+        return menuID;
     }
 }

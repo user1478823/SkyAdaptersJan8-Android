@@ -5,5 +5,6 @@
     </declare-styleable>
     <declare-styleable name="SkyDrawerRecycler">
         <attr name="drawerCustomRow" format="reference" />
+        <attr name="drawerMenu"      format="reference" />
     </declare-styleable>
 </resources>
