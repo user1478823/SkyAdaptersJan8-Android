@@ -6,6 +6,6 @@
     <declare-styleable name="SkyDrawerRecycler">
         <attr name="drawerCustomRow"     format="reference" />
         <attr name="drawerMenu"          format="reference" />
-        <attr name="drawerLayoutManager" format="string|integer" />
+        <attr name="drawerLayoutManager" format="integer" />
     </declare-styleable>
 </resources>

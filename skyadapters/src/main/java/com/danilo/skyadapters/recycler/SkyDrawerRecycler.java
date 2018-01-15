@@ -31,16 +31,18 @@ public class SkyDrawerRecycler extends RecyclerView {
         customRow = ta.getResourceId(R.styleable.SkyDrawerRecycler_drawerCustomRow, 0);
         menuID = ta.getResourceId(R.styleable.SkyDrawerRecycler_drawerMenu, 0);
 
-        String sLayoutManager = ta.getString(R.styleable.SkyDrawerRecycler_drawerLayoutManager);
+        int span = ta.getInt(R.styleable.SkyDrawerRecycler_drawerLayoutManager, 0);
 
-        if (sLayoutManager.contains("linear")) {
+        layoutManager = new GridLayoutManager(context, span);
+
+        /*if (sLayoutManager.contains("linear")) {
             layoutManager = new LinearLayoutManager(context);
         }
 
         if (sLayoutManager.contains("grid")) {
             int intLayoutManager = ta.getInt(R.styleable.SkyDrawerRecycler_drawerLayoutManager, 0);
             layoutManager = new GridLayoutManager(context, intLayoutManager);
-        }
+        }*/
 
         ta.recycle();
     }
