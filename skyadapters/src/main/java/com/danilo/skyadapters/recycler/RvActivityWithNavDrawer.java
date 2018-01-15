@@ -64,7 +64,7 @@ public abstract class RvActivityWithNavDrawer extends RvBase /*implements RxBack
         toggle = toolbarAdapter.buildToolbarWithNavDrawer(
                 drawerActivitiesToLaunch(),
                 drawerLayoutManager(),
-                drawerItemColor()[2],
+                drawerItemColor(),
                 rvs.get(1));
 
         if (toggle != null) {
@@ -93,7 +93,7 @@ public abstract class RvActivityWithNavDrawer extends RvBase /*implements RxBack
 
     public abstract Intent[] drawerActivitiesToLaunch();
     public abstract RecyclerView.LayoutManager drawerLayoutManager();
-    public abstract Integer[] drawerItemColor();
+    public abstract Integer drawerItemColor();
 
     @Override
     public RvAdapter.RvInterface getRvOnBind() {
