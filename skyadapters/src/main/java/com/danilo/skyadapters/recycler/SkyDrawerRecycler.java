@@ -21,7 +21,7 @@ public class SkyDrawerRecycler extends RecyclerView {
         super(context, attrs);
 
         TypedArray ta = context.getTheme().obtainStyledAttributes
-                (attrs, R.styleable.SkyRecycler, 0, 0);
+                (attrs, R.styleable.SkyDrawerRecycler, 0, 0);
 
         customRow = ta.getResourceId(R.styleable.SkyDrawerRecycler_drawerCustomRow, 0);
         ta.recycle();
