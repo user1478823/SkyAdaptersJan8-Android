@@ -69,11 +69,6 @@ public abstract class RvActivityWithBackToggle extends RvBase {
     public abstract ThemeManager getMyTheme();
 
     @Override
-    public Integer getView() {
-        return getActivityView();
-    }
-
-    @Override
     public RecyclerView.LayoutManager getLayoutManager() {
         return rvLayoutManager();
     }

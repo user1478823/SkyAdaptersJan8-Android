@@ -104,11 +104,6 @@ public abstract class RvActivityWithNavDrawer extends RvBase /*implements RxBack
     }
 
     @Override
-    public Integer getView() {
-        return getActivityView();
-    }
-
-    @Override
     public RecyclerView.LayoutManager getLayoutManager() {
         return rvLayoutManager();
     }

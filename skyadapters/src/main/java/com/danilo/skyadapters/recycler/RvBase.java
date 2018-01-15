@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -19,13 +20,13 @@ import io.reactivex.disposables.Disposable;
 
 public abstract class RvBase extends AppCompatActivity {
 
-    public List list = null;
-    public RvAdapter adapter;
-    private RecyclerView rv;
+    public  List list = null;
+    public  RvAdapter adapter;
+    private SkyRecycler rv;
 
     public void initRv(Integer rvID) {
         if (rvID != null) {
-            rv = (RecyclerView) findViewById(rvID);
+            rv = (SkyRecycler) findViewById(rvID);
             rv.setLayoutManager(getLayoutManager());
             if (getEndlessRecyclerOnScrollListener() != null) {
                 rv.addOnScrollListener(getEndlessRecyclerOnScrollListener());
@@ -35,37 +36,23 @@ public abstract class RvBase extends AppCompatActivity {
         }
     }
 
-    protected abstract EndlessRecyclerOnScrollListener getEndlessRecyclerOnScrollListener();
+    public abstract EndlessRecyclerOnScrollListener getEndlessRecyclerOnScrollListener();
 
     public void populateRv(List value) {
         if (list == null) {
             list = value;
-            ViewGroup vg = (ViewGroup) getLayoutInflater().inflate(getRvCustomRow_holderIDS().get(0), null);
-            ArrayList<Integer> ids = new ArrayList();
-            for (int i = 0; i < vg.getChildCount(); i++) {
-                ids.add(vg.getChildAt(i).getId());
-            }
             adapter = new RvAdapter(list,
-                    /*getRvCustomRow_holderIDS().subList(1, getRvCustomRow_holderIDS().size())*/
-                    ids,
-                    getRvCustomRow_holderIDS().get(0),
+                    getRvCustomRow_holderIDS().subList(1, getRvCustomRow_holderIDS().size()),
+                    rv.getCustomRow()
+                    /*getRvCustomRow_holderIDS().get(0)*/ ,
                     getRvOnBind());
             rv.setAdapter(adapter);
         } else {
-            //int scroll = this.list.size();
             list.addAll(value);
-            /*adapter = new RvAdapter(this.list.size(),
-                    getRvCustomRow_holderIDS().subList(1, getRvCustomRow_holderIDS().size()),
-                    getRvCustomRow_holderIDS().get(0),
-                    getRvOnBind());
-            rv.setAdapter(adapter);
-            rv.scrollToPosition(scroll);*/
             adapter.notifyDataSetChanged();
-            //adapter.notifyItemRangeInserted(scroll, value.size());
         }
     }
 
-    public abstract Integer getView();
     public abstract RecyclerView.LayoutManager getLayoutManager();
     public abstract ArrayList<Integer> getRvCustomRow_holderIDS();
     public abstract RvAdapter.RvInterface getRvOnBind();
