@@ -17,34 +17,16 @@ import com.danilo.skyadapters.recycler.SkyDrawerRecycler;
 public class RvAdapter extends RecyclerView.Adapter<RvAdapter.ViewHolder> {
 
     private Activity a;
-    private int customLayoutID;
-    //private Class[] activities;
     private int color;
     private Menu menu;
     private SkyDrawerRecycler rv;
-
     private Intent[] intents;
 
 
-    /*public RvAdapter(final Activity a, Menu menu, Class[] activities, int customLayoutID,
+    public RvAdapter(final Activity a, Intent[] intents,
                      RecyclerView.LayoutManager layoutManager, int color, Integer drawerRvID) {
         this.a              = a;
-        this.menu           = menu;
-        this.activities     = activities;
-        this.customLayoutID = customLayoutID;
-        this.color          = color;
-
-        RecyclerView rv = (RecyclerView) a.findViewById(drawerRvID);
-        rv.setLayoutManager(layoutManager);
-        rv.setAdapter(this);
-    } */
-
-    public RvAdapter(final Activity a, Menu menu, Intent[] intents, int customLayoutID,
-                     RecyclerView.LayoutManager layoutManager, int color, Integer drawerRvID) {
-        this.a              = a;
-        //this.menu           = menu;
         this.intents        = intents;
-        this.customLayoutID = customLayoutID;
         this.color          = color;
 
         rv = (SkyDrawerRecycler) a.findViewById(drawerRvID);

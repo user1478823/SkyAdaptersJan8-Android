@@ -121,25 +121,18 @@ public class ToolbarAdapter {
         return toggleBtn;
     } */
 
-    public ActionBarDrawerToggle buildToolbarWithNavDrawer(int vgID,
+    public ActionBarDrawerToggle buildToolbarWithNavDrawer(
                                                            Intent[] activitiesToLaunch,
-                                                           int menuID,
-                                                           int customLayoutID,
                                                            RecyclerView.LayoutManager layoutManager,
                                                            int drawerItemColor, Integer drawerRvID){
 
-        Menu menu = new PopupMenu(a, null).getMenu();
-        a.getMenuInflater().inflate(menuID, menu);
-
-        RvAdapter rvAdapter = new RvAdapter(a, menu,
-                activitiesToLaunch, customLayoutID, layoutManager, drawerItemColor, drawerRvID);
+        RvAdapter rvAdapter = new RvAdapter(a, activitiesToLaunch, layoutManager, drawerItemColor, drawerRvID);
 
         ActionBarDrawerToggle toggleBtn = null;
         if (drawerLayout != null) {
             toggleBtn = new ActionBarDrawerToggle(a, drawerLayout,
                     R.string.drawer_open, R.string.drawer_closed);
             drawerLayout.addDrawerListener(toggleBtn);
-            //toggleBtn.syncState();
         }
 
         if (toolbar != null) {
