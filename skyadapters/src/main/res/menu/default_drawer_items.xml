@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:title="Error: Add app:drawerMenu= into SkyDrawerRecycler xml"></item>
+    <item
+        android:icon="?android:attr/alertDialogIcon"
+        android:title="Error: Add app:drawerMenu= into SkyDrawerRecycler xml"></item>
 
 </menu>
