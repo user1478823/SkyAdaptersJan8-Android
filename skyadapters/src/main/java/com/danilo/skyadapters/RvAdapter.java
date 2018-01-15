@@ -48,12 +48,12 @@ public class RvAdapter extends RecyclerView.Adapter<RvAdapter.ViewHolder> {
         this.color          = color;
 
         rv = (SkyDrawerRecycler) a.findViewById(drawerRvID);
-        rv.setLayoutManager(layoutManager);
-        rv.setAdapter(this);
 
         this.menu = new PopupMenu(a, null).getMenu();
         a.getMenuInflater().inflate(rv.getMenuID(), menu);
 
+        rv.setLayoutManager(layoutManager);
+        rv.setAdapter(this);
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
