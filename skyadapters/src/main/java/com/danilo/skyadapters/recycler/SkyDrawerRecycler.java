@@ -22,11 +22,11 @@ public class SkyDrawerRecycler extends RecyclerView {
         TypedArray ta = context.getTheme().obtainStyledAttributes
                 (attrs, R.styleable.SkyRecycler, 0, 0);
 
-        customRow = ta.getResourceId(R.styleable.SkyRecycler_customRow, 0);
+        customRow = ta.getResourceId(R.styleable.SkyDrawerRecycler_drawerCustomRow, 0);
         ta.recycle();
     }
 
-    public Integer getCustomRow() {
+    public Integer getDrawerCustomRow() {
         return customRow;
     }
 }

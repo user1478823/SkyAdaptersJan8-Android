@@ -4,6 +4,6 @@
         <attr name="customRow" format="reference" />
     </declare-styleable>
     <declare-styleable name="SkyDrawerRecycler">
-        <attr name="customRow" format="reference" />
+        <attr name="drawerCustomRow" format="reference" />
     </declare-styleable>
 </resources>

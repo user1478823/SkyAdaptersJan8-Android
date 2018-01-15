@@ -57,7 +57,7 @@ public class RvAdapter extends RecyclerView.Adapter<RvAdapter.ViewHolder> {
 
         ViewHolder(View itemView) {
             super(itemView);
-            ViewGroup vg = (ViewGroup) a.getLayoutInflater().inflate(rv.getCustomRow(),null);
+            ViewGroup vg = (ViewGroup) a.getLayoutInflater().inflate(rv.getDrawerCustomRow(),null);
             for (int i = 0; i < vg.getChildCount(); i++) {
                 if (vg.getChildAt(i) instanceof TextView) {
                     txt = (TextView) itemView.findViewById(vg.getChildAt(i).getId());
