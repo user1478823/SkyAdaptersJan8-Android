@@ -50,7 +50,7 @@ public class RvAdapter extends RecyclerView.Adapter<RvAdapter.ViewHolder> {
         rv = (SkyDrawerRecycler) a.findViewById(drawerRvID);
 
         this.menu = new PopupMenu(a, null).getMenu();
-        a.getMenuInflater().inflate(rv.getMenuID(), menu);
+        a.getMenuInflater().inflate(rv.getMenuID(), this.menu);
 
         rv.setLayoutManager(layoutManager);
         rv.setAdapter(this);
