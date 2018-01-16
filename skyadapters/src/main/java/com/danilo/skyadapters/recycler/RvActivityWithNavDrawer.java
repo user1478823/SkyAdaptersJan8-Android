@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import com.danilo.skyadapters.RxBackground;
 import com.danilo.skyadapters.ToolbarAdapter;
 import com.danilo.skyadapters.ToolbarCustomizer;
+import com.danilo.skyadapters.ToolbarPOJO;
 
 import java.util.ArrayList;
 
@@ -70,7 +71,23 @@ public abstract class RvActivityWithNavDrawer extends RvBase /*implements RxBack
             toggle.syncState();
         }
 
-        if (customizeToolbar() != null) {
+        ToolbarPOJO toolbar = customizeToolbar();
+
+        if (toolbar != null) {
+            if (toolbar.getTitle() != null) {
+                toolbarAdapter.setToolbarTitle(toolbar.getTitle());
+            }
+            if (toolbar.getColor() != null) {
+                toolbarAdapter.setToolbarColor(toolbar.getColor());
+            }
+            if (toolbar.getTextColor() != null) {
+                toolbarAdapter.setToolbarTextColor(toolbar.getTextColor());
+            }
+            if (toolbar.getTypeface() != null) {
+                toolbarAdapter.setToolbarTypeFace(toolbar.getTypeface());
+            }
+
+        /*if (customizeToolbar() != null) {
             if (customizeToolbar().setToolbarTitle() != null) {
                 toolbarAdapter.setToolbarTitle(customizeToolbar().setToolbarTitle());
             }
@@ -82,7 +99,7 @@ public abstract class RvActivityWithNavDrawer extends RvBase /*implements RxBack
             }
             if (customizeToolbar().setToolbarTypeFace() != null) {
                 toolbarAdapter.setToolbarTypeFace(customizeToolbar().setToolbarTypeFace());
-            }
+            }*/
         }
     }
 
@@ -112,7 +129,8 @@ public abstract class RvActivityWithNavDrawer extends RvBase /*implements RxBack
     public abstract RecyclerView.LayoutManager rvLayoutManager();
     public abstract ArrayList<Integer> rvCustomRow_holderIDS();
 
-    public abstract ToolbarCustomizer customizeToolbar();
+    //public abstract ToolbarCustomizer customizeToolbar();
+    public abstract ToolbarPOJO customizeToolbar();
     public abstract ThemeManager getMyTheme();
 
     @Override
