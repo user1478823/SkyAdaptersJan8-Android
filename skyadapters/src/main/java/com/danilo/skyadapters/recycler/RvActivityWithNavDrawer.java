@@ -87,10 +87,7 @@ public abstract class RvActivityWithNavDrawer extends RvBase /*implements RxBack
     }
 
     public abstract RxBackground.RxBackgroundInterface getRxBackgroundInterface();
-
     public abstract ActivityPOJO getActivityPOJO();
-    //public abstract int getActivityView();
-
     public abstract Intent[] drawerActivitiesToLaunch();
 
 
@@ -113,7 +110,6 @@ public abstract class RvActivityWithNavDrawer extends RvBase /*implements RxBack
     public abstract RecyclerView.LayoutManager rvLayoutManager();
     public abstract ArrayList<Integer> rvCustomRow_holderIDS();
     public abstract DrawerToolbarPOJO customizeToolbar();
-    //public abstract Integer getMyTheme();
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

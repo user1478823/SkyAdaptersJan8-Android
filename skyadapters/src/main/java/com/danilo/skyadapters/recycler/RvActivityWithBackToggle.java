@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
 
+import com.danilo.skyadapters.ActivityPOJO;
 import com.danilo.skyadapters.RxBackground;
 import com.danilo.skyadapters.ToolbarAdapter;
 import com.danilo.skyadapters.ToolbarPOJO;
@@ -21,12 +22,13 @@ public abstract class RvActivityWithBackToggle extends RvBase {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getMyTheme() != null) {
-            Integer theme = getMyTheme().getTheme();
+        ActivityPOJO aP = getActivityPOJO();
+        if (aP.getTheme() != null) {
+            Integer theme = aP.getTheme();
             setTheme(theme);
         }
-        setContentView(getActivityView());
-        ToolbarAdapter toolbarAdapter = new ToolbarAdapter(this, getActivityView());
+        setContentView(aP.getView());
+        ToolbarAdapter toolbarAdapter = new ToolbarAdapter(this, aP.getView());
         toolbarAdapter.buildToolbarWithHomeUp();
 
         ToolbarPOJO toolbar = customizeToolbar();
@@ -38,7 +40,7 @@ public abstract class RvActivityWithBackToggle extends RvBase {
             if (toolbar.getTypeface()  != null) toolbarAdapter.setToolbarTypeFace(toolbar.getTypeface());
         }
 
-        ViewGroup vg = (ViewGroup) getLayoutInflater().inflate(getActivityView(), null);
+        ViewGroup vg = (ViewGroup) getLayoutInflater().inflate(aP.getView(), null);
 
         Integer rvID = null;
         for (int i = 0; i < vg.getChildCount(); i++) {
@@ -52,15 +54,12 @@ public abstract class RvActivityWithBackToggle extends RvBase {
     }
 
     protected abstract RxBackground.RxBackgroundInterface getRxBackgroundInterface();
-
-    public abstract int getActivityView();
-
+    public abstract ActivityPOJO getActivityPOJO();
     public abstract RvAdapter.RvInterface rvOnBind();
     public abstract RecyclerView.LayoutManager rvLayoutManager();
     public abstract ArrayList<Integer> rvCustomRow_holderIDS();
 
     public abstract ToolbarPOJO customizeToolbar();
-    public abstract ThemeManager getMyTheme();
 
     @Override
     public RecyclerView.LayoutManager getLayoutManager() {
