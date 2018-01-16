@@ -17,7 +17,7 @@ import com.danilo.skyadapters.recycler.SkyDrawerRecycler;
 public class RvAdapter extends RecyclerView.Adapter<RvAdapter.ViewHolder> {
 
     private Activity a;
-    private int color;
+    private Integer color;
     private Menu menu;
     private SkyDrawerRecycler rv;
     private Intent[] intents;
@@ -71,7 +71,9 @@ public class RvAdapter extends RecyclerView.Adapter<RvAdapter.ViewHolder> {
         holder.txt.setText(menuItem.getTitle());
         if (holder.img != null) holder.img.setImageDrawable(menuItem.getIcon());
 
-        holder.itemView.setBackgroundColor(color);
+        if (color != null) {
+            holder.itemView.setBackgroundColor(color);
+        }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

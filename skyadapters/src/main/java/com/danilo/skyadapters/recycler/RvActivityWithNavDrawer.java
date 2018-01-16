@@ -11,9 +11,9 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 
+import com.danilo.skyadapters.DrawerToolbarPOJO;
 import com.danilo.skyadapters.RxBackground;
 import com.danilo.skyadapters.ToolbarAdapter;
-import com.danilo.skyadapters.ToolbarCustomizer;
 import com.danilo.skyadapters.ToolbarPOJO;
 
 import java.util.ArrayList;
@@ -29,11 +29,9 @@ public abstract class RvActivityWithNavDrawer extends RvBase /*implements RxBack
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getMyTheme() != null) {
-            Integer theme = getMyTheme().getTheme();
-            setTheme(theme);
-        }
+        if (getMyTheme() != null) setTheme(getMyTheme());
         setContentView(getActivityView());
+
         ViewGroup vg = (ViewGroup) getLayoutInflater().inflate(getActivityView(), null);
 
         DrawerLayout drawerLayout = null;
@@ -58,20 +56,25 @@ public abstract class RvActivityWithNavDrawer extends RvBase /*implements RxBack
             }
         }
 
+        DrawerToolbarPOJO toolbar = customizeToolbar();
+
+        Integer drawerItemsColor = null;
+        if (toolbar != null) {
+            drawerItemsColor = toolbar.getDrawerItemsColor();
+        }
+
         initRv(rvs.get(0));
         new RxBackground().executeInBackground(this, getRxBackgroundInterface());
 
         ToolbarAdapter toolbarAdapter = new ToolbarAdapter(this, getActivityView());
         toggle = toolbarAdapter.buildToolbarWithNavDrawer(
                 drawerActivitiesToLaunch(),
-                drawerItemColor(),
+                drawerItemsColor,
                 rvs.get(1));
 
         if (toggle != null) {
             toggle.syncState();
         }
-
-        ToolbarPOJO toolbar = customizeToolbar();
 
         if (toolbar != null) {
             if (toolbar.getTitle()     != null) toolbarAdapter.setToolbarTitle(toolbar.getTitle());
@@ -86,7 +89,7 @@ public abstract class RvActivityWithNavDrawer extends RvBase /*implements RxBack
     public abstract int getActivityView();
 
     public abstract Intent[] drawerActivitiesToLaunch();
-    public abstract Integer drawerItemColor();
+    //public abstract Integer drawerItemColor();
 
     @Override
     public RvAdapter.RvInterface getRvOnBind() {
@@ -106,8 +109,8 @@ public abstract class RvActivityWithNavDrawer extends RvBase /*implements RxBack
     public abstract RvAdapter.RvInterface rvOnBind();
     public abstract RecyclerView.LayoutManager rvLayoutManager();
     public abstract ArrayList<Integer> rvCustomRow_holderIDS();
-    public abstract ToolbarPOJO customizeToolbar();
-    public abstract ThemeManager getMyTheme();
+    public abstract DrawerToolbarPOJO customizeToolbar();
+    public abstract Integer getMyTheme();
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

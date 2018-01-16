@@ -8,11 +8,9 @@ import android.view.ViewGroup;
 
 import com.danilo.skyadapters.RxBackground;
 import com.danilo.skyadapters.ToolbarAdapter;
-import com.danilo.skyadapters.ToolbarCustomizer;
 import com.danilo.skyadapters.ToolbarPOJO;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by ttlnisoffice on 12/20/17.

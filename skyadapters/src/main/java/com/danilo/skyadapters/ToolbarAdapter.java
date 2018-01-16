@@ -122,7 +122,7 @@ public class ToolbarAdapter {
     } */
 
     public ActionBarDrawerToggle buildToolbarWithNavDrawer(Intent[] activitiesToLaunch,
-                                                           int drawerItemColor, Integer drawerRvID){
+                                                           Integer drawerItemColor, Integer drawerRvID){
 
         RvAdapter rvAdapter = new RvAdapter(a, activitiesToLaunch, drawerItemColor, drawerRvID);
 
