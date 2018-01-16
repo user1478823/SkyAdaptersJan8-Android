@@ -24,7 +24,7 @@ public class RvAdapter extends RecyclerView.Adapter<RvAdapter.ViewHolder> {
 
 
     public RvAdapter(final Activity a, Intent[] intents,
-                     int color, Integer drawerRvID) {
+                     Integer color, Integer drawerRvID) {
         this.a              = a;
         this.intents        = intents;
         this.color          = color;
