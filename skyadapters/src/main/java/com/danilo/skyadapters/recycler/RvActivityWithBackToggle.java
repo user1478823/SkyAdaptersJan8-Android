@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import com.danilo.skyadapters.RxBackground;
 import com.danilo.skyadapters.ToolbarAdapter;
 import com.danilo.skyadapters.ToolbarCustomizer;
+import com.danilo.skyadapters.ToolbarPOJO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,19 +30,14 @@ public abstract class RvActivityWithBackToggle extends RvBase {
         setContentView(getActivityView());
         ToolbarAdapter toolbarAdapter = new ToolbarAdapter(this, getActivityView());
         toolbarAdapter.buildToolbarWithHomeUp();
-        if (customizeToolbar() != null) {
-            if (customizeToolbar().setToolbarTitle() != null) {
-                toolbarAdapter.setToolbarTitle(customizeToolbar().setToolbarTitle());
-            }
-            if (customizeToolbar().setToolbarColor() != null) {
-                toolbarAdapter.setToolbarColor(customizeToolbar().setToolbarColor());
-            }
-            if (customizeToolbar().setToolbarTextColor() != null) {
-                toolbarAdapter.setToolbarTextColor(customizeToolbar().setToolbarTextColor());
-            }
-            if (customizeToolbar().setToolbarTypeFace() != null) {
-                toolbarAdapter.setToolbarTypeFace(customizeToolbar().setToolbarTypeFace());
-            }
+
+        ToolbarPOJO toolbar = customizeToolbar();
+
+        if (toolbar != null) {
+            if (toolbar.getTitle()     != null) toolbarAdapter.setToolbarTitle(toolbar.getTitle());
+            if (toolbar.getColor()     != null) toolbarAdapter.setToolbarColor(toolbar.getColor());
+            if (toolbar.getTextColor() != null) toolbarAdapter.setToolbarTextColor(toolbar.getTextColor());
+            if (toolbar.getTypeface()  != null) toolbarAdapter.setToolbarTypeFace(toolbar.getTypeface());
         }
 
         ViewGroup vg = (ViewGroup) getLayoutInflater().inflate(getActivityView(), null);
@@ -65,7 +61,7 @@ public abstract class RvActivityWithBackToggle extends RvBase {
     public abstract RecyclerView.LayoutManager rvLayoutManager();
     public abstract ArrayList<Integer> rvCustomRow_holderIDS();
 
-    public abstract ToolbarCustomizer customizeToolbar();
+    public abstract ToolbarPOJO customizeToolbar();
     public abstract ThemeManager getMyTheme();
 
     @Override

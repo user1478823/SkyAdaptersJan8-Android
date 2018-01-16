@@ -74,36 +74,14 @@ public abstract class RvActivityWithNavDrawer extends RvBase /*implements RxBack
         ToolbarPOJO toolbar = customizeToolbar();
 
         if (toolbar != null) {
-            if (toolbar.getTitle() != null) {
-                toolbarAdapter.setToolbarTitle(toolbar.getTitle());
-            }
-            if (toolbar.getColor() != null) {
-                toolbarAdapter.setToolbarColor(toolbar.getColor());
-            }
-            if (toolbar.getTextColor() != null) {
-                toolbarAdapter.setToolbarTextColor(toolbar.getTextColor());
-            }
-            if (toolbar.getTypeface() != null) {
-                toolbarAdapter.setToolbarTypeFace(toolbar.getTypeface());
-            }
-
-        /*if (customizeToolbar() != null) {
-            if (customizeToolbar().setToolbarTitle() != null) {
-                toolbarAdapter.setToolbarTitle(customizeToolbar().setToolbarTitle());
-            }
-            if (customizeToolbar().setToolbarColor() != null) {
-                toolbarAdapter.setToolbarColor(customizeToolbar().setToolbarColor());
-            }
-            if (customizeToolbar().setToolbarTextColor() != null) {
-                toolbarAdapter.setToolbarTextColor(customizeToolbar().setToolbarTextColor());
-            }
-            if (customizeToolbar().setToolbarTypeFace() != null) {
-                toolbarAdapter.setToolbarTypeFace(customizeToolbar().setToolbarTypeFace());
-            }*/
+            if (toolbar.getTitle()     != null) toolbarAdapter.setToolbarTitle(toolbar.getTitle());
+            if (toolbar.getColor()     != null) toolbarAdapter.setToolbarColor(toolbar.getColor());
+            if (toolbar.getTextColor() != null) toolbarAdapter.setToolbarTextColor(toolbar.getTextColor());
+            if (toolbar.getTypeface()  != null) toolbarAdapter.setToolbarTypeFace(toolbar.getTypeface());
         }
     }
 
-    protected abstract RxBackground.RxBackgroundInterface getRxBackgroundInterface();
+    public abstract RxBackground.RxBackgroundInterface getRxBackgroundInterface();
 
     public abstract int getActivityView();
 
@@ -128,8 +106,6 @@ public abstract class RvActivityWithNavDrawer extends RvBase /*implements RxBack
     public abstract RvAdapter.RvInterface rvOnBind();
     public abstract RecyclerView.LayoutManager rvLayoutManager();
     public abstract ArrayList<Integer> rvCustomRow_holderIDS();
-
-    //public abstract ToolbarCustomizer customizeToolbar();
     public abstract ToolbarPOJO customizeToolbar();
     public abstract ThemeManager getMyTheme();
 

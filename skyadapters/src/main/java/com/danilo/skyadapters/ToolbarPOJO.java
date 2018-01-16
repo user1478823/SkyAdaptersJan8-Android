@@ -8,12 +8,10 @@ import android.graphics.Typeface;
 
 public class ToolbarPOJO {
 
-    String   title;
-    Integer  color;
-    Typeface typeface;
-    Integer  textColor;
-
-    public ToolbarPOJO() {}
+    private String   title;
+    private Integer  color;
+    private Typeface typeface;
+    private Integer  textColor;
 
     public ToolbarPOJO(String title, Integer color, Typeface typeface, Integer textColor) {
         this.title = title;
