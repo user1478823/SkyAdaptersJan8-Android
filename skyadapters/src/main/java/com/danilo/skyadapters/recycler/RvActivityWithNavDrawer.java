@@ -60,7 +60,7 @@ public abstract class RvActivityWithNavDrawer extends RvBase {
         }
 
         DrawerToolbarPOJO toolbarP = null;
-        if (ToolbarPOJO.ToolbarCustomizer.class.isAssignableFrom(this.getClass())) {
+        if (DrawerToolbarPOJO.DrawerToolbarCustomizer.class.isAssignableFrom(this.getClass())) {
             toolbarCustomizer = ((DrawerToolbarPOJO.DrawerToolbarCustomizer) this);
             toolbarP = toolbarCustomizer.customizeDrawerToolbar();
         }
