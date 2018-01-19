@@ -23,9 +23,10 @@ import java.util.ArrayList;
  * Created by ttlnisoffice on 12/22/17.
  */
 
-public abstract class RvActivityWithNavDrawer extends RvBase /*implements RxBackground.RxBackgroundInterface*/ {
+public abstract class RvActivityWithNavDrawer extends RvBase {
 
     private ActionBarDrawerToggle toggle;
+    private DrawerToolbarPOJO.DrawerToolbarCustomizer toolbarCustomizer;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -58,11 +59,15 @@ public abstract class RvActivityWithNavDrawer extends RvBase /*implements RxBack
             }
         }
 
-        DrawerToolbarPOJO toolbar = customizeToolbar();
+        DrawerToolbarPOJO toolbarP = null;
+        if (ToolbarPOJO.ToolbarCustomizer.class.isAssignableFrom(this.getClass())) {
+            toolbarCustomizer = ((DrawerToolbarPOJO.DrawerToolbarCustomizer) this);
+            toolbarP = toolbarCustomizer.customizeDrawerToolbar();
+        }
 
         Integer drawerItemsColor = null;
-        if (toolbar != null) {
-            drawerItemsColor = toolbar.getDrawerItemsColor();
+        if (toolbarP != null) {
+            drawerItemsColor = toolbarP.getDrawerItemsColor();
         }
 
         initRv(rvs.get(0));
@@ -78,11 +83,11 @@ public abstract class RvActivityWithNavDrawer extends RvBase /*implements RxBack
             toggle.syncState();
         }
 
-        if (toolbar != null) {
-            if (toolbar.getTitle()     != null) toolbarAdapter.setToolbarTitle(toolbar.getTitle());
-            if (toolbar.getColor()     != null) toolbarAdapter.setToolbarColor(toolbar.getColor());
-            if (toolbar.getTextColor() != null) toolbarAdapter.setToolbarTextColor(toolbar.getTextColor());
-            if (toolbar.getTypeface()  != null) toolbarAdapter.setToolbarTypeFace(toolbar.getTypeface());
+        if (toolbarP != null) {
+            if (toolbarP.getTitle()     != null) toolbarAdapter.setToolbarTitle(toolbarP.getTitle());
+            if (toolbarP.getColor()     != null) toolbarAdapter.setToolbarColor(toolbarP.getColor());
+            if (toolbarP.getTextColor() != null) toolbarAdapter.setToolbarTextColor(toolbarP.getTextColor());
+            if (toolbarP.getTypeface()  != null) toolbarAdapter.setToolbarTypeFace(toolbarP.getTypeface());
         }
     }
 
