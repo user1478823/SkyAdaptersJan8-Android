@@ -64,11 +64,6 @@ public abstract class RvActivityWithBackToggle extends RvBase {
     public abstract ToolbarPOJO customizeToolbar();
 
     @Override
-    public RecyclerView.LayoutManager getLayoutManager() {
-        return rvLayoutManager();
-    }
-
-    @Override
     public ArrayList<Integer> getRvCustomRow_holderIDS() {
         return rvCustomRow_holderIDS();
     }

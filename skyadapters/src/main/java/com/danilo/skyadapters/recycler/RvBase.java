@@ -54,7 +54,7 @@ public abstract class RvBase extends AppCompatActivity /*implements EndlessRecyc
         }
     }
 
-    
+
     public abstract ArrayList<Integer> getRvCustomRow_holderIDS();
     public abstract RvAdapter.RvInterface getRvOnBind();
 
