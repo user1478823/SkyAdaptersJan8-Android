@@ -1,8 +1,8 @@
 package com.danilo.skyadapters.recycler;
 
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -16,35 +16,23 @@ import io.reactivex.disposables.Disposable;
  * Created by ttlnisoffice on 12/29/17.
  */
 
-public abstract class RvBase extends AppCompatActivity /*implements EndlessRecyclerOnScrollListener2.onScrollInterface*/ {
+public abstract class RvBase extends AppCompatActivity /*implements EndlessRecyclerOnScrollListener.onScrollInterface*/ {
 
     public  List list = null;
     public  RvAdapter adapter;
     public RecyclerView rv;
 
-    private EndlessRecyclerOnScrollListener2.onScrollInterface onScrollInterface;
+    private EndlessRecyclerOnScrollListener.onScrollInterface onScrollInterface;
 
 
     public void initRv(Integer rvID) {
         if (rvID != null) {
             rv = (RecyclerView) findViewById(rvID);
-            rv.setLayoutManager(getLayoutManager());
-            /*if (getEndlessRecyclerOnScrollListener() != null) {
-                rv.addOnScrollListener(getEndlessRecyclerOnScrollListener());
-            }*/
-            /*if (this.onScroll() != null) {
-                rv.addOnScrollListener(onScroll());
-            }*/
-
-            if (EndlessRecyclerOnScrollListener2.onScrollInterface.class.isAssignableFrom(this.getClass())) {
-                onScrollInterface = (EndlessRecyclerOnScrollListener2.onScrollInterface) this;
+            rv.setLayoutManager(new LinearLayoutManager(this));
+            if (EndlessRecyclerOnScrollListener.onScrollInterface.class.isAssignableFrom(this.getClass())) {
+                onScrollInterface = (EndlessRecyclerOnScrollListener.onScrollInterface) this;
                 rv.addOnScrollListener(onScrollInterface.onScroll());
-                
             }
-
-
-
-
         } else {
             Toast.makeText(this, "Error: RvID is null", Toast.LENGTH_LONG).show();
         }
@@ -66,7 +54,7 @@ public abstract class RvBase extends AppCompatActivity /*implements EndlessRecyc
         }
     }
 
-    public abstract RecyclerView.LayoutManager getLayoutManager();
+    
     public abstract ArrayList<Integer> getRvCustomRow_holderIDS();
     public abstract RvAdapter.RvInterface getRvOnBind();
 
