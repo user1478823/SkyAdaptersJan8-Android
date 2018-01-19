@@ -103,7 +103,7 @@ public abstract class RvActivityWithNavDrawer extends RvBase /*implements RxBack
 
     public abstract RvAdapter.RvInterface rvOnBind();
     public abstract ArrayList<Integer> rvCustomRow_holderIDS();
-    public abstract DrawerToolbarPOJO customizeToolbar();
+    //public abstract DrawerToolbarPOJO customizeToolbar();
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

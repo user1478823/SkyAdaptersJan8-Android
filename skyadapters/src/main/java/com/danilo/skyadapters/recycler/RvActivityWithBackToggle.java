@@ -43,7 +43,7 @@ public abstract class RvActivityWithBackToggle extends RvBase {
             if (toolbarP.getTextColor() != null) toolbarAdapter.setToolbarTextColor(toolbarP.getTextColor());
             if (toolbarP.getTypeface()  != null) toolbarAdapter.setToolbarTypeFace(toolbarP.getTypeface());
         }
-        
+
         ViewGroup vg = (ViewGroup) getLayoutInflater().inflate(aP.getView(), null);
 
         Integer rvID = null;

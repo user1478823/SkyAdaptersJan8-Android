@@ -15,6 +15,10 @@ public class DrawerToolbarPOJO extends ToolbarPOJO {
         this.drawerItemsColor = drawerItemsColor;
     }
 
+    public interface DrawerToolbarCustomizer {
+        public DrawerToolbarPOJO customizeDrawerToolbar();
+    }
+
     public Integer getDrawerItemsColor() {
         return drawerItemsColor;
     }
