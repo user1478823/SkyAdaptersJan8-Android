@@ -19,7 +19,7 @@ import java.util.ArrayList;
 
 public abstract class RvActivityWithBackToggle extends RvBase {
 
-
+    private ToolbarPOJO.ToolbarCustomizer toolbarCustomizer;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -33,15 +33,17 @@ public abstract class RvActivityWithBackToggle extends RvBase {
         ToolbarAdapter toolbarAdapter = new ToolbarAdapter(this, aP.getView());
         toolbarAdapter.buildToolbarWithHomeUp();
 
-        ToolbarPOJO toolbar = customizeToolbar();
+        ToolbarPOJO toolbarP;
+        if (ToolbarPOJO.ToolbarCustomizer.class.isAssignableFrom(this.getClass())) {
+            toolbarCustomizer = ((ToolbarPOJO.ToolbarCustomizer) this);
+            toolbarP = toolbarCustomizer.customizeToolbar();
 
-        if (toolbar != null) {
-            if (toolbar.getTitle()     != null) toolbarAdapter.setToolbarTitle(toolbar.getTitle());
-            if (toolbar.getColor()     != null) toolbarAdapter.setToolbarColor(toolbar.getColor());
-            if (toolbar.getTextColor() != null) toolbarAdapter.setToolbarTextColor(toolbar.getTextColor());
-            if (toolbar.getTypeface()  != null) toolbarAdapter.setToolbarTypeFace(toolbar.getTypeface());
+            if (toolbarP.getTitle()     != null) toolbarAdapter.setToolbarTitle(toolbarP.getTitle());
+            if (toolbarP.getColor()     != null) toolbarAdapter.setToolbarColor(toolbarP.getColor());
+            if (toolbarP.getTextColor() != null) toolbarAdapter.setToolbarTextColor(toolbarP.getTextColor());
+            if (toolbarP.getTypeface()  != null) toolbarAdapter.setToolbarTypeFace(toolbarP.getTypeface());
         }
-
+        
         ViewGroup vg = (ViewGroup) getLayoutInflater().inflate(aP.getView(), null);
 
         Integer rvID = null;
@@ -60,7 +62,7 @@ public abstract class RvActivityWithBackToggle extends RvBase {
     public abstract RvAdapter.RvInterface rvOnBind();
     public abstract ArrayList<Integer> rvCustomRow_holderIDS();
 
-    public abstract ToolbarPOJO customizeToolbar();
+    //public abstract ToolbarPOJO customizeToolbar();
 
     @Override
     public ArrayList<Integer> getRvCustomRow_holderIDS() {

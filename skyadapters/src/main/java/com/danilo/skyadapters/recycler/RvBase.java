@@ -24,7 +24,6 @@ public abstract class RvBase extends AppCompatActivity /*implements EndlessRecyc
 
     private EndlessRecyclerOnScrollListener.onScrollInterface onScrollInterface;
 
-
     public void initRv(Integer rvID) {
         if (rvID != null) {
             rv = (RecyclerView) findViewById(rvID);

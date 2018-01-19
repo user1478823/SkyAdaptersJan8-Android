@@ -20,6 +20,10 @@ public class ToolbarPOJO {
         this.textColor = textColor;
     }
 
+    public interface ToolbarCustomizer {
+        public ToolbarPOJO customizeToolbar();
+    }
+
     public String getTitle() {
         return title;
     }
