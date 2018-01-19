@@ -16,11 +16,14 @@ import io.reactivex.disposables.Disposable;
  * Created by ttlnisoffice on 12/29/17.
  */
 
-public abstract class RvBase extends AppCompatActivity implements EndlessRecyclerOnScrollListener2.onScrollInterface {
+public abstract class RvBase extends AppCompatActivity /*implements EndlessRecyclerOnScrollListener2.onScrollInterface*/ {
 
     public  List list = null;
     public  RvAdapter adapter;
     public RecyclerView rv;
+    private EndlessRecyclerOnScrollListener2.onScrollInterface onScrollInterface;
+
+
 
     public void initRv(Integer rvID) {
         if (rvID != null) {
@@ -29,9 +32,15 @@ public abstract class RvBase extends AppCompatActivity implements EndlessRecycle
             /*if (getEndlessRecyclerOnScrollListener() != null) {
                 rv.addOnScrollListener(getEndlessRecyclerOnScrollListener());
             }*/
-            if (this.onScroll() != null) {
+            /*if (this.onScroll() != null) {
                 rv.addOnScrollListener(onScroll());
+            }*/
+
+            if (EndlessRecyclerOnScrollListener2.onScrollInterface.class.isAssignableFrom(this.getClass())) {
+                onScrollInterface = (EndlessRecyclerOnScrollListener2.onScrollInterface) this;
+                rv.addOnScrollListener(onScrollInterface.onScroll());
             }
+
 
 
 
