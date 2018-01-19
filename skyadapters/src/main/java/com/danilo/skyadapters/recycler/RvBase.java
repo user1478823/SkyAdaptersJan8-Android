@@ -39,6 +39,7 @@ public abstract class RvBase extends AppCompatActivity /*implements EndlessRecyc
             if (EndlessRecyclerOnScrollListener2.onScrollInterface.class.isAssignableFrom(this.getClass())) {
                 onScrollInterface = (EndlessRecyclerOnScrollListener2.onScrollInterface) this;
                 rv.addOnScrollListener(onScrollInterface.onScroll());
+                
             }
 
 
