@@ -20,7 +20,7 @@ public abstract class EndlessRecyclerOnScrollListener2 extends RecyclerView.OnSc
     public EndlessRecyclerOnScrollListener2(/*LinearLayoutManager linearLayoutManager*/RecyclerView rv) {
         this.linearLayoutManager = (LinearLayoutManager) rv.getLayoutManager();
         rv.addOnScrollListener(this);
-        
+
     }
 
     @Override
