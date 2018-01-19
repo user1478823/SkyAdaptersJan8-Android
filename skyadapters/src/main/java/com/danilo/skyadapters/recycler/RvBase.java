@@ -22,7 +22,7 @@ public abstract class RvBase extends AppCompatActivity /*implements EndlessRecyc
     public  RvAdapter adapter;
     public RecyclerView rv;
 
-
+    private EndlessRecyclerOnScrollListener2.onScrollInterface onScrollInterface;
 
 
     public void initRv(Integer rvID) {
@@ -36,7 +36,10 @@ public abstract class RvBase extends AppCompatActivity /*implements EndlessRecyc
                 rv.addOnScrollListener(onScroll());
             }*/
 
-
+            if (EndlessRecyclerOnScrollListener2.onScrollInterface.class.isAssignableFrom(this.getClass())) {
+                onScrollInterface = (EndlessRecyclerOnScrollListener2.onScrollInterface) this;
+                rv.addOnScrollListener(onScrollInterface.onScroll());
+            }
 
 
 
