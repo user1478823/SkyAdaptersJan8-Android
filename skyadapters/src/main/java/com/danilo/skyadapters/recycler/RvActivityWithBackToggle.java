@@ -19,6 +19,8 @@ import java.util.ArrayList;
 
 public abstract class RvActivityWithBackToggle extends RvBase {
 
+    private EndlessRecyclerOnScrollListener2.onScrollInterface onScrollInterface;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +40,12 @@ public abstract class RvActivityWithBackToggle extends RvBase {
             if (toolbar.getColor()     != null) toolbarAdapter.setToolbarColor(toolbar.getColor());
             if (toolbar.getTextColor() != null) toolbarAdapter.setToolbarTextColor(toolbar.getTextColor());
             if (toolbar.getTypeface()  != null) toolbarAdapter.setToolbarTypeFace(toolbar.getTypeface());
+
+            if (EndlessRecyclerOnScrollListener2.onScrollInterface.class.isAssignableFrom(this.getClass())) {
+                onScrollInterface = (EndlessRecyclerOnScrollListener2.onScrollInterface) this;
+                rv.addOnScrollListener(onScrollInterface.onScroll());
+            }
+
         }
 
         ViewGroup vg = (ViewGroup) getLayoutInflater().inflate(aP.getView(), null);
