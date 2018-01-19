@@ -58,7 +58,6 @@ public abstract class RvActivityWithBackToggle extends RvBase {
     protected abstract RxBackground.RxBackgroundInterface getRxBackgroundInterface();
     public abstract ActivityPOJO getActivityPOJO();
     public abstract RvAdapter.RvInterface rvOnBind();
-    public abstract RecyclerView.LayoutManager rvLayoutManager();
     public abstract ArrayList<Integer> rvCustomRow_holderIDS();
 
     public abstract ToolbarPOJO customizeToolbar();
