@@ -19,7 +19,7 @@ public abstract class RvBase extends AppCompatActivity {
 
     public  List list = null;
     public  RvAdapter adapter;
-    private RecyclerView rv;
+    public RecyclerView rv;
 
     public void initRv(Integer rvID) {
         if (rvID != null) {
