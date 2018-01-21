@@ -12,6 +12,7 @@ public class ActivityPOJO {
     public ActivityPOJO(int view, Integer theme) {
         this.view = view;
         this.theme = theme;
+        
     }
 
     public int getView() {
