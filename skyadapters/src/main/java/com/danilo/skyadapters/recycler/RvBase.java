@@ -22,14 +22,12 @@ public abstract class RvBase extends AppCompatActivity /*implements EndlessRecyc
     public  RvAdapter adapter;
     public RecyclerView rv;
 
-    private EndlessRecyclerOnScrollListener.onScrollInterface onScrollInterface;
-
     public void initRv(Integer rvID) {
         if (rvID != null) {
             rv = (RecyclerView) findViewById(rvID);
             rv.setLayoutManager(new LinearLayoutManager(this));
-            if (EndlessRecyclerOnScrollListener.onScrollInterface.class.isAssignableFrom(this.getClass())) {
-                onScrollInterface = (EndlessRecyclerOnScrollListener.onScrollInterface) this;
+            if (RvInterface.EndlessRvOnScrollListener.class.isAssignableFrom(this.getClass())) {
+                RvInterface.EndlessRvOnScrollListener onScrollInterface = (RvInterface.EndlessRvOnScrollListener) this;
                 rv.addOnScrollListener(onScrollInterface.onScroll());
             }
         } else {

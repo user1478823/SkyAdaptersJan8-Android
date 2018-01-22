@@ -20,12 +20,15 @@ import java.util.ArrayList;
 
 public abstract class RvActivityWithBackToggle extends RvBase {
 
-    private ToolbarPOJO.ToolbarCustomizer toolbarCustomizer;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ActivityPOJO aP = getActivityPOJO();
+        ActivityPOJO aP = null;
+        if (RvInterface.ActivityContent.class.isAssignableFrom(this.getClass())) {
+            RvInterface.ActivityContent activityContent = ((RvInterface.ActivityContent) this);
+            aP = activityContent.getActivityContent();
+        }
+
         if (aP == null || aP.getView() == null) {
             setContentView(R.layout.default_layout);
         } else {
@@ -44,8 +47,8 @@ public abstract class RvActivityWithBackToggle extends RvBase {
         toolbarAdapter.buildToolbarWithHomeUp();
 
         ToolbarPOJO toolbarP;
-        if (ToolbarPOJO.ToolbarCustomizer.class.isAssignableFrom(this.getClass())) {
-            toolbarCustomizer = ((ToolbarPOJO.ToolbarCustomizer) this);
+        if (RvInterface.ToolbarCustomizer.class.isAssignableFrom(this.getClass())) {
+            RvInterface.ToolbarCustomizer toolbarCustomizer = ((RvInterface.ToolbarCustomizer) this);
             toolbarP = toolbarCustomizer.customizeToolbar();
 
             if (toolbarP.getTitle()     != null) toolbarAdapter.setToolbarTitle(toolbarP.getTitle());
@@ -72,11 +75,9 @@ public abstract class RvActivityWithBackToggle extends RvBase {
     }
 
     protected abstract RxBackground.RxBackgroundInterface getRxBackgroundInterface();
-    public abstract ActivityPOJO getActivityPOJO();
+    //public abstract ActivityPOJO getActivityPOJO();
     public abstract RvAdapter.RvInterface rvOnBind();
     public abstract ArrayList<Integer> rvCustomRow_holderIDS();
-
-    //public abstract ToolbarPOJO customizeToolbar();
 
     @Override
     public ArrayList<Integer> getRvCustomRow_holderIDS() {
