@@ -32,8 +32,7 @@ public abstract class RvActivityWithBackToggle extends RvBase {
             setContentView(aP.getView());
         }
         if (aP != null && aP.getTheme() != null) {
-            Integer theme = aP.getTheme();
-            setTheme(theme);
+            setTheme(aP.getTheme());
         }
 
         ToolbarAdapter toolbarAdapter = null;
