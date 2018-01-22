@@ -34,7 +34,7 @@ public abstract class RvActivity extends AppCompatActivity {
     public abstract List rvList();
     public abstract List<Integer> holderIDS();
     public abstract RecyclerView.LayoutManager rvLayoutManager();
-    public abstract RvAdapter.RvInterface rvOnBind();
+    public abstract RvAdapter.RvAdapterInterface rvOnBind();
 
     public void updateRV() {
         adapter.notifyDataSetChanged();

@@ -15,13 +15,13 @@ public class RvAdapter extends RecyclerView.Adapter<RvHolder> {
     private List list;
     private List<Integer> ids;
     private int customRow;
-    private RvInterface rvInterface;
+    private RvAdapterInterface rvAdapterInterface;
 
-    public RvAdapter(List list, List<Integer> ids, int customRow, RvInterface rvInterface) {
+    public RvAdapter(List list, List<Integer> ids, int customRow, RvAdapterInterface rvAdapterInterface) {
         this.list = list;
         this.ids = ids;
         this.customRow = customRow;
-        this.rvInterface = rvInterface;
+        this.rvAdapterInterface = rvAdapterInterface;
     }
 
     @Override
@@ -32,7 +32,7 @@ public class RvAdapter extends RecyclerView.Adapter<RvHolder> {
 
     @Override
     public void onBindViewHolder(RvHolder holder, int position) {
-        rvInterface.onBindViewHolder(holder, position);
+        rvAdapterInterface.onBindViewHolder(holder, position);
     }
 
     @Override
@@ -40,7 +40,7 @@ public class RvAdapter extends RecyclerView.Adapter<RvHolder> {
         return list.size();
     }
 
-    public interface RvInterface {
+    public interface RvAdapterInterface {
         public void onBindViewHolder(RvHolder holder, int position);
     }
 }

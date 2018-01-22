@@ -53,7 +53,7 @@ public abstract class RvBase extends AppCompatActivity /*implements EndlessRecyc
 
 
     public abstract ArrayList<Integer> getRvCustomRow_holderIDS();
-    public abstract RvAdapter.RvInterface getRvOnBind();
+    public abstract RvAdapter.RvAdapterInterface getRvOnBind();
 
     public Observer buildObserver(final ObserverInterface observerInterface) {
         return new Observer<List>() {

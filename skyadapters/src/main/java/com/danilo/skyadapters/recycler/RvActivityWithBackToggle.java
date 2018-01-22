@@ -76,7 +76,7 @@ public abstract class RvActivityWithBackToggle extends RvBase {
 
     protected abstract RxBackground.RxBackgroundInterface getRxBackgroundInterface();
     //public abstract ActivityPOJO getActivityPOJO();
-    public abstract RvAdapter.RvInterface rvOnBind();
+    public abstract RvAdapter.RvAdapterInterface rvOnBind();
     public abstract ArrayList<Integer> rvCustomRow_holderIDS();
 
     @Override
@@ -85,7 +85,7 @@ public abstract class RvActivityWithBackToggle extends RvBase {
     }
 
     @Override
-    public RvAdapter.RvInterface getRvOnBind() {
+    public RvAdapter.RvAdapterInterface getRvOnBind() {
         return rvOnBind();
     }
 }

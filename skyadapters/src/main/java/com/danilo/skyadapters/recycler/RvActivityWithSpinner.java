@@ -44,11 +44,11 @@ public abstract class RvActivityWithSpinner extends RvActivity {
     }
 
     @Override
-    public RvAdapter.RvInterface rvOnBind() {
+    public RvAdapter.RvAdapterInterface rvOnBind() {
         return getRvOnBind();
     }
 
-    public abstract RvAdapter.RvInterface getRvOnBind();
+    public abstract RvAdapter.RvAdapterInterface getRvOnBind();
     public abstract int getActivityView();
     public abstract int getRvID();
     public abstract int getRvCustomRow();

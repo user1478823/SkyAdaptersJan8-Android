@@ -47,7 +47,7 @@ public class RvManager {
         return this;
     }
 
-    public void sixFinnalOnBind(RvAdapter.RvInterface rvInterface) {
-        rv.setAdapter(new RvAdapter(rvList, ids, customRow, rvInterface));
+    public void sixFinnalOnBind(RvAdapter.RvAdapterInterface rvAdapterInterface) {
+        rv.setAdapter(new RvAdapter(rvList, ids, customRow, rvAdapterInterface));
     }
 }

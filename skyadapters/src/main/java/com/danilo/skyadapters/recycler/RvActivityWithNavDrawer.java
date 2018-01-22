@@ -15,7 +15,6 @@ import com.danilo.skyadapters.ActivityPOJO;
 import com.danilo.skyadapters.DrawerToolbarPOJO;
 import com.danilo.skyadapters.RxBackground;
 import com.danilo.skyadapters.ToolbarAdapter;
-import com.danilo.skyadapters.ToolbarPOJO;
 
 import java.util.ArrayList;
 
@@ -97,7 +96,7 @@ public abstract class RvActivityWithNavDrawer extends RvBase {
 
 
     @Override
-    public RvAdapter.RvInterface getRvOnBind() {
+    public RvAdapter.RvAdapterInterface getRvOnBind() {
         return rvOnBind();
     }
 
@@ -106,7 +105,7 @@ public abstract class RvActivityWithNavDrawer extends RvBase {
         return rvCustomRow_holderIDS();
     }
 
-    public abstract RvAdapter.RvInterface rvOnBind();
+    public abstract RvAdapter.RvAdapterInterface rvOnBind();
     public abstract ArrayList<Integer> rvCustomRow_holderIDS();
     //public abstract DrawerToolbarPOJO customizeToolbar();
 
