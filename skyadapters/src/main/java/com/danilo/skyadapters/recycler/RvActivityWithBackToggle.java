@@ -36,8 +36,12 @@ public abstract class RvActivityWithBackToggle extends RvBase {
             setTheme(theme);
         }
 
-
-        ToolbarAdapter toolbarAdapter = new ToolbarAdapter(this, aP.getView());
+        ToolbarAdapter toolbarAdapter = null;
+        if (aP == null || aP.getView() == null) {
+            toolbarAdapter = new ToolbarAdapter(this);
+        } else {
+            toolbarAdapter = new ToolbarAdapter(this, aP.getView());
+        }
         toolbarAdapter.buildToolbarWithHomeUp();
 
         ToolbarPOJO toolbarP;
@@ -51,19 +55,20 @@ public abstract class RvActivityWithBackToggle extends RvBase {
             if (toolbarP.getTypeface()  != null) toolbarAdapter.setToolbarTypeFace(toolbarP.getTypeface());
         }
 
-        ViewGroup vg = (ViewGroup) getLayoutInflater().inflate(aP.getView(), null);
-
         Integer rvID = null;
-        for (int i = 0; i < vg.getChildCount(); i++) {
-            if (vg.getChildAt(i) instanceof RecyclerView) {
-                rvID = vg.getChildAt(i).getId();
+        if (aP == null || aP.getView() == null) {
+            rvID = R.id.rv;
+        } else {
+            ViewGroup vg = (ViewGroup) getLayoutInflater().inflate(aP.getView(), null);
+
+            for (int i = 0; i < vg.getChildCount(); i++) {
+                if (vg.getChildAt(i) instanceof RecyclerView) {
+                    rvID = vg.getChildAt(i).getId();
+                }
             }
         }
-        if (aP == null || aP.getView() == null) {
-            initRv(R.id.rv);
-        } else {
-            initRv(rvID);
-        }
+        initRv(rvID);
+
         new RxBackground().executeInBackground(this, getRxBackgroundInterface());
     }
 
