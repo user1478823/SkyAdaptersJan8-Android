@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 
 import com.danilo.skyadapters.ActivityPOJO;
+import com.danilo.skyadapters.R;
 import com.danilo.skyadapters.RxBackground;
 import com.danilo.skyadapters.ToolbarAdapter;
 import com.danilo.skyadapters.ToolbarPOJO;
@@ -25,11 +26,17 @@ public abstract class RvActivityWithBackToggle extends RvBase {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActivityPOJO aP = getActivityPOJO();
-        if (aP.getTheme() != null) {
+        if (aP == null || aP.getView() == null) {
+            setContentView(R.layout.default_layout);
+        } else {
+            setContentView(aP.getView());
+        }
+        if (aP != null && aP.getTheme() != null) {
             Integer theme = aP.getTheme();
             setTheme(theme);
         }
-        setContentView(aP.getView());
+
+
         ToolbarAdapter toolbarAdapter = new ToolbarAdapter(this, aP.getView());
         toolbarAdapter.buildToolbarWithHomeUp();
 
@@ -52,8 +59,11 @@ public abstract class RvActivityWithBackToggle extends RvBase {
                 rvID = vg.getChildAt(i).getId();
             }
         }
-
-        initRv(rvID);
+        if (aP == null || aP.getView() == null) {
+            initRv(R.id.rv);
+        } else {
+            initRv(rvID);
+        }
         new RxBackground().executeInBackground(this, getRxBackgroundInterface());
     }
 

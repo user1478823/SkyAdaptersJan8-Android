@@ -26,6 +26,10 @@ public class ToolbarAdapter {
     private Toolbar toolbar = null;
     private DrawerLayout drawerLayout = null;
 
+    public ToolbarAdapter(AppCompatActivity a) {
+        toolbar = a.findViewById(R.id.toolbar);
+    }
+
     public ToolbarAdapter(AppCompatActivity a, int layoutID) {
         this.a = a;
 

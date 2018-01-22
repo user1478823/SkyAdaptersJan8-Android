@@ -6,8 +6,8 @@ package com.danilo.skyadapters;
 
 public class ActivityPOJO {
 
-    int     view;
-    Integer theme;
+    private Integer view;
+    private Integer theme;
 
     public ActivityPOJO(int view, Integer theme) {
         this.view = view;
@@ -15,11 +15,11 @@ public class ActivityPOJO {
         
     }
 
-    public int getView() {
+    public Integer getView() {
         return view;
     }
 
-    public void setView(int view) {
+    public void setView(Integer view) {
         this.view = view;
     }
 
