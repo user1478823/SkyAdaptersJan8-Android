@@ -77,6 +77,9 @@ public abstract class RvActivityWithBackToggle extends RvBase {
                                  toolbarDrawer.getNumberOfRows(),
                                  toolbarDrawer.getDrawerItemsColor(),
                                  R.id.rv_drawer);
+                        if (toggle != null) {
+                            toggle.syncState();
+                        }
                         case "ToolbarWithUpPOJO":
                         ToolbarWithUpPOJO toolbarUp = (ToolbarWithUpPOJO) toolbarP;
                         if (toolbarUp.getTitle()     != null) toolbarAdapter.setToolbarTitle    (toolbarUp.getTitle());
