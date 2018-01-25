@@ -27,7 +27,7 @@ public class SpinnerAdapter {
     public SpinnerAdapter attachSpinner(ArrayList<String> spinnerItems, Integer customSpinnerLayout,
                                         AdapterView.OnItemSelectedListener listener, LinearLayout ll) {
         Spinner spinner = new Spinner(a);
-        int layout = android.R.layout.activity_list_item;
+        int layout = android.R.layout.simple_list_item_1;
         if (customSpinnerLayout != null) {
             layout = customSpinnerLayout;
         }
@@ -42,7 +42,7 @@ public class SpinnerAdapter {
     public SpinnerAdapter buildSpinner(int spinnerID, ArrayList<String> spinnerItems, Integer customSpinnerLayout,
                                        AdapterView.OnItemSelectedListener listener) {
         spinner = (Spinner) a.findViewById(spinnerID);
-        int layout = android.R.layout.activity_list_item;
+        int layout = android.R.layout.simple_list_item_1;
         if (customSpinnerLayout != null) {
             layout = customSpinnerLayout;
         }
