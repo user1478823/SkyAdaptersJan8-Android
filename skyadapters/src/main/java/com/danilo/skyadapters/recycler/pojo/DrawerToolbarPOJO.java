@@ -10,8 +10,9 @@ public class DrawerToolbarPOJO extends ToolbarPOJO {
 
     private Integer drawerItemsColor;
 
-    public DrawerToolbarPOJO(String title, Integer color, Typeface typeface, Integer textColor, Integer drawerItemsColor) {
-        super(title, color, typeface, textColor);
+    public DrawerToolbarPOJO(Integer color, Integer drawerItemsColor) {
+        //super(title, color, typeface, textColor);
+        super(color);
         this.drawerItemsColor = drawerItemsColor;
     }
 

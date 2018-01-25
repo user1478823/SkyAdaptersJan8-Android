@@ -82,12 +82,12 @@ public abstract class RvActivityWithNavDrawer extends RvBase {
             toggle.syncState();
         }
 
-        if (toolbarP != null) {
+        /*if (toolbarP != null) {
             if (toolbarP.getTitle()     != null) toolbarAdapter.setToolbarTitle(toolbarP.getTitle());
             if (toolbarP.getColor()     != null) toolbarAdapter.setToolbarColor(toolbarP.getColor());
             if (toolbarP.getTextColor() != null) toolbarAdapter.setToolbarTextColor(toolbarP.getTextColor());
             if (toolbarP.getTypeface()  != null) toolbarAdapter.setToolbarTypeFace(toolbarP.getTypeface());
-        }
+        }*/
     }
 
     public abstract RxBackground.RxBackgroundInterface getRxBackgroundInterface();
