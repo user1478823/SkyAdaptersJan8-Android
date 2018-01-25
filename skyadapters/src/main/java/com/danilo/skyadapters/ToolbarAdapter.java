@@ -29,6 +29,8 @@ public class ToolbarAdapter {
     public ToolbarAdapter(AppCompatActivity a) {
         this.a = a;
         toolbar = a.findViewById(R.id.toolbar);
+        drawerLayout = a.findViewById(R.id.drawer_layout);
+        drawerLayout.setVisibility(View.VISIBLE);
     }
 
     public ToolbarAdapter(AppCompatActivity a, int layoutID) {
@@ -130,7 +132,7 @@ public class ToolbarAdapter {
                                                            Integer drawerItemColor, Integer drawerRvID){
 
         RvAdapter rvAdapter = new RvAdapter(a, activitiesToLaunch, drawerItemColor, drawerRvID);
-
+/*
         ActionBarDrawerToggle toggleBtn = null;
         if (drawerLayout != null) {
             toggleBtn = new ActionBarDrawerToggle(a, drawerLayout,
@@ -139,10 +141,15 @@ public class ToolbarAdapter {
         }
 
         if (toolbar != null) {
-            a.setSupportActionBar(toolbar);
-            a.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }
+            }
 
+
+*/
+        ActionBarDrawerToggle toggleBtn = new ActionBarDrawerToggle(a, drawerLayout,
+                R.string.drawer_open, R.string.drawer_closed);
+        drawerLayout.addDrawerListener(toggleBtn);
+        a.setSupportActionBar(toolbar);
+        a.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         return toggleBtn;
     }
 

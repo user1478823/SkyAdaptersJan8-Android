@@ -12,7 +12,7 @@ import android.widget.LinearLayout;
 
 
 import com.danilo.skyadapters.recycler.pojo.ActivityPOJO;
-import com.danilo.skyadapters.recycler.pojo.DrawerToolbarPOJO;
+import com.danilo.skyadapters.recycler.pojo.ToolbarWithDrawerPOJO;
 import com.danilo.skyadapters.RxBackground;
 import com.danilo.skyadapters.ToolbarAdapter;
 
@@ -25,7 +25,7 @@ import java.util.ArrayList;
 public abstract class RvActivityWithNavDrawer extends RvBase {
 
     private ActionBarDrawerToggle toggle;
-    private DrawerToolbarPOJO.DrawerToolbarCustomizer toolbarCustomizer;
+    //private ToolbarWithDrawerPOJO.DrawerToolbarCustomizer toolbarCustomizer;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -58,21 +58,21 @@ public abstract class RvActivityWithNavDrawer extends RvBase {
             }
         }
 
-        DrawerToolbarPOJO toolbarP = null;
-        if (DrawerToolbarPOJO.DrawerToolbarCustomizer.class.isAssignableFrom(this.getClass())) {
-            toolbarCustomizer = ((DrawerToolbarPOJO.DrawerToolbarCustomizer) this);
+        /*ToolbarWithDrawerPOJO toolbarP = null;
+        if (ToolbarWithDrawerPOJO.DrawerToolbarCustomizer.class.isAssignableFrom(this.getClass())) {
+            toolbarCustomizer = ((ToolbarWithDrawerPOJO.DrawerToolbarCustomizer) this);
             toolbarP = toolbarCustomizer.customizeDrawerToolbar();
         }
 
         Integer drawerItemsColor = null;
         if (toolbarP != null) {
             drawerItemsColor = toolbarP.getDrawerItemsColor();
-        }
+        }*/
 
         initRv(rvs.get(0));
         new RxBackground().executeInBackground(this, getRxBackgroundInterface());
 
-        ToolbarAdapter toolbarAdapter = new ToolbarAdapter(this, aP.getView());
+        /*ToolbarAdapter toolbarAdapter = new ToolbarAdapter(this, aP.getView());
         toggle = toolbarAdapter.buildToolbarWithNavDrawer(
                 drawerActivitiesToLaunch(),
                 drawerItemsColor,
@@ -107,7 +107,7 @@ public abstract class RvActivityWithNavDrawer extends RvBase {
 
     public abstract RvAdapter.RvAdapterInterface rvOnBind();
     public abstract ArrayList<Integer> rvCustomRow_holderIDS();
-    //public abstract DrawerToolbarPOJO customizeToolbar();
+    //public abstract ToolbarWithDrawerPOJO customizeToolbar();
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

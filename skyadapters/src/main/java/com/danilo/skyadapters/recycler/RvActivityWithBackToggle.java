@@ -2,7 +2,9 @@ package com.danilo.skyadapters.recycler;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.RecyclerView;
+import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
@@ -11,9 +13,9 @@ import com.danilo.skyadapters.recycler.pojo.ActivityPOJO;
 import com.danilo.skyadapters.R;
 import com.danilo.skyadapters.RxBackground;
 import com.danilo.skyadapters.SpinnerAdapter;
-import com.danilo.skyadapters.recycler.pojo.SpinnerPOJO;
 import com.danilo.skyadapters.ToolbarAdapter;
 import com.danilo.skyadapters.recycler.pojo.ToolbarPOJO;
+import com.danilo.skyadapters.recycler.pojo.ToolbarWithDrawerPOJO;
 import com.danilo.skyadapters.recycler.pojo.ToolbarWithSpinnerPOJO;
 import com.danilo.skyadapters.recycler.pojo.ToolbarWithUpPOJO;
 
@@ -24,6 +26,8 @@ import java.util.ArrayList;
  */
 
 public abstract class RvActivityWithBackToggle extends RvBase {
+
+    private ActionBarDrawerToggle toggle;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,6 +48,7 @@ public abstract class RvActivityWithBackToggle extends RvBase {
         }
 
         ToolbarAdapter toolbarAdapter = null;
+        Integer drawerRvID            = null;
         if (aP == null || aP.getView() == null) {
             toolbarAdapter = new ToolbarAdapter(this);
         } else {
@@ -55,25 +60,37 @@ public abstract class RvActivityWithBackToggle extends RvBase {
             RvInterface.ToolbarCustomizer toolbarCustomizer = ((RvInterface.ToolbarCustomizer) this);
             toolbarP = toolbarCustomizer.customizeToolbar();
 
-            switch (toolbarP.getClass().getSimpleName()) {
-                case "ToolbarWithUpPOJO":
-                    ToolbarWithUpPOJO toolbarUp = (ToolbarWithUpPOJO) toolbarP;
-                    if (toolbarUp.getTitle()     != null) toolbarAdapter.setToolbarTitle    (toolbarUp.getTitle());
-                    if (toolbarUp.getTextColor() != null) toolbarAdapter.setToolbarTextColor(toolbarUp.getTextColor());
-                    if (toolbarUp.getTypeface()  != null) toolbarAdapter.setToolbarTypeFace (toolbarUp.getTypeface());
-                    toolbarAdapter.buildToolbarWithHomeUp();
-                    break;
-                case "ToolbarWithSpinnerPOJO":
-                    ToolbarWithSpinnerPOJO toolbarSpinner = (ToolbarWithSpinnerPOJO) toolbarP;
-                    LinearLayout ll = findViewById(R.id.ll);
-                    new SpinnerAdapter(this).attachSpinner(toolbarSpinner.getSpinnerItems(),
-                                                              toolbarSpinner.getCustomSpinnerLayout(),
-                                                              toolbarSpinner.getListener(),
-                                                              ll);
-                    break;
-            }
+            if (toolbarP != null) {
+                switch (toolbarP.getClass().getSimpleName()) {
+                    case "ToolbarWithDrawerPOJO":
+                        ToolbarWithDrawerPOJO toolbarDrawer = (ToolbarWithDrawerPOJO) toolbarP;
+                        if (toolbarDrawer.getTitle()     != null) toolbarAdapter.setToolbarTitle    (toolbarDrawer.getTitle());
+                        if (toolbarDrawer.getColor()     != null) toolbarAdapter.setToolbarColor    (toolbarDrawer.getColor());
+                        if (toolbarDrawer.getTextColor() != null) toolbarAdapter.setToolbarTextColor(toolbarDrawer.getTextColor());
+                        if (toolbarDrawer.getTypeface()  != null) toolbarAdapter.setToolbarTypeFace (toolbarDrawer.getTypeface());
+                        toggle = toolbarAdapter.buildToolbarWithNavDrawer(
+                                 toolbarDrawer.getDrawerActivitiesToLaunch(),
+                                 toolbarDrawer.getDrawerItemsColor(),
+                                 R.id.rv_drawer);
+                        case "ToolbarWithUpPOJO":
+                        ToolbarWithUpPOJO toolbarUp = (ToolbarWithUpPOJO) toolbarP;
+                        if (toolbarUp.getTitle()     != null) toolbarAdapter.setToolbarTitle    (toolbarUp.getTitle());
+                        if (toolbarUp.getTextColor() != null) toolbarAdapter.setToolbarTextColor(toolbarUp.getTextColor());
+                        if (toolbarUp.getTypeface()  != null) toolbarAdapter.setToolbarTypeFace (toolbarUp.getTypeface());
+                        toolbarAdapter.buildToolbarWithHomeUp();
+                        break;
+                    case "ToolbarWithSpinnerPOJO":
+                        ToolbarWithSpinnerPOJO toolbarSpinner = (ToolbarWithSpinnerPOJO) toolbarP;
+                        LinearLayout ll = findViewById(R.id.ll);
+                        new SpinnerAdapter(this).attachSpinner(toolbarSpinner.getSpinnerItems(),
+                                                                  toolbarSpinner.getCustomSpinnerLayout(),
+                                                                  toolbarSpinner.getListener(),
+                                                                  ll);
+                        break;
+                }
 
-            if (toolbarP.getColor() != null) toolbarAdapter.setToolbarColor(toolbarP.getColor());
+                if (toolbarP.getColor() != null) toolbarAdapter.setToolbarColor(toolbarP.getColor());
+            }
         }
 
         Integer rvID = null;
@@ -89,19 +106,6 @@ public abstract class RvActivityWithBackToggle extends RvBase {
             }
         }
         initRv(rvID);
-
-        if (RvInterface.SpinnerManager.class.isAssignableFrom(this.getClass())) {
-            RvInterface.SpinnerManager spinnerManager = ((RvInterface.SpinnerManager) this);
-            SpinnerPOJO sP = spinnerManager.attachSpinner();
-
-            LinearLayout ll = findViewById(R.id.ll);
-
-            new SpinnerAdapter(this).attachSpinner(sP.getSpinnerItems(), sP.getCustomSpinnerLayout(),
-                                                     sP.getListener(), ll);
-        } else {
-            toolbarAdapter.buildToolbarWithHomeUp();
-        }
-
         new RxBackground().executeInBackground(this, getRxBackgroundInterface());
     }
 
@@ -119,4 +123,12 @@ public abstract class RvActivityWithBackToggle extends RvBase {
     public RvAdapter.RvAdapterInterface getRvOnBind() {
         return rvOnBind();
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (toggle != null && this.getClass().getSimpleName().contains("MainActivity") && toggle.onOptionsItemSelected(item)) {
+            return true;
+        } else return false;
+    }
+
 }
