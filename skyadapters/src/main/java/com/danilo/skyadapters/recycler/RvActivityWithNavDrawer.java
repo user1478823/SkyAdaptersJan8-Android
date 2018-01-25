@@ -11,8 +11,8 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 
-import com.danilo.skyadapters.ActivityPOJO;
-import com.danilo.skyadapters.DrawerToolbarPOJO;
+import com.danilo.skyadapters.recycler.pojo.ActivityPOJO;
+import com.danilo.skyadapters.recycler.pojo.DrawerToolbarPOJO;
 import com.danilo.skyadapters.RxBackground;
 import com.danilo.skyadapters.ToolbarAdapter;
 

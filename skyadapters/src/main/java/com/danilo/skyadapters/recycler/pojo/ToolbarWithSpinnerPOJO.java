@@ -1,5 +1,6 @@
-package com.danilo.skyadapters;
+package com.danilo.skyadapters.recycler.pojo;
 
+import android.graphics.Typeface;
 import android.widget.AdapterView;
 
 import java.util.ArrayList;
@@ -8,13 +9,14 @@ import java.util.ArrayList;
  * Created by ttlnisoffice on 1/25/18.
  */
 
-public class SpinnerPOJO {
+public class ToolbarWithSpinnerPOJO extends ToolbarPOJO {
 
     private ArrayList<String>                  spinnerItems;
     private Integer                            customSpinnerLayout;
     private AdapterView.OnItemSelectedListener listener;
 
-    public SpinnerPOJO(ArrayList<String> spinnerItems, Integer customSpinnerLayout, AdapterView.OnItemSelectedListener listener) {
+    public ToolbarWithSpinnerPOJO(Integer toolbarColor, ArrayList<String> spinnerItems, Integer customSpinnerLayout, AdapterView.OnItemSelectedListener listener) {
+        super(toolbarColor);
         this.spinnerItems = spinnerItems;
         this.customSpinnerLayout = customSpinnerLayout;
         this.listener = listener;

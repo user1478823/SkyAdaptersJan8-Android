@@ -7,13 +7,15 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 
-import com.danilo.skyadapters.ActivityPOJO;
+import com.danilo.skyadapters.recycler.pojo.ActivityPOJO;
 import com.danilo.skyadapters.R;
 import com.danilo.skyadapters.RxBackground;
 import com.danilo.skyadapters.SpinnerAdapter;
-import com.danilo.skyadapters.SpinnerPOJO;
+import com.danilo.skyadapters.recycler.pojo.SpinnerPOJO;
 import com.danilo.skyadapters.ToolbarAdapter;
-import com.danilo.skyadapters.ToolbarPOJO;
+import com.danilo.skyadapters.recycler.pojo.ToolbarPOJO;
+import com.danilo.skyadapters.recycler.pojo.ToolbarWithSpinnerPOJO;
+import com.danilo.skyadapters.recycler.pojo.ToolbarWithUpPOJO;
 
 import java.util.ArrayList;
 
@@ -53,10 +55,25 @@ public abstract class RvActivityWithBackToggle extends RvBase {
             RvInterface.ToolbarCustomizer toolbarCustomizer = ((RvInterface.ToolbarCustomizer) this);
             toolbarP = toolbarCustomizer.customizeToolbar();
 
-            if (toolbarP.getTitle()     != null) toolbarAdapter.setToolbarTitle(toolbarP.getTitle());
-            if (toolbarP.getColor()     != null) toolbarAdapter.setToolbarColor(toolbarP.getColor());
-            if (toolbarP.getTextColor() != null) toolbarAdapter.setToolbarTextColor(toolbarP.getTextColor());
-            if (toolbarP.getTypeface()  != null) toolbarAdapter.setToolbarTypeFace(toolbarP.getTypeface());
+            switch (toolbarP.getClass().getSimpleName()) {
+                case "ToolbarWithUpPOJO":
+                    ToolbarWithUpPOJO toolbarUp = (ToolbarWithUpPOJO) toolbarP;
+                    if (toolbarUp.getTitle()     != null) toolbarAdapter.setToolbarTitle    (toolbarUp.getTitle());
+                    if (toolbarUp.getTextColor() != null) toolbarAdapter.setToolbarTextColor(toolbarUp.getTextColor());
+                    if (toolbarUp.getTypeface()  != null) toolbarAdapter.setToolbarTypeFace (toolbarUp.getTypeface());
+                    toolbarAdapter.buildToolbarWithHomeUp();
+                    break;
+                case "ToolbarWithSpinnerPOJO":
+                    ToolbarWithSpinnerPOJO toolbarSpinner = (ToolbarWithSpinnerPOJO) toolbarP;
+                    LinearLayout ll = findViewById(R.id.ll);
+                    new SpinnerAdapter(this).attachSpinner(toolbarSpinner.getSpinnerItems(),
+                                                              toolbarSpinner.getCustomSpinnerLayout(),
+                                                              toolbarSpinner.getListener(),
+                                                              ll);
+                    break;
+            }
+
+            if (toolbarP.getColor() != null) toolbarAdapter.setToolbarColor(toolbarP.getColor());
         }
 
         Integer rvID = null;

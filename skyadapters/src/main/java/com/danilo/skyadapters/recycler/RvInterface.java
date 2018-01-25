@@ -1,9 +1,8 @@
 package com.danilo.skyadapters.recycler;
 
-import com.danilo.skyadapters.ActivityPOJO;
-import com.danilo.skyadapters.SpinnerAdapter;
-import com.danilo.skyadapters.SpinnerPOJO;
-import com.danilo.skyadapters.ToolbarPOJO;
+import com.danilo.skyadapters.recycler.pojo.ActivityPOJO;
+import com.danilo.skyadapters.recycler.pojo.SpinnerPOJO;
+import com.danilo.skyadapters.recycler.pojo.ToolbarPOJO;
 
 /**
  * Created by ttlnisoffice on 1/22/18.

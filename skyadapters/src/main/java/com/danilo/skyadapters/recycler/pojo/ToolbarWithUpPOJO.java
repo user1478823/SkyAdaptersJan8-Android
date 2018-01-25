@@ -1,22 +1,21 @@
-package com.danilo.skyadapters;
+package com.danilo.skyadapters.recycler.pojo;
 
 import android.graphics.Typeface;
 
 /**
- * Created by ttlnisoffice on 1/16/18.
+ * Created by ttlnisoffice on 1/25/18.
  */
 
-public class ToolbarPOJO {
+public class ToolbarWithUpPOJO extends ToolbarPOJO {
 
     private String   title;
-    private Integer  color;
     private Typeface typeface;
     private Integer  textColor;
 
-    public ToolbarPOJO(String title, Integer color, Typeface typeface, Integer textColor) {
-        this.title = title;
-        this.color = color;
-        this.typeface = typeface;
+    public ToolbarWithUpPOJO(Integer toolbarColor, String title, Typeface typeface, Integer textColor) {
+        super(toolbarColor);
+        this.title     = title;
+        this.typeface  = typeface;
         this.textColor = textColor;
     }
 
@@ -26,14 +25,6 @@ public class ToolbarPOJO {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public Integer getColor() {
-        return color;
-    }
-
-    public void setColor(Integer color) {
-        this.color = color;
     }
 
     public Typeface getTypeface() {

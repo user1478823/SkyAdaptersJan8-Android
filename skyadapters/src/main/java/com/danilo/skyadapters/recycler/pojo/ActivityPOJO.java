@@ -1,4 +1,4 @@
-package com.danilo.skyadapters;
+package com.danilo.skyadapters.recycler.pojo;
 
 /**
  * Created by ttlnisoffice on 1/16/18.

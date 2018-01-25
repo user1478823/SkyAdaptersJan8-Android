@@ -1,4 +1,4 @@
-package com.danilo.skyadapters;
+package com.danilo.skyadapters.recycler.pojo;
 
 import android.graphics.Typeface;
 
