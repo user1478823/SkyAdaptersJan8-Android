@@ -1,6 +1,8 @@
 package com.danilo.skyadapters.recycler;
 
 import com.danilo.skyadapters.ActivityPOJO;
+import com.danilo.skyadapters.SpinnerAdapter;
+import com.danilo.skyadapters.SpinnerPOJO;
 import com.danilo.skyadapters.ToolbarPOJO;
 
 /**
@@ -19,6 +21,10 @@ public class RvInterface {
 
     public interface EndlessRvOnScrollListener {
         public EndlessRecyclerOnScrollListener onScroll();
+    }
+
+    public interface SpinnerManager {
+        public SpinnerPOJO attachSpinner();
     }
 
 }

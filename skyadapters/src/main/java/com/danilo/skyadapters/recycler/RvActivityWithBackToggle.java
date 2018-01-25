@@ -4,11 +4,14 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 
 import com.danilo.skyadapters.ActivityPOJO;
 import com.danilo.skyadapters.R;
 import com.danilo.skyadapters.RxBackground;
+import com.danilo.skyadapters.SpinnerAdapter;
+import com.danilo.skyadapters.SpinnerPOJO;
 import com.danilo.skyadapters.ToolbarAdapter;
 import com.danilo.skyadapters.ToolbarPOJO;
 
@@ -70,6 +73,16 @@ public abstract class RvActivityWithBackToggle extends RvBase {
             }
         }
         initRv(rvID);
+
+        if (RvInterface.SpinnerManager.class.isAssignableFrom(this.getClass())) {
+            RvInterface.SpinnerManager spinnerManager = ((RvInterface.SpinnerManager) this);
+            SpinnerPOJO sP = spinnerManager.attachSpinner();
+
+            LinearLayout ll = findViewById(R.id.ll);
+
+            new SpinnerAdapter(this).attachSpinner(sP.getSpinnerItems(), sP.getCustomSpinnerLayout(),
+                                                     sP.getListener(), ll);
+        }
 
         new RxBackground().executeInBackground(this, getRxBackgroundInterface());
     }

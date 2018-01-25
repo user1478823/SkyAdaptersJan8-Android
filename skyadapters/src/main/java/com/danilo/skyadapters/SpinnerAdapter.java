@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
@@ -21,6 +22,21 @@ public class SpinnerAdapter {
 
     public SpinnerAdapter(Activity a) {
         this.a = a;
+    }
+
+    public SpinnerAdapter attachSpinner(ArrayList<String> spinnerItems, Integer customSpinnerLayout,
+                                        AdapterView.OnItemSelectedListener listener, LinearLayout ll) {
+        Spinner spinner = new Spinner(a);
+        int layout = android.R.layout.activity_list_item;
+        if (customSpinnerLayout != null) {
+            layout = customSpinnerLayout;
+        }
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(a, layout, spinnerItems);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(listener);
+        ll.addView(spinner);
+        return this;
     }
 
     public SpinnerAdapter buildSpinner(int spinnerID, ArrayList<String> spinnerItems, Integer customSpinnerLayout,
