@@ -47,7 +47,6 @@ public abstract class RvActivityWithBackToggle extends RvBase {
         } else {
             toolbarAdapter = new ToolbarAdapter(this, aP.getView());
         }
-        toolbarAdapter.buildToolbarWithHomeUp();
 
         ToolbarPOJO toolbarP;
         if (RvInterface.ToolbarCustomizer.class.isAssignableFrom(this.getClass())) {
@@ -82,6 +81,8 @@ public abstract class RvActivityWithBackToggle extends RvBase {
 
             new SpinnerAdapter(this).attachSpinner(sP.getSpinnerItems(), sP.getCustomSpinnerLayout(),
                                                      sP.getListener(), ll);
+        } else {
+            toolbarAdapter.buildToolbarWithHomeUp();
         }
 
         new RxBackground().executeInBackground(this, getRxBackgroundInterface());
