@@ -20,7 +20,7 @@ public class RvAdapter extends RecyclerView.Adapter<RvAdapter.ViewHolder> {
     private Activity a;
     private Integer color;
     private Menu menu;
-    private SkyDrawerRecycler rv;
+    private RecyclerView rv;
     private Intent[] intents;
     private int customLayout;
 
@@ -32,13 +32,13 @@ public class RvAdapter extends RecyclerView.Adapter<RvAdapter.ViewHolder> {
         this.color          = color;
         this.customLayout   = customLayoutID;
 
-        rv = (SkyDrawerRecycler) a.findViewById(R.id.rv_drawer);
+        rv =  a.findViewById(R.id.rv_drawer);
 
         this.menu = new PopupMenu(a, null).getMenu();
         a.getMenuInflater().inflate(menuID, this.menu);
 
         rv.setLayoutManager(new GridLayoutManager(a, numOfRows));
-        if (rv.getDrawerCustomRow() == 0) {
+        if (customLayoutID == 0) {
             new ErrorNotifications().displayError(a, "Add app:drawerCustomRow= into SkyDrawerRecycler xml");
         } else {
             rv.setAdapter(this);
