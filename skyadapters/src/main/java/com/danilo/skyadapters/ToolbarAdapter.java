@@ -129,9 +129,12 @@ public class ToolbarAdapter {
     } */
 
     public ActionBarDrawerToggle buildToolbarWithNavDrawer(Intent[] activitiesToLaunch,
+                                                           int menuID,
+                                                           int customLayoutID,
+                                                           int numOfRows,
                                                            Integer drawerItemColor, Integer drawerRvID){
 
-        RvAdapter rvAdapter = new RvAdapter(a, activitiesToLaunch, drawerItemColor, drawerRvID);
+        RvAdapter rvAdapter = new RvAdapter(a, activitiesToLaunch, drawerItemColor, drawerRvID, menuID, customLayoutID, numOfRows);
 /*
         ActionBarDrawerToggle toggleBtn = null;
         if (drawerLayout != null) {

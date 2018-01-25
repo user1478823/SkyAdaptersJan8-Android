@@ -2,6 +2,7 @@ package com.danilo.skyadapters;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -21,20 +22,22 @@ public class RvAdapter extends RecyclerView.Adapter<RvAdapter.ViewHolder> {
     private Menu menu;
     private SkyDrawerRecycler rv;
     private Intent[] intents;
+    private int customLayout;
 
 
     public RvAdapter(final Activity a, Intent[] intents,
-                     Integer color, Integer drawerRvID) {
+                     Integer color, Integer drawerRvID, int menuID, int customLayoutID, int numOfRows) {
         this.a              = a;
         this.intents        = intents;
         this.color          = color;
+        this.customLayout   = customLayoutID;
 
-        rv = (SkyDrawerRecycler) a.findViewById(drawerRvID);
+        rv = (SkyDrawerRecycler) a.findViewById(R.id.rv_drawer);
 
         this.menu = new PopupMenu(a, null).getMenu();
-        a.getMenuInflater().inflate(rv.getMenuID(), this.menu);
+        a.getMenuInflater().inflate(menuID, this.menu);
 
-        rv.setLayoutManager(rv.getLayoutManager());
+        rv.setLayoutManager(new GridLayoutManager(a, numOfRows));
         if (rv.getDrawerCustomRow() == 0) {
             new ErrorNotifications().displayError(a, "Add app:drawerCustomRow= into SkyDrawerRecycler xml");
         } else {
@@ -48,7 +51,7 @@ public class RvAdapter extends RecyclerView.Adapter<RvAdapter.ViewHolder> {
 
         ViewHolder(View itemView) {
             super(itemView);
-            ViewGroup vg = (ViewGroup) a.getLayoutInflater().inflate(rv.getDrawerCustomRow(),null);
+            ViewGroup vg = (ViewGroup) a.getLayoutInflater().inflate(customLayout,null);
             for (int i = 0; i < vg.getChildCount(); i++) {
                 if (vg.getChildAt(i) instanceof TextView) {
                     txt = (TextView) itemView.findViewById(vg.getChildAt(i).getId());

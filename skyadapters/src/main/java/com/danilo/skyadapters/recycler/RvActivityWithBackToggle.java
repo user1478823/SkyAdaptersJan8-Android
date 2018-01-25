@@ -70,6 +70,9 @@ public abstract class RvActivityWithBackToggle extends RvBase {
                         if (toolbarDrawer.getTypeface()  != null) toolbarAdapter.setToolbarTypeFace (toolbarDrawer.getTypeface());
                         toggle = toolbarAdapter.buildToolbarWithNavDrawer(
                                  toolbarDrawer.getDrawerActivitiesToLaunch(),
+                                 toolbarDrawer.getDrawerMenu(),
+                                 toolbarDrawer.getDrawerCustomRow(),
+                                 toolbarDrawer.getNumberOfRows(),
                                  toolbarDrawer.getDrawerItemsColor(),
                                  R.id.rv_drawer);
                         case "ToolbarWithUpPOJO":
