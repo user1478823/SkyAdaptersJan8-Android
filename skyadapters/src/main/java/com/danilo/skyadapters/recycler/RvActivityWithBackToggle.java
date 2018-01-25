@@ -47,13 +47,15 @@ public abstract class RvActivityWithBackToggle extends RvBase {
             setTheme(aP.getTheme());
         }
 
-        ToolbarAdapter toolbarAdapter = null;
+        /*ToolbarAdapter toolbarAdapter = null;
         Integer drawerRvID            = null;
         if (aP == null || aP.getView() == null) {
             toolbarAdapter = new ToolbarAdapter(this);
         } else {
             toolbarAdapter = new ToolbarAdapter(this, aP.getView());
-        }
+        }*/
+
+        ToolbarAdapter toolbarAdapter = new ToolbarAdapter(this);
 
         ToolbarPOJO toolbarP;
         if (RvInterface.ToolbarCustomizer.class.isAssignableFrom(this.getClass())) {

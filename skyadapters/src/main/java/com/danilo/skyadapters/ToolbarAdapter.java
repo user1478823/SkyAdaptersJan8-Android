@@ -29,8 +29,6 @@ public class ToolbarAdapter {
     public ToolbarAdapter(AppCompatActivity a) {
         this.a = a;
         toolbar = a.findViewById(R.id.toolbar);
-        drawerLayout = a.findViewById(R.id.drawer_layout);
-        drawerLayout.setVisibility(View.VISIBLE);
     }
 
     public ToolbarAdapter(AppCompatActivity a, int layoutID) {
@@ -134,6 +132,9 @@ public class ToolbarAdapter {
                                                            int numOfRows,
                                                            Integer drawerItemColor, Integer drawerRvID){
 
+        drawerLayout = a.findViewById(R.id.drawer_layout);
+        drawerLayout.setVisibility(View.VISIBLE);
+
         RvAdapter rvAdapter = new RvAdapter(a, activitiesToLaunch, drawerItemColor, drawerRvID, menuID, customLayoutID, numOfRows);
 /*
         ActionBarDrawerToggle toggleBtn = null;
@@ -157,7 +158,8 @@ public class ToolbarAdapter {
     }
 
     public ToolbarAdapter setToolbarTitle(String title){
-        a.getSupportActionBar().setTitle(title);
+        toolbar.setTitle(title);
+        //a.getSupportActionBar().setTitle(title);
         return this;
     }
 
