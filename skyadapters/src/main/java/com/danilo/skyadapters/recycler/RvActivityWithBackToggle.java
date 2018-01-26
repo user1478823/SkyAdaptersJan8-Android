@@ -135,7 +135,7 @@ public abstract class RvActivityWithBackToggle extends RvBase {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (toggle != null && this.getClass().getSimpleName().contains("MainActivity") && toggle.onOptionsItemSelected(item)) {
+        if (toggle.onOptionsItemSelected(item)) {
             return true;
         } else return false;
     }
