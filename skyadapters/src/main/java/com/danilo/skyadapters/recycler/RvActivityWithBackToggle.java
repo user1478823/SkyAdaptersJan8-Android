@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -93,6 +94,8 @@ public abstract class RvActivityWithBackToggle extends RvBase {
                         break;
                     case "ToolbarWithSpinnerPOJO":
                         ToolbarWithSpinnerPOJO toolbarSpinner = (ToolbarWithSpinnerPOJO) toolbarP;
+                        Toolbar toolbar = findViewById(R.id.toolbar);
+                        toolbar.setTitle("");
                         LinearLayout ll = findViewById(R.id.ll);
                         new SpinnerAdapter(this).attachSpinner(toolbarSpinner.getSpinnerItems(),
                                                                   toolbarSpinner.getCustomSpinnerLayout(),
