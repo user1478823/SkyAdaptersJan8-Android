@@ -158,8 +158,8 @@ public class ToolbarAdapter {
     }
 
     public ToolbarAdapter setToolbarTitle(String title){
-        toolbar.setTitle(title);
-        //a.getSupportActionBar().setTitle(title);
+        //toolbar.setTitle(title);
+        a.getSupportActionBar().setTitle(title);
         return this;
     }
 
