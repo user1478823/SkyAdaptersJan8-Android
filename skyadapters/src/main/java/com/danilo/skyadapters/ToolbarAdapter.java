@@ -153,7 +153,7 @@ public class ToolbarAdapter {
         ActionBarDrawerToggle toggleBtn = new ActionBarDrawerToggle(a, drawerLayout,
                 R.string.drawer_open, R.string.drawer_closed);
         drawerLayout.addDrawerListener(toggleBtn);
-        toolbar.setTitle("");
+        //toolbar.setTitle("test");
         a.setSupportActionBar(toolbar);
         //a.getSupportActionBar().setTitle("Test title");
         a.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -161,8 +161,11 @@ public class ToolbarAdapter {
     }
 
     public ToolbarAdapter setToolbarTitle(String title){
-        toolbar.setTitle(title);
-        //LinearLayout ll = a.findViewById(R.id.ll);
+        //toolbar.setTitle(title);
+        LinearLayout ll = a.findViewById(R.id.ll);
+        TextView txt = new TextView(a);
+        txt.setText(title);
+        ll.addView(txt);
         //ll.setVisibility(View.GONE);
        // a.getSupportActionBar().setTitle(title);
         //a.setTitle(title);
