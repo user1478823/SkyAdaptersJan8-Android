@@ -80,6 +80,7 @@ public abstract class RvActivityWithBackToggle extends RvBase {
                         if (toggle != null) {
                             toggle.syncState();
                         }
+                        break;
                         case "ToolbarWithUpPOJO":
                         ToolbarWithUpPOJO toolbarUp = (ToolbarWithUpPOJO) toolbarP;
                         if (toolbarUp.getTitle()     != null) toolbarAdapter.setToolbarTitle    (toolbarUp.getTitle());
