@@ -154,6 +154,7 @@ public class ToolbarAdapter {
         drawerLayout.addDrawerListener(toggleBtn);
         //toolbar.setTitle("");
         a.setSupportActionBar(toolbar);
+        a.getSupportActionBar().setTitle("Test title");
         a.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         return toggleBtn;
     }
@@ -161,7 +162,7 @@ public class ToolbarAdapter {
     public ToolbarAdapter setToolbarTitle(String title){
         //toolbar.setTitle(title);
         //a.getSupportActionBar().setTitle(title);
-        a.setTitle(title);
+        //a.setTitle(title);
         return this;
     }
 
