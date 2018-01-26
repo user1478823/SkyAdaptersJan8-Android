@@ -162,8 +162,8 @@ public class ToolbarAdapter {
 
     public ToolbarAdapter setToolbarTitle(String title){
         //toolbar.setTitle(title);
-        LinearLayout ll = a.findViewById(R.id.ll);
-        ll.setVisibility(View.GONE);
+        //LinearLayout ll = a.findViewById(R.id.ll);
+        //ll.setVisibility(View.GONE);
         a.getSupportActionBar().setTitle(title);
         //a.setTitle(title);
         return this;
