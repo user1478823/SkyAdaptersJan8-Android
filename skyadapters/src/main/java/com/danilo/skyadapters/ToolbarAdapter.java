@@ -152,15 +152,15 @@ public class ToolbarAdapter {
         ActionBarDrawerToggle toggleBtn = new ActionBarDrawerToggle(a, drawerLayout,
                 R.string.drawer_open, R.string.drawer_closed);
         drawerLayout.addDrawerListener(toggleBtn);
-        //toolbar.setTitle("");
+        toolbar.setTitle("");
         a.setSupportActionBar(toolbar);
-        a.getSupportActionBar().setTitle("Test title");
+        //a.getSupportActionBar().setTitle("Test title");
         a.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         return toggleBtn;
     }
 
     public ToolbarAdapter setToolbarTitle(String title){
-        //toolbar.setTitle(title);
+        toolbar.setTitle(title);
         //a.getSupportActionBar().setTitle(title);
         //a.setTitle(title);
         return this;
