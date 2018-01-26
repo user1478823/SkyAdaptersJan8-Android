@@ -70,6 +70,7 @@ public abstract class RvActivityWithBackToggle extends RvBase {
                         if (toolbarDrawer.getColor()     != null) toolbarAdapter.setToolbarColor    (toolbarDrawer.getColor());
                         if (toolbarDrawer.getTextColor() != null) toolbarAdapter.setToolbarTextColor(toolbarDrawer.getTextColor());
                         if (toolbarDrawer.getTypeface()  != null) toolbarAdapter.setToolbarTypeFace (toolbarDrawer.getTypeface());
+                        if (toolbarDrawer.getColor() != null) toolbarAdapter.setToolbarColor(toolbarDrawer.getColor());
                         toggle = toolbarAdapter.buildToolbarWithNavDrawer(
                                  toolbarDrawer.getDrawerActivitiesToLaunch(),
                                  toolbarDrawer.getDrawerMenu(),
@@ -86,6 +87,7 @@ public abstract class RvActivityWithBackToggle extends RvBase {
                         if (toolbarUp.getTitle()     != null) toolbarAdapter.setToolbarTitle    (toolbarUp.getTitle());
                         if (toolbarUp.getTextColor() != null) toolbarAdapter.setToolbarTextColor(toolbarUp.getTextColor());
                         if (toolbarUp.getTypeface()  != null) toolbarAdapter.setToolbarTypeFace (toolbarUp.getTypeface());
+                        if (toolbarUp.getColor() != null) toolbarAdapter.setToolbarColor(toolbarUp.getColor());
                         toolbarAdapter.buildToolbarWithHomeUp();
                         break;
                     case "ToolbarWithSpinnerPOJO":
@@ -97,8 +99,6 @@ public abstract class RvActivityWithBackToggle extends RvBase {
                                                                   ll);
                         break;
                 }
-
-                if (toolbarP.getColor() != null) toolbarAdapter.setToolbarColor(toolbarP.getColor());
             }
         }
 
