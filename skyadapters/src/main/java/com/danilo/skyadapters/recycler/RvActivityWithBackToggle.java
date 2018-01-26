@@ -93,11 +93,11 @@ public abstract class RvActivityWithBackToggle extends RvBase {
                         break;
                     case "ToolbarWithSpinnerPOJO":
                         ToolbarWithSpinnerPOJO toolbarSpinner = (ToolbarWithSpinnerPOJO) toolbarP;
-                        //LinearLayout ll = findViewById(R.id.ll);
-                        /*new SpinnerAdapter(this).attachSpinner(toolbarSpinner.getSpinnerItems(),
+                        LinearLayout ll = findViewById(R.id.ll);
+                        new SpinnerAdapter(this).attachSpinner(toolbarSpinner.getSpinnerItems(),
                                                                   toolbarSpinner.getCustomSpinnerLayout(),
                                                                   toolbarSpinner.getListener(),
-                                                                  ll);*/
+                                                                  ll);
                         break;
                 }
             }
