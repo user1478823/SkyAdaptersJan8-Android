@@ -74,7 +74,7 @@ public class ToolbarAdapter {
         return this;
     }
 
-    public ToolbarAdapter buildToolbarWithHomeUp() {
+    public ToolbarAdapter buildToolbarWithHomeUp(String title) {
         a.setSupportActionBar(toolbar);
         a.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -83,6 +83,9 @@ public class ToolbarAdapter {
                 a.finish();
             }
         });
+        if (title != null) {
+            toolbar.setTitle(title);
+        }
         return this;
     }
 
@@ -131,7 +134,8 @@ public class ToolbarAdapter {
                                                            int menuID,
                                                            int customLayoutID,
                                                            int numOfRows,
-                                                           Integer drawerItemColor, Integer drawerRvID){
+                                                           Integer drawerItemColor, Integer drawerRvID,
+                                                           String title){
 
         drawerLayout = a.findViewById(R.id.drawer_layout);
         drawerLayout.setVisibility(View.VISIBLE);
@@ -153,7 +157,10 @@ public class ToolbarAdapter {
         ActionBarDrawerToggle toggleBtn = new ActionBarDrawerToggle(a, drawerLayout,
                 R.string.drawer_open, R.string.drawer_closed);
         drawerLayout.addDrawerListener(toggleBtn);
-        toolbar.setTitle("test");
+        if (title != null) {
+            toolbar.setTitle(title);
+        }
+
         a.setSupportActionBar(toolbar);
         //a.getSupportActionBar().setTitle("Test title");
         a.getSupportActionBar().setDisplayHomeAsUpEnabled(true);

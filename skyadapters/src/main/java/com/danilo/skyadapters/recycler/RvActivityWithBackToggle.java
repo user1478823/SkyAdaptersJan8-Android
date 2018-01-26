@@ -66,7 +66,7 @@ public abstract class RvActivityWithBackToggle extends RvBase {
                 switch (toolbarP.getClass().getSimpleName()) {
                     case "ToolbarWithDrawerPOJO":
                         ToolbarWithDrawerPOJO toolbarDrawer = (ToolbarWithDrawerPOJO) toolbarP;
-                        if (toolbarDrawer.getTitle()     != null) toolbarAdapter.setToolbarTitle    (toolbarDrawer.getTitle());
+                        //if (toolbarDrawer.getTitle()     != null) toolbarAdapter.setToolbarTitle    (toolbarDrawer.getTitle());
                         if (toolbarDrawer.getColor()     != null) toolbarAdapter.setToolbarColor    (toolbarDrawer.getColor());
                         if (toolbarDrawer.getTextColor() != null) toolbarAdapter.setToolbarTextColor(toolbarDrawer.getTextColor());
                         if (toolbarDrawer.getTypeface()  != null) toolbarAdapter.setToolbarTypeFace (toolbarDrawer.getTypeface());
@@ -77,18 +77,19 @@ public abstract class RvActivityWithBackToggle extends RvBase {
                                  toolbarDrawer.getDrawerCustomRow(),
                                  toolbarDrawer.getNumberOfRows(),
                                  toolbarDrawer.getDrawerItemsColor(),
-                                 R.id.rv_drawer);
+                                 R.id.rv_drawer,
+                                toolbarDrawer.getTitle());
                         if (toggle != null) {
                             toggle.syncState();
                         }
                         break;
                         case "ToolbarWithUpPOJO":
                         ToolbarWithUpPOJO toolbarUp = (ToolbarWithUpPOJO) toolbarP;
-                        if (toolbarUp.getTitle()     != null) toolbarAdapter.setToolbarTitle    (toolbarUp.getTitle());
+                        //if (toolbarUp.getTitle()     != null) toolbarAdapter.setToolbarTitle    (toolbarUp.getTitle());
                         if (toolbarUp.getTextColor() != null) toolbarAdapter.setToolbarTextColor(toolbarUp.getTextColor());
                         if (toolbarUp.getTypeface()  != null) toolbarAdapter.setToolbarTypeFace (toolbarUp.getTypeface());
                         if (toolbarUp.getColor() != null) toolbarAdapter.setToolbarColor(toolbarUp.getColor());
-                        toolbarAdapter.buildToolbarWithHomeUp();
+                        toolbarAdapter.buildToolbarWithHomeUp(toolbarUp.getTitle());
                         break;
                     case "ToolbarWithSpinnerPOJO":
                         ToolbarWithSpinnerPOJO toolbarSpinner = (ToolbarWithSpinnerPOJO) toolbarP;
