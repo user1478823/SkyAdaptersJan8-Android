@@ -14,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
@@ -161,6 +162,8 @@ public class ToolbarAdapter {
 
     public ToolbarAdapter setToolbarTitle(String title){
         toolbar.setTitle(title);
+        LinearLayout ll = a.findViewById(R.id.ll);
+        ll.setVisibility(View.GONE);
         //a.getSupportActionBar().setTitle(title);
         //a.setTitle(title);
         return this;
