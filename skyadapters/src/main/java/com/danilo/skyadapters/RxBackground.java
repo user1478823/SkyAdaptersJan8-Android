@@ -2,6 +2,7 @@ package com.danilo.skyadapters;
 
 
 
+import com.danilo.skyadapters.recycler.RvActivityWithBackToggle;
 import com.danilo.skyadapters.recycler.RvBase;
 
 import java.util.List;
@@ -17,7 +18,7 @@ import io.reactivex.schedulers.Schedulers;
 
 public class RxBackground {
 
-    public void executeInBackground(final RvBase a, final RxBackgroundInterface rxBackgroundInterface) {
+    public void executeInBackground(final RvActivityWithBackToggle a, final RxBackgroundInterface rxBackgroundInterface) {
         Observable<List> observable = Observable.just("a") //had to add something
                 .map(new Function<String, List>() {
                     @Override
@@ -32,7 +33,6 @@ public class RxBackground {
         observable.subscribe(a.buildObserver(new RvBase.ObserverInterface() {
             @Override
             public void onNext(List value) {
-                //rxBackgroundInterface.getOnResultReceived(value);
                 if (value != null) {
                     a.populateRv(value);
                 } else {
@@ -45,6 +45,5 @@ public class RxBackground {
 
     public interface RxBackgroundInterface {
         public List getDoInBackground();
-        //public void getOnResultReceived(List value);
     }
 }

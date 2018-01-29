@@ -3,11 +3,14 @@ package com.danilo.skyadapters.recycler;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 
 import com.danilo.skyadapters.recycler.pojo.ActivityPOJO;
@@ -21,14 +24,21 @@ import com.danilo.skyadapters.recycler.pojo.ToolbarWithSpinnerPOJO;
 import com.danilo.skyadapters.recycler.pojo.ToolbarWithUpPOJO;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 
 /**
  * Created by ttlnisoffice on 12/20/17.
  */
 
-public abstract class RvActivityWithBackToggle extends RvBase {
+public abstract class RvActivityWithBackToggle extends AppCompatActivity {
 
     private ActionBarDrawerToggle toggle;
+    public List list = null;
+    public  RvAdapter adapter;
+    public RecyclerView rv;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,14 +57,6 @@ public abstract class RvActivityWithBackToggle extends RvBase {
         if (aP != null && aP.getTheme() != null) {
             setTheme(aP.getTheme());
         }
-
-        /*ToolbarAdapter toolbarAdapter = null;
-        Integer drawerRvID            = null;
-        if (aP == null || aP.getView() == null) {
-            toolbarAdapter = new ToolbarAdapter(this);
-        } else {
-            toolbarAdapter = new ToolbarAdapter(this, aP.getView());
-        }*/
 
         ToolbarAdapter toolbarAdapter = new ToolbarAdapter(this);
 
@@ -123,25 +125,69 @@ public abstract class RvActivityWithBackToggle extends RvBase {
     }
 
     protected abstract RxBackground.RxBackgroundInterface getRxBackgroundInterface();
-    //public abstract ActivityPOJO getActivityPOJO();
     public abstract RvAdapter.RvAdapterInterface rvOnBind();
     public abstract ArrayList<Integer> rvCustomRow_holderIDS();
-
-    @Override
-    public ArrayList<Integer> getRvCustomRow_holderIDS() {
-        return rvCustomRow_holderIDS();
-    }
-
-    @Override
-    public RvAdapter.RvAdapterInterface getRvOnBind() {
-        return rvOnBind();
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (toggle.onOptionsItemSelected(item)) {
             return true;
         } else return false;
+    }
+
+    public void initRv(Integer rvID) {
+        if (rvID != null) {
+            rv = (RecyclerView) findViewById(rvID);
+            rv.setLayoutManager(new LinearLayoutManager(this));
+            if (RvInterface.EndlessRvOnScrollListener.class.isAssignableFrom(this.getClass())) {
+                RvInterface.EndlessRvOnScrollListener onScrollInterface = (RvInterface.EndlessRvOnScrollListener) this;
+                rv.addOnScrollListener(onScrollInterface.onScroll());
+            }
+        } else {
+            Toast.makeText(this, "Error: RvID is null", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public void populateRv(List value) {
+        if (list == null) {
+            list = value;
+            adapter = new RvAdapter(list,
+                    getRvCustomRow_holderIDS().subList(1, getRvCustomRow_holderIDS().size()),
+                    getRvCustomRow_holderIDS().get(0),
+                    getRvOnBind());
+            rv.setAdapter(adapter);
+        } else {
+            list.addAll(value);
+            adapter.notifyDataSetChanged();
+        }
+    }
+
+    public abstract ArrayList<Integer> getRvCustomRow_holderIDS();
+    public abstract RvAdapter.RvAdapterInterface getRvOnBind();
+
+    public Observer buildObserver(final ObserverInterface observerInterface) {
+        return new Observer<List>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+            }
+
+            @Override
+            public void onNext(List value) {
+                observerInterface.onNext(value);
+            }
+
+            @Override
+            public void onError(Throwable e) {
+            }
+
+            @Override
+            public void onComplete() {
+            }
+        };
+    }
+
+    public interface ObserverInterface {
+        public void onNext(List value);
     }
 
 }
