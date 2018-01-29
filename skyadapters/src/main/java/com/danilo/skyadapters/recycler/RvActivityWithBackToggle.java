@@ -88,11 +88,14 @@ public abstract class RvActivityWithBackToggle extends AppCompatActivity {
                 }
                 if (vg.getChildAt(i) instanceof  DrawerLayout) {
                     drawerLayout = (DrawerLayout) findViewById(vg.getChildAt(i).getId());
+                    ArrayList<Integer> rvIDs = new ArrayList();
                     for (int j = 0; j < drawerLayout.getChildCount(); j++) {
                         if (drawerLayout.getChildAt(j) instanceof RecyclerView) {
-                            drawerRv = findViewById(drawerLayout.getChildAt(j).getId());
+                            rvIDs.add(drawerLayout.getChildAt(j).getId());
                         }
                     }
+                    rv = findViewById(rvIDs.get(0));
+                    drawerRv = findViewById(rvIDs.get(1));
                 }
             }
         }
