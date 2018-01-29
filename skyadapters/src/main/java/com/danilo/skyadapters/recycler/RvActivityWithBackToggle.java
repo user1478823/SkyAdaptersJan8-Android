@@ -44,11 +44,12 @@ public abstract class RvActivityWithBackToggle extends AppCompatActivity {
     public List list = null;
     public  RvAdapter adapter;
     public RecyclerView rv;
+    private ToolbarPOJO toolbarP;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ActivityPOJO aP = null;
+        /*ActivityPOJO aP = null;
         if (RvInterface.ActivityContent.class.isAssignableFrom(this.getClass())) {
             RvInterface.ActivityContent activityContent = ((RvInterface.ActivityContent) this);
             aP = activityContent.getActivityContent();
@@ -61,12 +62,17 @@ public abstract class RvActivityWithBackToggle extends AppCompatActivity {
         }
         if (aP != null && aP.getTheme() != null) {
             setTheme(aP.getTheme());
-        }
+        }*/
 
-        ToolbarPOJO toolbarP;
         if (RvInterface.ToolbarCustomizer.class.isAssignableFrom(this.getClass())) {
             RvInterface.ToolbarCustomizer toolbarCustomizer = ((RvInterface.ToolbarCustomizer) this);
             toolbarP = toolbarCustomizer.customizeToolbar();
+
+            if (toolbarP != null && toolbarP.getClass().getSimpleName().contains("ToolbarWithDrawerPOJO")) {
+                setContentView(R.layout.default_drawer_layout);
+            } else {
+                setContentView(R.layout.default_layout);
+            }
 
             if (toolbarP != null) {
                 Toolbar toolbar = findViewById(R.id.toolbar);
@@ -83,16 +89,12 @@ public abstract class RvActivityWithBackToggle extends AppCompatActivity {
                     if (toolbarP.getClass().getSimpleName().contains("ToolbarWithDrawerPOJO")) {
                         ToolbarWithDrawerPOJO toolbarDrawer = (ToolbarWithDrawerPOJO) toolbarP;
                         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
-                        //drawerLayout.setVisibility(View.VISIBLE);
                         new com.danilo.skyadapters.RvAdapter(this, toolbarDrawer.getDrawerActivitiesToLaunch(),
                                 toolbarDrawer.getDrawerItemsColor(), toolbarDrawer.getDrawerMenu(),
                                 toolbarDrawer.getDrawerCustomRow(), toolbarDrawer.getNumberOfRows());
                         toggle = new ActionBarDrawerToggle(this, drawerLayout,
                                  R.string.drawer_open, R.string.drawer_closed);
                         drawerLayout.addDrawerListener(toggle);
-                    } else {
-                        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
-                        //drawerLayout.setVisibility(View.GONE);
                     }
                     setSupportActionBar(toolbar);
                     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -107,14 +109,14 @@ public abstract class RvActivityWithBackToggle extends AppCompatActivity {
                             toolbarSpinner.getCustomSpinnerLayout(),
                             toolbarSpinner.getListener(),
                             ll);
-                    DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
-                    //drawerLayout.setVisibility(View.GONE);
                 }
             }
+        } else {
+            setContentView(R.layout.default_layout);
         }
 
         Integer rvID = null;
-        if (aP == null || aP.getView() == null) {
+        /*if (aP == null || aP.getView() == null) {
             rvID = R.id.rv;
         } else {
             ViewGroup vg = (ViewGroup) getLayoutInflater().inflate(aP.getView(), null);
@@ -124,6 +126,11 @@ public abstract class RvActivityWithBackToggle extends AppCompatActivity {
                     rvID = vg.getChildAt(i).getId();
                 }
             }
+        }*/
+        if (toolbarP != null && toolbarP.getClass().getSimpleName().contains("ToolbarWithDrawerPOJO")) {
+            rvID = R.id.rv_main;
+        } else {
+            rvID = R.id.rv;
         }
         initRv(rvID);
         new RxBackground().executeInBackground(this, getRxBackgroundInterface());
