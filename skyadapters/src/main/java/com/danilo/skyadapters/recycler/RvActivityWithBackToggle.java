@@ -61,7 +61,7 @@ public abstract class RvActivityWithBackToggle extends AppCompatActivity {
         if (aP != null && aP.getTheme() != null) {
             setTheme(aP.getTheme());
         }
-        
+
         ToolbarPOJO toolbarP;
         if (RvInterface.ToolbarCustomizer.class.isAssignableFrom(this.getClass())) {
             RvInterface.ToolbarCustomizer toolbarCustomizer = ((RvInterface.ToolbarCustomizer) this);
@@ -71,7 +71,7 @@ public abstract class RvActivityWithBackToggle extends AppCompatActivity {
                 Toolbar toolbar = findViewById(R.id.toolbar);
                 toolbar.setTitle("");
                 if (toolbarP.getColor() != null) toolbar.setBackgroundColor(toolbarP.getColor());
-                if (toolbarP.getClass().getSimpleName().contains("ToolbarWithDrawerPOJO") && toolbarP.getClass().getSimpleName().contains("ToolbarWithUpPOJO")) {
+                if (toolbarP.getClass().getSimpleName().contains("ToolbarWithDrawerPOJO") || toolbarP.getClass().getSimpleName().contains("ToolbarWithUpPOJO")) {
                     String title = null;
                     if (toolbarP.getClass().getSimpleName().contains("ToolbarWithDrawerPOJO")) {
                         ToolbarWithDrawerPOJO toolbarDrawer = (ToolbarWithDrawerPOJO) toolbarP;
