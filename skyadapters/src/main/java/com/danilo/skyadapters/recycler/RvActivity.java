@@ -131,6 +131,13 @@ public abstract class RvActivity extends AppCompatActivity {
                 getSupportActionBar().setDisplayHomeAsUpEnabled(true);
                 if (toggle != null) {
                     toggle.syncState();
+                } else {
+                    toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            finish();
+                        }
+                    });
                 }
             } else if (toolbarP.getClass().getSimpleName().contains("ToolbarWithSpinnerPOJO")) {
                 ToolbarWithSpinnerPOJO toolbarSpinner = (ToolbarWithSpinnerPOJO) toolbarP;
