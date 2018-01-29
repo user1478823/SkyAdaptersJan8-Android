@@ -62,6 +62,10 @@ public abstract class RvActivity extends AppCompatActivity {
             toolbarP = toolbarCustomizer.customizeToolbar();
         }
 
+        if (aP != null && aP.getTheme() != null) {
+            setTheme(aP.getTheme());
+        }
+
         if (aP == null || aP.getView() == null) {
             if (toolbarP == null) {
                 setContentView(R.layout.default_layout);
@@ -98,9 +102,6 @@ public abstract class RvActivity extends AppCompatActivity {
                     drawerRv = findViewById(rvIDs.get(1));
                 }
             }
-        }
-        if (aP != null && aP.getTheme() != null) {
-            setTheme(aP.getTheme());
         }
 
         if (toolbarP != null) {
