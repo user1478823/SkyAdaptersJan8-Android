@@ -2,7 +2,7 @@ package com.danilo.skyadapters;
 
 
 
-import com.danilo.skyadapters.recycler.RvActivityWithBackToggle;
+import com.danilo.skyadapters.recycler.RvActivity;
 
 import java.util.List;
 
@@ -17,7 +17,7 @@ import io.reactivex.schedulers.Schedulers;
 
 public class RxBackground {
 
-    public void executeInBackground(final RvActivityWithBackToggle a, final RxBackgroundInterface rxBackgroundInterface) {
+    public void executeInBackground(final RvActivity a, final RxBackgroundInterface rxBackgroundInterface) {
         Observable<List> observable = Observable.just("a") //had to add something
                 .map(new Function<String, List>() {
                     @Override
@@ -29,7 +29,7 @@ public class RxBackground {
                 .observeOn(AndroidSchedulers.mainThread());
 
 
-        observable.subscribe(a.buildObserver(new RvActivityWithBackToggle.ObserverInterface() {
+        observable.subscribe(a.buildObserver(new RvActivity.ObserverInterface() {
             @Override
             public void onNext(List value) {
                 if (value != null) {

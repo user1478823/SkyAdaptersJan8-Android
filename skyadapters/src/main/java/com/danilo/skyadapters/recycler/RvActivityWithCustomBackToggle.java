@@ -15,7 +15,7 @@ import java.util.List;
  * Created by ttlnisoffice on 12/20/17.
  */
 
-public abstract class RvActivityWithCustomBackToggle extends RvActivity {
+public abstract class RvActivityWithCustomBackToggle { /*extends RvActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -85,6 +85,6 @@ public abstract class RvActivityWithCustomBackToggle extends RvActivity {
     public abstract String   getToolbarTitle();
     public abstract Integer  getToolbarColor();
     public abstract Typeface getToolbarTypeFace();
-    public abstract Integer  getToolbarTextColor();
+    public abstract Integer  getToolbarTextColor();*/
 
 }
