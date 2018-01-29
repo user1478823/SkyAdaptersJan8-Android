@@ -92,7 +92,7 @@ public abstract class RvActivityWithBackToggle extends AppCompatActivity {
                         drawerLayout.addDrawerListener(toggle);
                     } else {
                         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
-                        drawerLayout.setVisibility(View.GONE);
+                        //drawerLayout.setVisibility(View.GONE);
                     }
                     setSupportActionBar(toolbar);
                     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -108,7 +108,7 @@ public abstract class RvActivityWithBackToggle extends AppCompatActivity {
                             toolbarSpinner.getListener(),
                             ll);
                     DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
-                    drawerLayout.setVisibility(View.GONE);
+                    //drawerLayout.setVisibility(View.GONE);
                 }
             }
         }
