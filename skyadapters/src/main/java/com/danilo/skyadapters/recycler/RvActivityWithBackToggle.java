@@ -86,7 +86,6 @@ public abstract class RvActivityWithBackToggle extends AppCompatActivity {
                         toggle = new ActionBarDrawerToggle(this, drawerLayout,
                                  R.string.drawer_open, R.string.drawer_closed);
                         drawerLayout.addDrawerListener(toggle);
-                        toggle.syncState();
                     } else {
                         ToolbarWithUpPOJO toolbarUp = (ToolbarWithUpPOJO) toolbarP;
                         if (toolbarUp.getTextColor() != null) toolbar.setTitleTextColor(toolbarUp.getTextColor());
@@ -98,6 +97,9 @@ public abstract class RvActivityWithBackToggle extends AppCompatActivity {
                     }
                     setSupportActionBar(toolbar);
                     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                    if (toggle != null) {
+                        toggle.syncState();
+                    }
                 } else if (toolbarP.getClass().getSimpleName().contains("ToolbarWithSpinnerPOJO")) {
                     ToolbarWithSpinnerPOJO toolbarSpinner = (ToolbarWithSpinnerPOJO) toolbarP;
                     LinearLayout ll = findViewById(R.id.ll);
