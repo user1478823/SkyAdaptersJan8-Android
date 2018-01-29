@@ -3,7 +3,6 @@ package com.danilo.skyadapters;
 
 
 import com.danilo.skyadapters.recycler.RvActivityWithBackToggle;
-import com.danilo.skyadapters.recycler.RvBase;
 
 import java.util.List;
 
@@ -30,7 +29,7 @@ public class RxBackground {
                 .observeOn(AndroidSchedulers.mainThread());
 
 
-        observable.subscribe(a.buildObserver(new RvBase.ObserverInterface() {
+        observable.subscribe(a.buildObserver(new RvActivityWithBackToggle.ObserverInterface() {
             @Override
             public void onNext(List value) {
                 if (value != null) {
