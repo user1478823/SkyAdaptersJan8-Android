@@ -125,8 +125,6 @@ public abstract class RvActivityWithBackToggle extends AppCompatActivity {
     }
 
     protected abstract RxBackground.RxBackgroundInterface getRxBackgroundInterface();
-    public abstract RvAdapter.RvAdapterInterface rvOnBind();
-    public abstract ArrayList<Integer> rvCustomRow_holderIDS();
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
