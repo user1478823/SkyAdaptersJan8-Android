@@ -47,6 +47,7 @@ public abstract class RvActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
     private RecyclerView drawerRv;
+    private ArrayList<Integer> rvIds = new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -92,14 +93,16 @@ public abstract class RvActivity extends AppCompatActivity {
                 }
                 if (vg.getChildAt(i) instanceof  DrawerLayout) {
                     drawerLayout = (DrawerLayout) findViewById(vg.getChildAt(i).getId());
-                    ArrayList<Integer> rvIDs = new ArrayList();
+                    //ArrayList<Integer> rvIDs = new ArrayList();
+                    /*
                     for (int j = 0; j < drawerLayout.getChildCount(); j++) {
                         if (drawerLayout.getChildAt(j) instanceof RecyclerView) {
                             rvIDs.add(drawerLayout.getChildAt(j).getId());
                         }
-                    }
-                    rv = findViewById(rvIDs.get(0));
-                    drawerRv = findViewById(rvIDs.get(1));
+                    }*/
+                    findAllRvs(drawerLayout);
+                    rv = findViewById(rvIds.get(0));
+                    drawerRv = findViewById(rvIds.get(1));
                 }
             }
         }
@@ -202,5 +205,17 @@ public abstract class RvActivity extends AppCompatActivity {
 
     public interface ObserverInterface {
         public void onNext(List value);
+    }
+
+    private void findAllRvs(ViewGroup viewGroup) {
+        int count = viewGroup.getChildCount();
+        for (int i = 0; i < count; i++) {
+            View view = viewGroup.getChildAt(i);
+            if (view instanceof ViewGroup)
+                findAllRvs((ViewGroup) view);
+            else if (view instanceof RecyclerView) {
+                rvIds.add(view.getId());
+            }
+        }
     }
 }
