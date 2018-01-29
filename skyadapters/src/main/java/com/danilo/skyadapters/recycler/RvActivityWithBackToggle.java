@@ -44,94 +44,104 @@ public abstract class RvActivityWithBackToggle extends AppCompatActivity {
     public List list = null;
     public  RvAdapter adapter;
     public RecyclerView rv;
-    private ToolbarPOJO toolbarP;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        /*ActivityPOJO aP = null;
+        ActivityPOJO aP = null;
         if (RvInterface.ActivityContent.class.isAssignableFrom(this.getClass())) {
             RvInterface.ActivityContent activityContent = ((RvInterface.ActivityContent) this);
             aP = activityContent.getActivityContent();
         }
+        ToolbarPOJO toolbarP = null;
+        if (RvInterface.ToolbarCustomizer.class.isAssignableFrom(this.getClass())) {
+            RvInterface.ToolbarCustomizer toolbarCustomizer = ((RvInterface.ToolbarCustomizer) this);
+            toolbarP = toolbarCustomizer.customizeToolbar();
+        }
 
         if (aP == null || aP.getView() == null) {
-            setContentView(R.layout.default_layout);
+            if (toolbarP == null) {
+                setContentView(R.layout.default_layout);
+            } else if (toolbarP != null && toolbarP.getClass().getSimpleName().contains("ToolbarWithDrawerPOJO")) {
+                setContentView(R.layout.default_drawer_layout);
+            } else {
+                setContentView(R.layout.default_layout);
+            }
         } else {
             setContentView(aP.getView());
         }
         if (aP != null && aP.getTheme() != null) {
             setTheme(aP.getTheme());
-        }*/
+        }
 
-        if (RvInterface.ToolbarCustomizer.class.isAssignableFrom(this.getClass())) {
-            RvInterface.ToolbarCustomizer toolbarCustomizer = ((RvInterface.ToolbarCustomizer) this);
-            toolbarP = toolbarCustomizer.customizeToolbar();
-
-            if (toolbarP != null && toolbarP.getClass().getSimpleName().contains("ToolbarWithDrawerPOJO")) {
-                setContentView(R.layout.default_drawer_layout);
-            } else {
-                setContentView(R.layout.default_layout);
-            }
-
-            if (toolbarP != null) {
-                Toolbar toolbar = findViewById(R.id.toolbar);
-                if (toolbarP.getColor() != null) toolbar.setBackgroundColor(toolbarP.getColor());
-                if (toolbarP.getClass().getSimpleName().contains("ToolbarWithDrawerPOJO") || toolbarP.getClass().getSimpleName().contains("ToolbarWithUpPOJO")) {
-                    ToolbarWithUpPOJO toolbarUp = (ToolbarWithUpPOJO) toolbarP;
-                    if (toolbarUp.getTextColor() != null) toolbar.setTitleTextColor(toolbarUp.getTextColor());
-                    if (toolbarUp.getTypeface()  != null) ((TextView)toolbar.getChildAt(0)).setTypeface(toolbarUp.getTypeface());
-                    if (toolbarUp.getTitle() != null) {
-                        toolbar.setTitle(toolbarUp.getTitle());
-                    } else {
-                        toolbar.setTitle("");
-                    }
-                    if (toolbarP.getClass().getSimpleName().contains("ToolbarWithDrawerPOJO")) {
-                        ToolbarWithDrawerPOJO toolbarDrawer = (ToolbarWithDrawerPOJO) toolbarP;
-                        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
-                        new com.danilo.skyadapters.RvAdapter(this, toolbarDrawer.getDrawerActivitiesToLaunch(),
-                                toolbarDrawer.getDrawerItemsColor(), toolbarDrawer.getDrawerMenu(),
-                                toolbarDrawer.getDrawerCustomRow(), toolbarDrawer.getNumberOfRows());
-                        toggle = new ActionBarDrawerToggle(this, drawerLayout,
-                                 R.string.drawer_open, R.string.drawer_closed);
-                        drawerLayout.addDrawerListener(toggle);
-                    }
-                    setSupportActionBar(toolbar);
-                    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-                    if (toggle != null) {
-                        toggle.syncState();
-                    }
-                } else if (toolbarP.getClass().getSimpleName().contains("ToolbarWithSpinnerPOJO")) {
-                    ToolbarWithSpinnerPOJO toolbarSpinner = (ToolbarWithSpinnerPOJO) toolbarP;
+        if (toolbarP != null) {
+            Toolbar toolbar = findViewById(R.id.toolbar);
+            if (toolbarP.getColor() != null) toolbar.setBackgroundColor(toolbarP.getColor());
+            if (toolbarP.getClass().getSimpleName().contains("ToolbarWithDrawerPOJO") || toolbarP.getClass().getSimpleName().contains("ToolbarWithUpPOJO")) {
+                ToolbarWithUpPOJO toolbarUp = (ToolbarWithUpPOJO) toolbarP;
+                if (toolbarUp.getTextColor() != null) toolbar.setTitleTextColor(toolbarUp.getTextColor());
+                if (toolbarUp.getTypeface()  != null) ((TextView)toolbar.getChildAt(0)).setTypeface(toolbarUp.getTypeface());
+                if (toolbarUp.getTitle() != null) {
+                    toolbar.setTitle(toolbarUp.getTitle());
+                } else {
                     toolbar.setTitle("");
-                    LinearLayout ll = findViewById(R.id.ll);
-                    new SpinnerAdapter(this).attachSpinner(toolbarSpinner.getSpinnerItems(),
-                            toolbarSpinner.getCustomSpinnerLayout(),
-                            toolbarSpinner.getListener(),
-                            ll);
                 }
+                if (toolbarP.getClass().getSimpleName().contains("ToolbarWithDrawerPOJO")) {
+                    ToolbarWithDrawerPOJO toolbarDrawer = (ToolbarWithDrawerPOJO) toolbarP;
+                    DrawerLayout drawerLayout = null;
+                    if (aP == null || aP.getView() == null) {
+                        drawerLayout = findViewById(R.id.drawer_layout);
+                    } else {
+                        ViewGroup vg = (ViewGroup) getLayoutInflater().inflate(aP.getView(),null);
+                        for (int i = 0; i < vg.getChildCount(); i++) {
+                            if (vg.getChildAt(i) instanceof Toolbar) {
+                                toolbar = (Toolbar) findViewById(vg.getChildAt(i).getId());
+                            }
+                            if (vg.getChildAt(i) instanceof  DrawerLayout) {
+                                drawerLayout = (DrawerLayout) findViewById(vg.getChildAt(i).getId());
+                            }
+                        }
+                    }
+
+                    new com.danilo.skyadapters.RvAdapter(this, toolbarDrawer.getDrawerActivitiesToLaunch(),
+                            toolbarDrawer.getDrawerItemsColor(), toolbarDrawer.getDrawerMenu(),
+                            toolbarDrawer.getDrawerCustomRow(), toolbarDrawer.getNumberOfRows());
+                    toggle = new ActionBarDrawerToggle(this, drawerLayout,
+                            R.string.drawer_open, R.string.drawer_closed);
+                    drawerLayout.addDrawerListener(toggle);
+                }
+                setSupportActionBar(toolbar);
+                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                if (toggle != null) {
+                    toggle.syncState();
+                }
+            } else if (toolbarP.getClass().getSimpleName().contains("ToolbarWithSpinnerPOJO")) {
+                ToolbarWithSpinnerPOJO toolbarSpinner = (ToolbarWithSpinnerPOJO) toolbarP;
+                toolbar.setTitle("");
+                LinearLayout ll = findViewById(R.id.ll);
+                new SpinnerAdapter(this).attachSpinner(toolbarSpinner.getSpinnerItems(),
+                        toolbarSpinner.getCustomSpinnerLayout(),
+                        toolbarSpinner.getListener(),
+                        ll);
             }
-        } else {
-            setContentView(R.layout.default_layout);
         }
 
         Integer rvID = null;
-        /*if (aP == null || aP.getView() == null) {
-            rvID = R.id.rv;
+        if (aP == null || aP.getView() == null) {
+            if (toolbarP != null && toolbarP.getClass().getSimpleName().contains("ToolbarWithDrawerPOJO")) {
+                rvID = R.id.rv_main;
+            } else {
+                rvID = R.id.rv;
+            }
         } else {
             ViewGroup vg = (ViewGroup) getLayoutInflater().inflate(aP.getView(), null);
-
             for (int i = 0; i < vg.getChildCount(); i++) {
                 if (vg.getChildAt(i) instanceof RecyclerView) {
                     rvID = vg.getChildAt(i).getId();
                 }
             }
-        }*/
-        if (toolbarP != null && toolbarP.getClass().getSimpleName().contains("ToolbarWithDrawerPOJO")) {
-            rvID = R.id.rv_main;
-        } else {
-            rvID = R.id.rv;
         }
+
         initRv(rvID);
         new RxBackground().executeInBackground(this, getRxBackgroundInterface());
     }

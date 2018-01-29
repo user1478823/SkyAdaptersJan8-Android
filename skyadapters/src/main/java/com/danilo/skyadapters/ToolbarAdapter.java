@@ -43,7 +43,6 @@ public class ToolbarAdapter {
             if (vg.getChildAt(i) instanceof  DrawerLayout) {
                 drawerLayout = (DrawerLayout) a.findViewById(vg.getChildAt(i).getId());
             }
-
         }
 
         /*if (toolbar == null && a.getClass().getSimpleName().contains("MainActivity")) {
