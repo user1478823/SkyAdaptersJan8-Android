@@ -211,10 +211,10 @@ public abstract class RvActivity extends AppCompatActivity {
         int count = viewGroup.getChildCount();
         for (int i = 0; i < count; i++) {
             View view = viewGroup.getChildAt(i);
-            if (view instanceof ViewGroup)
-                findAllRvs((ViewGroup) view);
-            else if (view instanceof RecyclerView) {
+            if (view instanceof RecyclerView)
                 rvIds.add(view.getId());
+            else if (view instanceof ViewGroup) {
+                findAllRvs((ViewGroup) view);
             }
         }
     }
