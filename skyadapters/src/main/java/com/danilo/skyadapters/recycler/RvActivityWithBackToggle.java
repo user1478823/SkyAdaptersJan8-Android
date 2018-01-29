@@ -135,24 +135,7 @@ public abstract class RvActivityWithBackToggle extends AppCompatActivity {
                         ll);
             }
         }
-
-        Integer rvID = null;
-        if (aP == null || aP.getView() == null) {
-            if (toolbarP != null && toolbarP.getClass().getSimpleName().contains("ToolbarWithDrawerPOJO")) {
-                rvID = R.id.rv_main;
-            } else {
-                rvID = R.id.rv;
-            }
-        } else {
-            ViewGroup vg = (ViewGroup) getLayoutInflater().inflate(aP.getView(), null);
-            for (int i = 0; i < vg.getChildCount(); i++) {
-                if (vg.getChildAt(i) instanceof RecyclerView) {
-                    rvID = vg.getChildAt(i).getId();
-                }
-            }
-        }
-
-        initRv(rvID);
+        initRv();
         new RxBackground().executeInBackground(this, getRxBackgroundInterface());
     }
 
@@ -163,9 +146,8 @@ public abstract class RvActivityWithBackToggle extends AppCompatActivity {
         return toggle.onOptionsItemSelected(item);
     }
 
-    public void initRv(Integer rvID) {
-        if (rvID != null) {
-            rv = (RecyclerView) findViewById(rvID);
+    public void initRv() {
+        if (rv != null) {
             rv.setLayoutManager(new LinearLayoutManager(this));
             if (RvInterface.EndlessRvOnScrollListener.class.isAssignableFrom(this.getClass())) {
                 RvInterface.EndlessRvOnScrollListener onScrollInterface = (RvInterface.EndlessRvOnScrollListener) this;
