@@ -1,15 +1,19 @@
 package com.danilo.skyadapters.recycler;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -57,9 +61,7 @@ public abstract class RvActivityWithBackToggle extends AppCompatActivity {
         if (aP != null && aP.getTheme() != null) {
             setTheme(aP.getTheme());
         }
-
-        ToolbarAdapter toolbarAdapter = new ToolbarAdapter(this);
-
+        
         ToolbarPOJO toolbarP;
         if (RvInterface.ToolbarCustomizer.class.isAssignableFrom(this.getClass())) {
             RvInterface.ToolbarCustomizer toolbarCustomizer = ((RvInterface.ToolbarCustomizer) this);
@@ -69,14 +71,45 @@ public abstract class RvActivityWithBackToggle extends AppCompatActivity {
                 Toolbar toolbar = findViewById(R.id.toolbar);
                 toolbar.setTitle("");
                 if (toolbarP.getColor() != null) toolbar.setBackgroundColor(toolbarP.getColor());
-                switch (toolbarP.getClass().getSimpleName()) {
+                if (toolbarP.getClass().getSimpleName().contains("ToolbarWithDrawerPOJO") && toolbarP.getClass().getSimpleName().contains("ToolbarWithUpPOJO")) {
+                    String title = null;
+                    if (toolbarP.getClass().getSimpleName().contains("ToolbarWithDrawerPOJO")) {
+                        ToolbarWithDrawerPOJO toolbarDrawer = (ToolbarWithDrawerPOJO) toolbarP;
+                        if (toolbarDrawer.getTextColor() != null) toolbar.setTitleTextColor(toolbarDrawer.getTextColor());
+                        if (toolbarDrawer.getTypeface()  != null) ((TextView)toolbar.getChildAt(0)).setTypeface(toolbarDrawer.getTypeface());
+                        if (toolbarDrawer.getTitle() != null) title = toolbarDrawer.getTitle();
+                        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+                        drawerLayout.setVisibility(View.VISIBLE);
+                        new com.danilo.skyadapters.RvAdapter(this, toolbarDrawer.getDrawerActivitiesToLaunch(),
+                                toolbarDrawer.getDrawerItemsColor(), toolbarDrawer.getDrawerMenu(),
+                                toolbarDrawer.getDrawerCustomRow(), toolbarDrawer.getNumberOfRows());
+                        toggle = new ActionBarDrawerToggle(this, drawerLayout,
+                                 R.string.drawer_open, R.string.drawer_closed);
+                        drawerLayout.addDrawerListener(toggle);
+                    } else {
+                        ToolbarWithUpPOJO toolbarUp = (ToolbarWithUpPOJO) toolbarP;
+                        if (toolbarUp.getTextColor() != null) toolbar.setTitleTextColor(toolbarUp.getTextColor());
+                        if (toolbarUp.getTypeface()  != null) ((TextView)toolbar.getChildAt(0)).setTypeface(toolbarUp.getTypeface());
+                        if (toolbarUp.getTitle() != null) title = toolbarUp.getTitle();
+                    }
+                    if (title != null) {
+                        toolbar.setTitle(title);
+                    }
+                    setSupportActionBar(toolbar);
+                    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                } else if (toolbarP.getClass().getSimpleName().contains("ToolbarWithSpinnerPOJO")) {
+                    ToolbarWithSpinnerPOJO toolbarSpinner = (ToolbarWithSpinnerPOJO) toolbarP;
+                    LinearLayout ll = findViewById(R.id.ll);
+                    new SpinnerAdapter(this).attachSpinner(toolbarSpinner.getSpinnerItems(),
+                            toolbarSpinner.getCustomSpinnerLayout(),
+                            toolbarSpinner.getListener(),
+                            ll);
+                }
+                /*switch (toolbarP.getClass().getSimpleName()) {
                     case "ToolbarWithDrawerPOJO":
                         ToolbarWithDrawerPOJO toolbarDrawer = (ToolbarWithDrawerPOJO) toolbarP;
-                        //if (toolbarDrawer.getTitle()     != null) toolbarAdapter.setToolbarTitle    (toolbarDrawer.getTitle());
-                        //if (toolbarDrawer.getColor()     != null) toolbarAdapter.setToolbarColor    (toolbarDrawer.getColor());
-                        if (toolbarDrawer.getTextColor() != null) toolbarAdapter.setToolbarTextColor(toolbarDrawer.getTextColor());
-                        if (toolbarDrawer.getTypeface()  != null) toolbarAdapter.setToolbarTypeFace (toolbarDrawer.getTypeface());
-                        if (toolbarDrawer.getColor() != null) toolbarAdapter.setToolbarColor(toolbarDrawer.getColor());
+                        if (toolbarDrawer.getTextColor() != null) toolbar.setTitleTextColor(toolbarDrawer.getTextColor());
+                        if (toolbarDrawer.getTypeface()  != null) ((TextView)toolbar.getChildAt(0)).setTypeface(toolbarDrawer.getTypeface());
                         toggle = toolbarAdapter.buildToolbarWithNavDrawer(
                                  toolbarDrawer.getDrawerActivitiesToLaunch(),
                                  toolbarDrawer.getDrawerMenu(),
@@ -91,23 +124,19 @@ public abstract class RvActivityWithBackToggle extends AppCompatActivity {
                         break;
                         case "ToolbarWithUpPOJO":
                         ToolbarWithUpPOJO toolbarUp = (ToolbarWithUpPOJO) toolbarP;
-                        //if (toolbarUp.getTitle()     != null) toolbarAdapter.setToolbarTitle    (toolbarUp.getTitle());
-                        if (toolbarUp.getTextColor() != null) toolbarAdapter.setToolbarTextColor(toolbarUp.getTextColor());
-                        if (toolbarUp.getTypeface()  != null) toolbarAdapter.setToolbarTypeFace (toolbarUp.getTypeface());
-                        //if (toolbarUp.getColor() != null) toolbarAdapter.setToolbarColor(toolbarUp.getColor());
+                        if (toolbarUp.getTextColor() != null) toolbar.setTitleTextColor(toolbarUp.getTextColor());
+                        if (toolbarUp.getTypeface()  != null) ((TextView)toolbar.getChildAt(0)).setTypeface(toolbarUp.getTypeface());
                         toolbarAdapter.buildToolbarWithHomeUp(toolbarUp.getTitle());
                         break;
                     case "ToolbarWithSpinnerPOJO":
                         ToolbarWithSpinnerPOJO toolbarSpinner = (ToolbarWithSpinnerPOJO) toolbarP;
-                        //Toolbar toolbar = findViewById(R.id.toolbar);
-                        //toolbar.setTitle("");
                         LinearLayout ll = findViewById(R.id.ll);
                         new SpinnerAdapter(this).attachSpinner(toolbarSpinner.getSpinnerItems(),
                                                                   toolbarSpinner.getCustomSpinnerLayout(),
                                                                   toolbarSpinner.getListener(),
                                                                   ll);
                         break;
-                }
+                }*/
             }
         }
 

@@ -134,13 +134,13 @@ public class ToolbarAdapter {
                                                            int menuID,
                                                            int customLayoutID,
                                                            int numOfRows,
-                                                           Integer drawerItemColor, Integer drawerRvID,
+                                                           Integer drawerItemColor,
                                                            String title){
 
         drawerLayout = a.findViewById(R.id.drawer_layout);
         drawerLayout.setVisibility(View.VISIBLE);
 
-        RvAdapter rvAdapter = new RvAdapter(a, activitiesToLaunch, drawerItemColor, drawerRvID, menuID, customLayoutID, numOfRows);
+        RvAdapter rvAdapter = new RvAdapter(a, activitiesToLaunch, drawerItemColor, menuID, customLayoutID, numOfRows);
 /*
         ActionBarDrawerToggle toggleBtn = null;
         if (drawerLayout != null) {
