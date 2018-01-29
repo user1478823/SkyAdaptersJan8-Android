@@ -1,5 +1,6 @@
 package com.danilo.skyadapters.recycler;
 
+import android.content.res.Configuration;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -97,6 +98,7 @@ public abstract class RvActivityWithBackToggle extends AppCompatActivity {
                     }
                 } else if (toolbarP.getClass().getSimpleName().contains("ToolbarWithSpinnerPOJO")) {
                     ToolbarWithSpinnerPOJO toolbarSpinner = (ToolbarWithSpinnerPOJO) toolbarP;
+                    toolbar.setTitle("");
                     LinearLayout ll = findViewById(R.id.ll);
                     new SpinnerAdapter(this).attachSpinner(toolbarSpinner.getSpinnerItems(),
                             toolbarSpinner.getCustomSpinnerLayout(),
@@ -182,6 +184,19 @@ public abstract class RvActivityWithBackToggle extends AppCompatActivity {
 
     public interface ObserverInterface {
         public void onNext(List value);
+    }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        // Sync the toggle state after onRestoreInstanceState has occurred.
+        toggle.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        toggle.onConfigurationChanged(newConfig);
     }
 
 }
