@@ -83,13 +83,16 @@ public abstract class RvActivityWithBackToggle extends AppCompatActivity {
                     if (toolbarP.getClass().getSimpleName().contains("ToolbarWithDrawerPOJO")) {
                         ToolbarWithDrawerPOJO toolbarDrawer = (ToolbarWithDrawerPOJO) toolbarP;
                         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
-                        drawerLayout.setVisibility(View.VISIBLE);
+                        //drawerLayout.setVisibility(View.VISIBLE);
                         new com.danilo.skyadapters.RvAdapter(this, toolbarDrawer.getDrawerActivitiesToLaunch(),
                                 toolbarDrawer.getDrawerItemsColor(), toolbarDrawer.getDrawerMenu(),
                                 toolbarDrawer.getDrawerCustomRow(), toolbarDrawer.getNumberOfRows());
                         toggle = new ActionBarDrawerToggle(this, drawerLayout,
                                  R.string.drawer_open, R.string.drawer_closed);
                         drawerLayout.addDrawerListener(toggle);
+                    } else {
+                        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+                        drawerLayout.setVisibility(View.GONE);
                     }
                     setSupportActionBar(toolbar);
                     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -104,6 +107,8 @@ public abstract class RvActivityWithBackToggle extends AppCompatActivity {
                             toolbarSpinner.getCustomSpinnerLayout(),
                             toolbarSpinner.getListener(),
                             ll);
+                    DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+                    drawerLayout.setVisibility(View.GONE);
                 }
             }
         }
