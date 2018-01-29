@@ -44,6 +44,9 @@ public abstract class RvActivityWithBackToggle extends AppCompatActivity {
     public List list = null;
     public  RvAdapter adapter;
     public RecyclerView rv;
+    private Toolbar toolbar;
+    private DrawerLayout drawerLayout;
+    private RecyclerView drawerRv;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -62,20 +65,42 @@ public abstract class RvActivityWithBackToggle extends AppCompatActivity {
         if (aP == null || aP.getView() == null) {
             if (toolbarP == null) {
                 setContentView(R.layout.default_layout);
-            } else if (toolbarP != null && toolbarP.getClass().getSimpleName().contains("ToolbarWithDrawerPOJO")) {
+                rv = findViewById(R.id.rv);
+            } else if (toolbarP.getClass().getSimpleName().contains("ToolbarWithDrawerPOJO")) {
                 setContentView(R.layout.default_drawer_layout);
+                rv = findViewById(R.id.rv_main);
+                drawerLayout = findViewById(R.id.drawer_layout);
+                drawerRv = findViewById(R.id.rv_drawer);
             } else {
                 setContentView(R.layout.default_layout);
+                rv = findViewById(R.id.rv);
             }
+            toolbar = findViewById(R.id.toolbar);
         } else {
             setContentView(aP.getView());
+            ViewGroup vg = (ViewGroup) getLayoutInflater().inflate(aP.getView(),null);
+            for (int i = 0; i < vg.getChildCount(); i++) {
+                if (vg.getChildAt(i) instanceof Toolbar) {
+                    toolbar = (Toolbar) findViewById(vg.getChildAt(i).getId());
+                }
+                if (vg.getChildAt(i) instanceof RecyclerView) {
+                    rv = findViewById(vg.getChildAt(i).getId());
+                }
+                if (vg.getChildAt(i) instanceof  DrawerLayout) {
+                    drawerLayout = (DrawerLayout) findViewById(vg.getChildAt(i).getId());
+                    for (int j = 0; j < drawerLayout.getChildCount(); j++) {
+                        if (drawerLayout.getChildAt(j) instanceof RecyclerView) {
+                            drawerRv = findViewById(drawerLayout.getChildAt(j).getId());
+                        }
+                    }
+                }
+            }
         }
         if (aP != null && aP.getTheme() != null) {
             setTheme(aP.getTheme());
         }
 
         if (toolbarP != null) {
-            Toolbar toolbar = findViewById(R.id.toolbar);
             if (toolbarP.getColor() != null) toolbar.setBackgroundColor(toolbarP.getColor());
             if (toolbarP.getClass().getSimpleName().contains("ToolbarWithDrawerPOJO") || toolbarP.getClass().getSimpleName().contains("ToolbarWithUpPOJO")) {
                 ToolbarWithUpPOJO toolbarUp = (ToolbarWithUpPOJO) toolbarP;
@@ -88,24 +113,9 @@ public abstract class RvActivityWithBackToggle extends AppCompatActivity {
                 }
                 if (toolbarP.getClass().getSimpleName().contains("ToolbarWithDrawerPOJO")) {
                     ToolbarWithDrawerPOJO toolbarDrawer = (ToolbarWithDrawerPOJO) toolbarP;
-                    DrawerLayout drawerLayout = null;
-                    if (aP == null || aP.getView() == null) {
-                        drawerLayout = findViewById(R.id.drawer_layout);
-                    } else {
-                        ViewGroup vg = (ViewGroup) getLayoutInflater().inflate(aP.getView(),null);
-                        for (int i = 0; i < vg.getChildCount(); i++) {
-                            if (vg.getChildAt(i) instanceof Toolbar) {
-                                toolbar = (Toolbar) findViewById(vg.getChildAt(i).getId());
-                            }
-                            if (vg.getChildAt(i) instanceof  DrawerLayout) {
-                                drawerLayout = (DrawerLayout) findViewById(vg.getChildAt(i).getId());
-                            }
-                        }
-                    }
-
                     new com.danilo.skyadapters.RvAdapter(this, toolbarDrawer.getDrawerActivitiesToLaunch(),
                             toolbarDrawer.getDrawerItemsColor(), toolbarDrawer.getDrawerMenu(),
-                            toolbarDrawer.getDrawerCustomRow(), toolbarDrawer.getNumberOfRows());
+                            toolbarDrawer.getDrawerCustomRow(), toolbarDrawer.getNumberOfRows(), drawerRv);
                     toggle = new ActionBarDrawerToggle(this, drawerLayout,
                             R.string.drawer_open, R.string.drawer_closed);
                     drawerLayout.addDrawerListener(toggle);

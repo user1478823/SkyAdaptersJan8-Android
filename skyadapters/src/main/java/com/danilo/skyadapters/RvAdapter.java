@@ -13,8 +13,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.danilo.skyadapters.recycler.SkyDrawerRecycler;
-
 public class RvAdapter extends RecyclerView.Adapter<RvAdapter.ViewHolder> {
 
     private Activity a;
@@ -26,13 +24,13 @@ public class RvAdapter extends RecyclerView.Adapter<RvAdapter.ViewHolder> {
 
 
     public RvAdapter(final Activity a, Intent[] intents,
-                     Integer color, int menuID, int customLayoutID, int numOfRows) {
+                     Integer color, int menuID, int customLayoutID, int numOfRows, RecyclerView drawerRv) {
         this.a              = a;
         this.intents        = intents;
         this.color          = color;
         this.customLayout   = customLayoutID;
 
-        rv =  a.findViewById(R.id.rv_drawer);
+        this.rv =  drawerRv;
 
         this.menu = new PopupMenu(a, null).getMenu();
         a.getMenuInflater().inflate(menuID, this.menu);

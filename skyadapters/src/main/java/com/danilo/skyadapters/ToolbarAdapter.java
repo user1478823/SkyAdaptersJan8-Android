@@ -8,10 +8,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.PopupMenu;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -139,7 +136,7 @@ public class ToolbarAdapter {
         drawerLayout = a.findViewById(R.id.drawer_layout);
         drawerLayout.setVisibility(View.VISIBLE);
 
-        RvAdapter rvAdapter = new RvAdapter(a, activitiesToLaunch, drawerItemColor, menuID, customLayoutID, numOfRows);
+        RvAdapter rvAdapter = new RvAdapter(a, activitiesToLaunch, drawerItemColor, menuID, customLayoutID, numOfRows, drawerRv);
 /*
         ActionBarDrawerToggle toggleBtn = null;
         if (drawerLayout != null) {
