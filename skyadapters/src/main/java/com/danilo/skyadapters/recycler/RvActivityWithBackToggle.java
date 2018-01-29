@@ -69,18 +69,18 @@ public abstract class RvActivityWithBackToggle extends AppCompatActivity {
 
             if (toolbarP != null) {
                 Toolbar toolbar = findViewById(R.id.toolbar);
-                toolbar.setTitle("");
                 if (toolbarP.getColor() != null) toolbar.setBackgroundColor(toolbarP.getColor());
                 if (toolbarP.getClass().getSimpleName().contains("ToolbarWithDrawerPOJO") || toolbarP.getClass().getSimpleName().contains("ToolbarWithUpPOJO")) {
-                    String title = null;
                     ToolbarWithUpPOJO toolbarUp = (ToolbarWithUpPOJO) toolbarP;
                     if (toolbarUp.getTextColor() != null) toolbar.setTitleTextColor(toolbarUp.getTextColor());
                     if (toolbarUp.getTypeface()  != null) ((TextView)toolbar.getChildAt(0)).setTypeface(toolbarUp.getTypeface());
+                    if (toolbarUp.getTitle() != null) {
+                        toolbar.setTitle(toolbarUp.getTitle());
+                    } else {
+                        toolbar.setTitle("");
+                    }
                     if (toolbarP.getClass().getSimpleName().contains("ToolbarWithDrawerPOJO")) {
                         ToolbarWithDrawerPOJO toolbarDrawer = (ToolbarWithDrawerPOJO) toolbarP;
-                        //if (toolbarDrawer.getTextColor() != null) toolbar.setTitleTextColor(toolbarDrawer.getTextColor());
-                        //if (toolbarDrawer.getTypeface()  != null) ((TextView)toolbar.getChildAt(0)).setTypeface(toolbarDrawer.getTypeface());
-                        if (toolbarDrawer.getTitle() != null) title = toolbarDrawer.getTitle();
                         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
                         drawerLayout.setVisibility(View.VISIBLE);
                         new com.danilo.skyadapters.RvAdapter(this, toolbarDrawer.getDrawerActivitiesToLaunch(),
@@ -89,14 +89,6 @@ public abstract class RvActivityWithBackToggle extends AppCompatActivity {
                         toggle = new ActionBarDrawerToggle(this, drawerLayout,
                                  R.string.drawer_open, R.string.drawer_closed);
                         drawerLayout.addDrawerListener(toggle);
-                    } else {
-                        ToolbarWithUpPOJO toolbarUp2 = (ToolbarWithUpPOJO) toolbarP;
-                        //if (toolbarUp.getTextColor() != null) toolbar.setTitleTextColor(toolbarUp.getTextColor());
-                        //if (toolbarUp.getTypeface()  != null) ((TextView)toolbar.getChildAt(0)).setTypeface(toolbarUp.getTypeface());
-                        if (toolbarUp2.getTitle() != null) title = toolbarUp2.getTitle();
-                    }
-                    if (title != null) {
-                        toolbar.setTitle(title);
                     }
                     setSupportActionBar(toolbar);
                     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -134,9 +126,7 @@ public abstract class RvActivityWithBackToggle extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (toggle.onOptionsItemSelected(item)) {
-            return true;
-        } else return false;
+        return toggle.onOptionsItemSelected(item);
     }
 
     public void initRv(Integer rvID) {
