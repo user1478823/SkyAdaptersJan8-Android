@@ -11,12 +11,22 @@ public class ToolbarWithUpPOJO extends ToolbarPOJO {
     private String   title;
     private Typeface typeface;
     private Integer  textColor;
+    private Integer  upIcon;
 
     public ToolbarWithUpPOJO(Integer toolbarColor, String title, Typeface typeface, Integer textColor) {
         super(toolbarColor);
         this.title     = title;
         this.typeface  = typeface;
         this.textColor = textColor;
+    }
+
+    public ToolbarWithUpPOJO(Integer toolbarColor, String title, Typeface typeface, Integer textColor,
+                             Integer upIcon) {
+        super(toolbarColor);
+        this.title     = title;
+        this.typeface  = typeface;
+        this.textColor = textColor;
+        this.upIcon    = upIcon;
     }
 
     public String getTitle() {
@@ -41,5 +51,13 @@ public class ToolbarWithUpPOJO extends ToolbarPOJO {
 
     public void setTextColor(Integer textColor) {
         this.textColor = textColor;
+    }
+
+    public Integer getUpIcon() {
+        return upIcon;
+    }
+
+    public void setUpIcon(Integer upIcon) {
+        this.upIcon = upIcon;
     }
 }

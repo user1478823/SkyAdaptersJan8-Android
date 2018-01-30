@@ -113,6 +113,7 @@ public abstract class RvActivity extends AppCompatActivity {
                 ToolbarWithUpPOJO toolbarUp = (ToolbarWithUpPOJO) toolbarP;
                 if (toolbarUp.getTextColor() != null) toolbar.setTitleTextColor(toolbarUp.getTextColor());
                 if (toolbarUp.getTypeface()  != null) ((TextView)toolbar.getChildAt(0)).setTypeface(toolbarUp.getTypeface());
+                if (toolbarUp.getUpIcon() != null) toolbar.setNavigationIcon(toolbarUp.getUpIcon());
                 if (toolbarUp.getTitle() != null) {
                     toolbar.setTitle(toolbarUp.getTitle());
                 } else {
