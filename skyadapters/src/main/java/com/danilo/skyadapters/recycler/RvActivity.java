@@ -147,6 +147,7 @@ public abstract class RvActivity extends AppCompatActivity {
                         toolbarSpinner.getCustomSpinnerLayout(),
                         toolbarSpinner.getListener(),
                         ll);
+                setSupportActionBar(toolbar);
             }
         }
         initRv();

@@ -16,7 +16,7 @@ public class RvAdapter extends RecyclerView.Adapter<RvHolder> {
 
     private List list;
     private List<Integer> ids;
-    List<Integer> li = new ArrayList<>();
+    private List<Integer> li = new ArrayList<>();
     private int customRow;
     private RvAdapterInterface rvAdapterInterface;
 
