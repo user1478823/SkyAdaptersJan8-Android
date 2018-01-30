@@ -151,11 +151,20 @@ public abstract class RvActivity extends AppCompatActivity {
                 setSupportActionBar(toolbar);
             }
         }
-        initRv();
-        new RxBackground().executeInBackground(this, getRxBackgroundInterface());
-    }
 
-    protected abstract RxBackground.RxBackgroundInterface getRxBackgroundInterface();
+        initRv();
+
+        if (RvInterface.BackgroundThread.class.isAssignableFrom(this.getClass())) {
+            RvInterface.BackgroundThread backgroundThread = ((RvInterface.BackgroundThread) this);
+            new RxBackground().executeInBackground(this, backgroundThread.doInBackground());
+        }
+
+        if (RvInterface.NetworkOperation.class.isAssignableFrom(this.getClass())) {
+            RvInterface.NetworkOperation networkOperation = ((RvInterface.NetworkOperation) this);
+            networkOperation.connect();
+        }
+
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
