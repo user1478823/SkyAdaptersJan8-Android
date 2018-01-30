@@ -30,8 +30,12 @@ public class RvAdapter extends RecyclerView.Adapter<RvHolder> {
     @Override
     public RvHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        findAllIDs((ViewGroup) inflater.inflate(customRow,null));
-        return new RvHolder(inflater.inflate(customRow, parent, false), li);
+        if (ids == null) {
+            findAllIDs((ViewGroup) inflater.inflate(customRow,null));
+            return new RvHolder(inflater.inflate(customRow, parent, false), li);
+        } else {
+            return new RvHolder(inflater.inflate(customRow, parent, false), ids);
+        }
     }
 
     @Override
