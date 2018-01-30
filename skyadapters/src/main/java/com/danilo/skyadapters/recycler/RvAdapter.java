@@ -2,8 +2,10 @@ package com.danilo.skyadapters.recycler;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,6 +16,7 @@ public class RvAdapter extends RecyclerView.Adapter<RvHolder> {
 
     private List list;
     private List<Integer> ids;
+    List<Integer> li = new ArrayList<>();
     private int customRow;
     private RvAdapterInterface rvAdapterInterface;
 
@@ -27,7 +30,8 @@ public class RvAdapter extends RecyclerView.Adapter<RvHolder> {
     @Override
     public RvHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        return new RvHolder(inflater.inflate(customRow, parent, false), ids);
+        findAllIDs((ViewGroup) inflater.inflate(customRow,null));
+        return new RvHolder(inflater.inflate(customRow, parent, false), li);
     }
 
     @Override
@@ -43,4 +47,18 @@ public class RvAdapter extends RecyclerView.Adapter<RvHolder> {
     public interface RvAdapterInterface {
         public void onBindViewHolder(RvHolder holder, int position);
     }
+
+    private void findAllIDs(ViewGroup viewGroup) {
+        int count = viewGroup.getChildCount();
+        for (int i = 0; i < count; i++) {
+            View view = viewGroup.getChildAt(i);
+            if (view.getId() != -1) {
+                li.add(view.getId());
+            }
+            else if (view instanceof ViewGroup) {
+                findAllIDs((ViewGroup) view);
+            }
+        }
+    }
+
 }
