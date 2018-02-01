@@ -176,7 +176,9 @@ public abstract class RvActivity extends AppCompatActivity {
             rv.setLayoutManager(new LinearLayoutManager(this));
             if (RvInterface.EndlessRvOnScrollListener.class.isAssignableFrom(this.getClass())) {
                 RvInterface.EndlessRvOnScrollListener onScrollInterface = (RvInterface.EndlessRvOnScrollListener) this;
-                rv.addOnScrollListener(onScrollInterface.onScroll());
+                if (onScrollInterface.onScroll() != null) {
+                    rv.addOnScrollListener(onScrollInterface.onScroll());
+                }
             }
         } else {
             Toast.makeText(this, "Error: RvID is null", Toast.LENGTH_LONG).show();
