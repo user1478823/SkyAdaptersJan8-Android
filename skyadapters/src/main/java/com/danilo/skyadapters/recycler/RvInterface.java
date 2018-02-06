@@ -15,6 +15,10 @@ public class RvInterface {
         public ActivityPOJO getActivityContent();
     }
 
+    /**
+     * Customizes toolbar color, title, title color, etc...
+     * Return ToolbarWithDrawerPOJO to attach NavDrawer  
+     */
     public interface ToolbarCustomizer {
         public ToolbarPOJO customizeToolbar();
     }
