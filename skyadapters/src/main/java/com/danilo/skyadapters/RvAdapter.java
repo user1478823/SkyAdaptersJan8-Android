@@ -107,7 +107,7 @@ public class RvAdapter extends RecyclerView.Adapter<RvAdapter.ViewHolder> {
         }
 
         if (drawerAdapterInterface != null) {
-            drawerAdapterInterface.onDrawerItemClick(position);
+            drawerAdapterInterface.onDrawerItemClick(menu, position);
         }
     }
 
@@ -117,6 +117,6 @@ public class RvAdapter extends RecyclerView.Adapter<RvAdapter.ViewHolder> {
     }
 
     public interface RvDrawerAdapterInterface {
-        public void onDrawerItemClick(int position);
+        public void onDrawerItemClick(Menu menu, int position);
     }
 }
