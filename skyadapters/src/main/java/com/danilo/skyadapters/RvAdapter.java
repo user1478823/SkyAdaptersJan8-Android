@@ -97,18 +97,21 @@ public class RvAdapter extends RecyclerView.Adapter<RvAdapter.ViewHolder> {
             holder.itemView.setBackgroundColor(color);
         }
 
-        if (intents != null) {
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (intents != null) {
                     a.startActivity(intents[holder.getAdapterPosition()]);
                 }
-            });
-        }
+                if (drawerAdapterInterface != null) {
+                    drawerAdapterInterface.onDrawerItemClick(menu, position);
+                }
+            }
+        });
 
-        if (drawerAdapterInterface != null) {
-            drawerAdapterInterface.onDrawerItemClick(menu, position);
-        }
+
+
+
     }
 
     @Override
