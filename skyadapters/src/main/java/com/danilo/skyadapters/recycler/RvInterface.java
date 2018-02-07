@@ -1,5 +1,7 @@
 package com.danilo.skyadapters.recycler;
 
+import android.support.v7.widget.RecyclerView;
+
 import com.danilo.skyadapters.RxBackground;
 import com.danilo.skyadapters.VolleyGet;
 import com.danilo.skyadapters.recycler.pojo.ActivityPOJO;
@@ -17,6 +19,10 @@ public class RvInterface {
 
     public interface ToolbarCustomizer {
         public ToolbarPOJO customizeToolbar();
+    }
+
+    public interface RvLayoutManager {
+        public RecyclerView.LayoutManager getLayoutManager();
     }
 
     public interface EndlessRvOnScrollListener {

@@ -1,7 +1,5 @@
 package com.danilo.skyadapters.recycler;
 
-import android.content.res.Configuration;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.DrawerLayout;
@@ -22,7 +20,6 @@ import com.danilo.skyadapters.recycler.pojo.ActivityPOJO;
 import com.danilo.skyadapters.R;
 import com.danilo.skyadapters.RxBackground;
 import com.danilo.skyadapters.SpinnerAdapter;
-import com.danilo.skyadapters.ToolbarAdapter;
 import com.danilo.skyadapters.recycler.pojo.ToolbarPOJO;
 import com.danilo.skyadapters.recycler.pojo.ToolbarWithDrawerPOJO;
 import com.danilo.skyadapters.recycler.pojo.ToolbarWithSpinnerPOJO;
@@ -180,7 +177,12 @@ public abstract class RvActivity extends AppCompatActivity {
 
     public void initRv() {
         if (rv != null) {
-            rv.setLayoutManager(new LinearLayoutManager(this));
+            if (RvInterface.RvLayoutManager.class.isAssignableFrom(this.getClass())) {
+                RvInterface.RvLayoutManager rvLayoutManager = (RvInterface.RvLayoutManager) this;
+                rv.setLayoutManager(rvLayoutManager.getLayoutManager());
+            } else {
+                rv.setLayoutManager(new LinearLayoutManager(this));
+            }
             if (RvInterface.EndlessRvOnScrollListener.class.isAssignableFrom(this.getClass())) {
                 RvInterface.EndlessRvOnScrollListener onScrollInterface = (RvInterface.EndlessRvOnScrollListener) this;
                 if (onScrollInterface.onScroll() != null) {
