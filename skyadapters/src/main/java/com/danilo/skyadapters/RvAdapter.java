@@ -21,6 +21,7 @@ public class RvAdapter extends RecyclerView.Adapter<RvAdapter.ViewHolder> {
     private RecyclerView rv;
     private Intent[] intents;
     private int customLayout;
+    private RvDrawerAdapterInterface drawerAdapterInterface;
 
 
     public RvAdapter(final Activity a, Intent[] intents,
@@ -29,6 +30,26 @@ public class RvAdapter extends RecyclerView.Adapter<RvAdapter.ViewHolder> {
         this.intents        = intents;
         this.color          = color;
         this.customLayout   = customLayoutID;
+
+        this.rv =  drawerRv;
+
+        this.menu = new PopupMenu(a, null).getMenu();
+        a.getMenuInflater().inflate(menuID, this.menu);
+
+        rv.setLayoutManager(new GridLayoutManager(a, numOfRows));
+        if (customLayoutID == 0) {
+            new ErrorNotifications().displayError(a, "Add app:drawerCustomRow= into SkyDrawerRecycler xml");
+        } else {
+            rv.setAdapter(this);
+        }
+    }
+
+    public RvAdapter(final Activity a, RvDrawerAdapterInterface drawerAdapterInterface,
+                     Integer color, int menuID, int customLayoutID, int numOfRows, RecyclerView drawerRv) {
+        this.a                      = a;
+        this.drawerAdapterInterface = drawerAdapterInterface;
+        this.color                  = color;
+        this.customLayout           = customLayoutID;
 
         this.rv =  drawerRv;
 
@@ -76,30 +97,26 @@ public class RvAdapter extends RecyclerView.Adapter<RvAdapter.ViewHolder> {
             holder.itemView.setBackgroundColor(color);
         }
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                a.startActivity(intents[holder.getAdapterPosition()]);
-            }
-        });
-        /*if (intents != null) {
-            a.startActivity(intents[position]);
-        } else {
+        if (intents != null) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (activities[holder.getAdapterPosition()].getSimpleName().contains("Setting")) {
-                        a.startActivityForResult(new Intent(a, activities[holder.getAdapterPosition()]), 0);
-                    } else {
-                        a.startActivity(new Intent(a, activities[holder.getAdapterPosition()]));
-                    }
+                    a.startActivity(intents[holder.getAdapterPosition()]);
                 }
             });
-        }*/
+        }
+
+        if (drawerAdapterInterface != null) {
+            drawerAdapterInterface.onDrawerItemClick(position);
+        }
     }
 
     @Override
     public int getItemCount() {
         return menu.size();
+    }
+
+    public interface RvDrawerAdapterInterface {
+        public void onDrawerItemClick(int position);
     }
 }
