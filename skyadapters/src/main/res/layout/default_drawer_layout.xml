@@ -1,32 +1,38 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
-    <include layout="@layout/toolbar_layout" />
-
-    <android.support.v4.widget.DrawerLayout
-        android:id="@+id/drawer_layout"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <!-- Content-->
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_main"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        <include layout="@layout/toolbar_layout" />
+
+        <android.support.v4.widget.DrawerLayout
+            android:id="@+id/drawer_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent">
 
-        <!-- This is NavigationDrawer -->
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_drawer"
-            android:layout_width="250dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="left"
-            android:background="@android:color/background_light" />
+            <!-- Content-->
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_main"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-    </android.support.v4.widget.DrawerLayout>
+            <!-- This is NavigationDrawer -->
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_drawer"
+                android:layout_width="250dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="left"
+                android:background="@android:color/background_light" />
 
-</LinearLayout>
+        </android.support.v4.widget.DrawerLayout>
+
+    </LinearLayout>
+    
+</android.support.design.widget.CoordinatorLayout>
