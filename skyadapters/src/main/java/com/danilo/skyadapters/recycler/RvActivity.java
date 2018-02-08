@@ -37,10 +37,10 @@ import io.reactivex.disposables.Disposable;
 
 public abstract class RvActivity extends AppCompatActivity {
 
-    public ActionBarDrawerToggle toggle;
-    public List list = null;
+    public  ActionBarDrawerToggle toggle;
+    public  List list = null;
     public  RvAdapter adapter;
-    public RecyclerView rv;
+    public  RecyclerView rv;
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
     private RecyclerView drawerRv;

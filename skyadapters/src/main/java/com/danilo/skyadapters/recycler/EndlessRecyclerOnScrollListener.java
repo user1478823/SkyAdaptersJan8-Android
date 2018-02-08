@@ -1,5 +1,6 @@
 package com.danilo.skyadapters.recycler;
 
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -11,14 +12,21 @@ public abstract class EndlessRecyclerOnScrollListener extends RecyclerView.OnScr
     private int previousTotal = 0; //The total number of items in the dataset after the last load
     private boolean loading = true; //True if we are still waiting for the last set of data to load
     private int visibleTreshold = 5; //The minimum amount of items to have below your current scroll position before loading more
-    int firstVisibleItem, visibleItemCount, totalItemCount;
+    private int firstVisibleItem, visibleItemCount, totalItemCount;
 
     private int currentPage = 1;
 
     private LinearLayoutManager linearLayoutManager;
+    private GridLayoutManager gridLayoutManager;
 
     public EndlessRecyclerOnScrollListener(RecyclerView rv) {
-        this.linearLayoutManager = (LinearLayoutManager) rv.getLayoutManager();
+        if (rv.getLayoutManager() instanceof LinearLayoutManager) {
+            this.linearLayoutManager = (LinearLayoutManager) rv.getLayoutManager();
+        }
+        if (rv.getLayoutManager() instanceof GridLayoutManager) {
+            gridLayoutManager = (GridLayoutManager) rv.getLayoutManager();
+        }
+
         rv.addOnScrollListener(this);
 
     }
@@ -28,8 +36,15 @@ public abstract class EndlessRecyclerOnScrollListener extends RecyclerView.OnScr
         super.onScrolled(recyclerView, dx, dy);
 
         visibleItemCount = recyclerView.getChildCount();
-        totalItemCount = linearLayoutManager.getItemCount();
-        firstVisibleItem = linearLayoutManager.findFirstVisibleItemPosition();
+        if (linearLayoutManager != null) {
+            totalItemCount   = linearLayoutManager.getItemCount();
+            firstVisibleItem = linearLayoutManager.findFirstVisibleItemPosition();
+        }
+
+        if (gridLayoutManager != null) {
+            totalItemCount   = gridLayoutManager.getItemCount();
+            firstVisibleItem = gridLayoutManager.findFirstVisibleItemPosition();
+        }
 
         if (loading){
             if (totalItemCount > previousTotal){
