@@ -71,4 +71,8 @@ public abstract class EndlessRecyclerOnScrollListener extends RecyclerView.OnScr
     public interface onScrollInterface {
         public EndlessRecyclerOnScrollListener onScroll();
     }
+
+    public void setVisibleTreshold(int visibleTreshold) {
+        this.visibleTreshold = visibleTreshold;
+    }
 }
