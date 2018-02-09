@@ -207,11 +207,15 @@ public abstract class RvActivity extends AppCompatActivity {
             rv.setAdapter(adapter);
         } else {
             boolean duplicate = false;
+            Object[] stockArr = new String[list.size()];
+            stockArr = list.toArray(stockArr);
             for (int i = 0; i < value.size(); i++) {
-                if (!Arrays.asList(list).contains(value.get(i))) {
+
+                if (!contains(stockArr, value.get(i))/*!Arrays.asList(list).get(i).contains(value.get(i))*/) {
                     list.add(value.get(i));
                     adapter.notifyItemInserted(list.size()+1);
                 }
+
             }
 
             /*if (list.get(list.size()-1).equals(value.get(value.size()-1))) {
@@ -223,6 +227,20 @@ public abstract class RvActivity extends AppCompatActivity {
             }*/
             //adapter.notifyDataSetChanged();
         }
+    }
+
+    public static <T> boolean contains(final T[] array, final T v) {
+        if (v == null) {
+            for (final T e : array)
+                if (e == null)
+                    return true;
+        } else {
+            for (final T e : array)
+                if (e == v || v.equals(e))
+                    return true;
+        }
+
+        return false;
     }
 
     public abstract ArrayList<Integer> getRvCustomRow_holderIDS();
