@@ -26,6 +26,7 @@ import com.danilo.skyadapters.recycler.pojo.ToolbarWithSpinnerPOJO;
 import com.danilo.skyadapters.recycler.pojo.ToolbarWithUpPOJO;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import io.reactivex.Observer;
@@ -206,22 +207,21 @@ public abstract class RvActivity extends AppCompatActivity {
             rv.setAdapter(adapter);
         } else {
             boolean duplicate = false;
-            for (int i = 0; i < list.size(); i++) {
-                Object o = list.get(i);
-                for (int j = 0; j < value.size(); j++) {
-                    if (value.get(j).equals(o)) {
-                        duplicate = true;
-                        break;
-                    }
+            for (int i = 0; i < value.size(); i++) {
+                if (!Arrays.asList(list).contains(value.get(i))) {
+                    list.add(value.get(i));
+                    adapter.notifyItemInserted(list.size()+1);
                 }
             }
+
             /*if (list.get(list.size()-1).equals(value.get(value.size()-1))) {
                 duplicate = true;
             }*/
-            if (!duplicate) {
+            /*if (!duplicate) {
                 list.addAll(value);
                 adapter.notifyDataSetChanged();
-            }
+            }*/
+            //adapter.notifyDataSetChanged();
         }
     }
 
