@@ -213,19 +213,9 @@ public abstract class RvActivity extends AppCompatActivity {
 
                 if (!contains(stockArr, value.get(i))/*!Arrays.asList(list).get(i).contains(value.get(i))*/) {
                     list.add(value.get(i));
-                    adapter.notifyDataSetChanged();
+                    adapter.notifyItemInserted(list.size()+1);
                 }
-
             }
-
-            /*if (list.get(list.size()-1).equals(value.get(value.size()-1))) {
-                duplicate = true;
-            }*/
-            /*if (!duplicate) {
-                list.addAll(value);
-                adapter.notifyDataSetChanged();
-            }*/
-            //adapter.notifyDataSetChanged();
         }
     }
 
