@@ -212,7 +212,7 @@ public abstract class RvActivity extends AppCompatActivity {
             }*/
             int lastOnList  = list.size()-1;
             int lastOnValue = value.size()-1;
-            if (list.get(lastOnList) == value.get(lastOnValue)) {
+            if (list.get(lastOnList).equals(value.get(lastOnValue))) {
                 duplicate = true;
             }
             if (!duplicate) {
