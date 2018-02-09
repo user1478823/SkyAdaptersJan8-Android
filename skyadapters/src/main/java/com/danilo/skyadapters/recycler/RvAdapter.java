@@ -27,7 +27,6 @@ public class RvAdapter extends RecyclerView.Adapter<RvHolder> {
         this.ids = ids;
         this.customRow = customRow;
         this.rvAdapterInterface = rvAdapterInterface;
-        setHasStableIds(true);
     }
 
     @Override
