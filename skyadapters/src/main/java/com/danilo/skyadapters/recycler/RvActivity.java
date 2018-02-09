@@ -204,21 +204,13 @@ public abstract class RvActivity extends AppCompatActivity {
             rv.setAdapter(adapter);
         } else {
             boolean duplicate = false;
-            /*for (int i = 0; i < list.size(); i++) {
-                if (list.get(i) == value.get(0)) {
-                    duplicate = true;
-                    break;
-                }
-            }*/
-            int lastOnList  = list.size()-1;
-            int lastOnValue = value.size()-1;
-            if (list.get(lastOnList).equals(value.get(lastOnValue))) {
+            if (list.get(list.size()-1).equals(value.get(value.size()-1))) {
                 duplicate = true;
             }
             if (!duplicate) {
                 list.addAll(value);
+                adapter.notifyDataSetChanged();
             }
-            adapter.notifyDataSetChanged();
         }
     }
 
