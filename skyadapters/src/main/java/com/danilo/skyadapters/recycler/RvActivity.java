@@ -183,6 +183,12 @@ public abstract class RvActivity extends AppCompatActivity {
             } else {
                 rv.setLayoutManager(new LinearLayoutManager(this));
             }
+            if (RvInterface.EndlessRvOnScrollListener.class.isAssignableFrom(this.getClass())) {
+                RvInterface.EndlessRvOnScrollListener onScrollInterface = (RvInterface.EndlessRvOnScrollListener) this;
+                if (onScrollInterface.onScroll() != null) {
+                    rv.addOnScrollListener(onScrollInterface.onScroll());
+                }
+            }
         } else {
             Toast.makeText(this, "Error: RvID is null", Toast.LENGTH_LONG).show();
         }
@@ -204,12 +210,6 @@ public abstract class RvActivity extends AppCompatActivity {
             if (!duplicate) {
                 list.addAll(value);
                 adapter.notifyDataSetChanged();
-            }
-        }
-        if (RvInterface.EndlessRvOnScrollListener.class.isAssignableFrom(this.getClass())) {
-            RvInterface.EndlessRvOnScrollListener onScrollInterface = (RvInterface.EndlessRvOnScrollListener) this;
-            if (onScrollInterface.onScroll() != null) {
-                rv.addOnScrollListener(onScrollInterface.onScroll());
             }
         }
     }
