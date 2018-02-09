@@ -188,9 +188,9 @@ public abstract class RvActivity extends AppCompatActivity {
             if (RvInterface.EndlessRvOnScrollListener.class.isAssignableFrom(this.getClass())) {
                 RvInterface.EndlessRvOnScrollListener onScrollInterface = (RvInterface.EndlessRvOnScrollListener) this;
                 en = onScrollInterface.onScroll();
-                /*if (onScrollInterface.onScroll() != null) {
+                if (onScrollInterface.onScroll() != null) {
                     rv.addOnScrollListener(onScrollInterface.onScroll());
-                }*/
+                }
             }
         } else {
             Toast.makeText(this, "Error: RvID is null", Toast.LENGTH_LONG).show();
