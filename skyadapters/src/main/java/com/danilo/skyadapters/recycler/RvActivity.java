@@ -206,9 +206,18 @@ public abstract class RvActivity extends AppCompatActivity {
             rv.setAdapter(adapter);
         } else {
             boolean duplicate = false;
-            if (list.get(list.size()-1).equals(value.get(value.size()-1))) {
-                duplicate = true;
+            for (int i = 0; i < list.size(); i++) {
+                Object o = list.get(i);
+                for (int j = 0; j < value.size(); j++) {
+                    if (value.get(j).equals(o)) {
+                        duplicate = true;
+                        break;
+                    }
+                }
             }
+            /*if (list.get(list.size()-1).equals(value.get(value.size()-1))) {
+                duplicate = true;
+            }*/
             if (!duplicate) {
                 list.addAll(value);
                 adapter.notifyDataSetChanged();
