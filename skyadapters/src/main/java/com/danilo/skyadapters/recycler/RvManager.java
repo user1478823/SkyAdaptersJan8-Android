@@ -12,13 +12,13 @@ import java.util.List;
 
 public class RvManager {
 
-    private Activity a;
+    private RvActivity a;
     private RecyclerView rv;
     private int customRow;
     private List rvList;
     private ArrayList<Integer> ids;
 
-    public RvManager(Activity a) {
+    public RvManager(RvActivity a) {
         this.a = a;
     }
 
@@ -48,6 +48,6 @@ public class RvManager {
     }
 
     public void sixFinnalOnBind(RvAdapter.RvAdapterInterface rvAdapterInterface) {
-        rv.setAdapter(new RvAdapter(rvList, ids, customRow, rvAdapterInterface));
+        rv.setAdapter(new RvAdapter(a, rvList, ids, customRow, rvAdapterInterface));
     }
 }

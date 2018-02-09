@@ -14,13 +14,15 @@ import java.util.List;
 
 public class RvAdapter extends RecyclerView.Adapter<RvHolder> {
 
+    private RvActivity a;
     private List list;
     private List<Integer> ids;
     private List<Integer> li = new ArrayList<>();
     private int customRow;
     private RvAdapterInterface rvAdapterInterface;
 
-    public RvAdapter(List list, List<Integer> ids, int customRow, RvAdapterInterface rvAdapterInterface) {
+    public RvAdapter(RvActivity a, List list, List<Integer> ids, int customRow, RvAdapterInterface rvAdapterInterface) {
+        this.a = a;
         this.list = list;
         this.ids = ids;
         this.customRow = customRow;
@@ -41,6 +43,9 @@ public class RvAdapter extends RecyclerView.Adapter<RvHolder> {
     @Override
     public void onBindViewHolder(RvHolder holder, int position) {
         rvAdapterInterface.onBindViewHolder(holder, position);
+        if (a.getEn().getVisibleTreshold() == position + 1) {
+            a.rv.addOnScrollListener((a.getEn()));
+        }
     }
 
     @Override

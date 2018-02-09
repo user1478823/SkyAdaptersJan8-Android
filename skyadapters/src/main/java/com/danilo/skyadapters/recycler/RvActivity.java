@@ -45,6 +45,7 @@ public abstract class RvActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     private RecyclerView drawerRv;
     private ArrayList<Integer> rvIds = new ArrayList<>();
+    private EndlessRecyclerOnScrollListener en = null;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -185,9 +186,10 @@ public abstract class RvActivity extends AppCompatActivity {
             }
             if (RvInterface.EndlessRvOnScrollListener.class.isAssignableFrom(this.getClass())) {
                 RvInterface.EndlessRvOnScrollListener onScrollInterface = (RvInterface.EndlessRvOnScrollListener) this;
-                if (onScrollInterface.onScroll() != null) {
+                en = onScrollInterface.onScroll();
+                /*if (onScrollInterface.onScroll() != null) {
                     rv.addOnScrollListener(onScrollInterface.onScroll());
-                }
+                }*/
             }
         } else {
             Toast.makeText(this, "Error: RvID is null", Toast.LENGTH_LONG).show();
@@ -197,7 +199,7 @@ public abstract class RvActivity extends AppCompatActivity {
     public void populateRv(List value) {
         if (list == null) {
             list = value;
-            adapter = new RvAdapter(list,
+            adapter = new RvAdapter(this, list,
                     getRvCustomRow_holderIDS().subList(1, getRvCustomRow_holderIDS().size()),
                     getRvCustomRow_holderIDS().get(0),
                     getRvOnBind());
@@ -252,5 +254,9 @@ public abstract class RvActivity extends AppCompatActivity {
                 findAllRvs((ViewGroup) view);
             }
         }
+    }
+
+    public EndlessRecyclerOnScrollListener getEn() {
+        return en;
     }
 }
