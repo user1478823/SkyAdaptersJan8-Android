@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -46,7 +47,7 @@ public abstract class RvActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     private RecyclerView drawerRv;
     private ArrayList<Integer> rvIds = new ArrayList<>();
-    private EndlessRecyclerOnScrollListener en = null;
+    private EndlessRecyclerOnScrollListener2 en = null;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -169,7 +170,6 @@ public abstract class RvActivity extends AppCompatActivity {
             RvInterface.NetworkOperation networkOperation = ((RvInterface.NetworkOperation) this);
             networkOperation.connect();
         }
-
     }
 
     @Override
@@ -185,12 +185,33 @@ public abstract class RvActivity extends AppCompatActivity {
             } else {
                 rv.setLayoutManager(new LinearLayoutManager(this));
             }
-            if (RvInterface.EndlessRvOnScrollListener.class.isAssignableFrom(this.getClass())) {
-                RvInterface.EndlessRvOnScrollListener onScrollInterface = (RvInterface.EndlessRvOnScrollListener) this;
+            if (RvInterface.OnScrollInterface.class.isAssignableFrom(this.getClass())) {
+                RvInterface.OnScrollInterface onScrollInterface = (RvInterface.OnScrollInterface) this;
                 en = onScrollInterface.onScroll();
-                if (onScrollInterface.onScroll() != null) {
-                    rv.addOnScrollListener(onScrollInterface.onScroll());
-                }
+
+                rv.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                    @Override
+                    public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                        super.onScrolled(recyclerView, dx, dy);
+                        int totalItemCount = 0;
+                        int lastVisibleItem = 0;
+                        if (rv.getLayoutManager()instanceof LinearLayoutManager) {
+                            LinearLayoutManager lm = (LinearLayoutManager) rv.getLayoutManager();
+                            totalItemCount = lm.getItemCount();
+                            lastVisibleItem = lm.findLastVisibleItemPosition();
+                        }
+                        if (rv.getLayoutManager()instanceof GridLayoutManager) {
+                            GridLayoutManager gm = (GridLayoutManager) rv.getLayoutManager();
+                            totalItemCount = gm.getItemCount();
+                            lastVisibleItem = gm.findLastVisibleItemPosition();
+                        }
+
+                        if (en.isLoading() && totalItemCount <= (lastVisibleItem + en.getVisibleThreshold())) {
+                           en.getLoadMoreInterface().loadMore();
+                           en.setLoading(true);
+                        }
+                    }
+                });
             }
         } else {
             Toast.makeText(this, "Error: RvID is null", Toast.LENGTH_LONG).show();
@@ -206,7 +227,6 @@ public abstract class RvActivity extends AppCompatActivity {
                     getRvOnBind());
             rv.setAdapter(adapter);
         } else {
-            boolean duplicate = false;
             Object[] stockArr = new Object[list.size()];
             stockArr = list.toArray(stockArr);
             for (int i = 0; i < value.size(); i++) {
@@ -273,7 +293,7 @@ public abstract class RvActivity extends AppCompatActivity {
         }
     }
 
-    public EndlessRecyclerOnScrollListener getEn() {
+    public EndlessRecyclerOnScrollListener2 getEn() {
         return en;
     }
 }

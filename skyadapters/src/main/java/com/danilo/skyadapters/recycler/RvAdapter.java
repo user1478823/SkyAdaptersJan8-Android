@@ -43,9 +43,9 @@ public class RvAdapter extends RecyclerView.Adapter<RvHolder> {
     @Override
     public void onBindViewHolder(RvHolder holder, int position) {
         rvAdapterInterface.onBindViewHolder(holder, position);
-        /*if (a.getEn().getVisibleTreshold() == position + 1) {
-            a.rv.addOnScrollListener((a.getEn()));
-        }*/
+        if (a.getEn() != null && a.getEn().getOnWhichPositionToDisableIsLoading() == position) {
+            a.getEn().setLoading(false);
+        }
     }
 
     @Override

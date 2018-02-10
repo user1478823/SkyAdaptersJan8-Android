@@ -29,6 +29,10 @@ public class RvInterface {
         public EndlessRecyclerOnScrollListener onScroll();
     }
 
+    public interface OnScrollInterface {
+        public EndlessRecyclerOnScrollListener2 onScroll();
+    }
+
     public interface BackgroundThread {
         public RxBackground.RxBackgroundInterface doInBackground();
     }
