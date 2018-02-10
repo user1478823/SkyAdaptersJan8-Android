@@ -206,7 +206,7 @@ public abstract class RvActivity extends AppCompatActivity {
                             lastVisibleItem = gm.findLastVisibleItemPosition();
                         }
 
-                        if (en.isLoading() && totalItemCount <= (lastVisibleItem + en.getVisibleThreshold())) {
+                        if (!en.isLoading() && totalItemCount <= (lastVisibleItem + en.getVisibleThreshold())) {
                            en.getLoadMoreInterface().loadMore();
                            en.setLoading(true);
                         }
