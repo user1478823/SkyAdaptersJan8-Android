@@ -207,11 +207,11 @@ public abstract class RvActivity extends AppCompatActivity {
             rv.setAdapter(adapter);
         } else {
             boolean duplicate = false;
-            Object[] stockArr = new String[list.size()];
+            Object[] stockArr = new Object[list.size()];
             stockArr = list.toArray(stockArr);
             for (int i = 0; i < value.size(); i++) {
 
-                if (!contains(stockArr, value.get(i))/*!Arrays.asList(list).get(i).contains(value.get(i))*/) {
+                if (!contains(stockArr, value.get(i))) {
                     list.add(value.get(i));
                     adapter.notifyItemInserted(list.size()+1);
                 }
