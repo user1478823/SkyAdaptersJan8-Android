@@ -42,7 +42,7 @@ public class RvAdapter extends RecyclerView.Adapter<RvHolder> {
 
     @Override
     public void onBindViewHolder(RvHolder holder, int position) {
-        rvAdapterInterface.onBindViewHolder(adapterList, holder, position);
+        rvAdapterInterface.onBindViewHolder(adapterList.get(position), holder, position);
         if (a.getEn() != null && position == a.list.size() - a.getEn().getOnWhichPositionToDisableIsLoading()) {
             a.getEn().setLoading(false);
         }
@@ -54,7 +54,7 @@ public class RvAdapter extends RecyclerView.Adapter<RvHolder> {
     }
 
     public interface RvAdapterInterface {
-        public void onBindViewHolder(List list, RvHolder holder, int position);
+        public void onBindViewHolder(Object list, RvHolder holder, int position);
     }
 
     private void findAllIDs(ViewGroup viewGroup) {
