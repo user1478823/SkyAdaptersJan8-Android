@@ -15,7 +15,7 @@ import java.util.List;
 public class RvAdapter extends RecyclerView.Adapter<RvHolder> {
 
     private RvActivity a;
-    private List list;
+    private List adapterList;
     private List<Integer> ids;
     private List<Integer> li = new ArrayList<>();
     private int customRow;
@@ -23,7 +23,7 @@ public class RvAdapter extends RecyclerView.Adapter<RvHolder> {
 
     public RvAdapter(RvActivity a, List list, List<Integer> ids, int customRow, RvAdapterInterface rvAdapterInterface) {
         this.a = a;
-        this.list = list;
+        this.adapterList = list;
         this.ids = ids;
         this.customRow = customRow;
         this.rvAdapterInterface = rvAdapterInterface;
@@ -42,7 +42,7 @@ public class RvAdapter extends RecyclerView.Adapter<RvHolder> {
 
     @Override
     public void onBindViewHolder(RvHolder holder, int position) {
-        rvAdapterInterface.onBindViewHolder(holder, position);
+        rvAdapterInterface.onBindViewHolder(adapterList, holder, position);
         if (a.getEn() != null && position == a.list.size() - a.getEn().getOnWhichPositionToDisableIsLoading()) {
             a.getEn().setLoading(false);
         }
@@ -50,11 +50,11 @@ public class RvAdapter extends RecyclerView.Adapter<RvHolder> {
 
     @Override
     public int getItemCount() {
-        return list.size();
+        return adapterList.size();
     }
 
     public interface RvAdapterInterface {
-        public void onBindViewHolder(RvHolder holder, int position);
+        public void onBindViewHolder(List list, RvHolder holder, int position);
     }
 
     private void findAllIDs(ViewGroup viewGroup) {
