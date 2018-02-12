@@ -9,11 +9,13 @@ public class TabFragmentPOJO {
     private int tabFragmentLayout;
     private TabFragment.TabFragmentInterface tabFragmentInterface;
     private String tabTitle;
+    private Integer tabIcon;
 
-    public TabFragmentPOJO(int tabFragmentLayout, TabFragment.TabFragmentInterface tabFragmentInterface, String tabTitle) {
+    public TabFragmentPOJO(int tabFragmentLayout, TabFragment.TabFragmentInterface tabFragmentInterface, String tabTitle, int tabIcon) {
         this.tabFragmentLayout = tabFragmentLayout;
         this.tabFragmentInterface = tabFragmentInterface;
         this.tabTitle = tabTitle;
+        this.tabIcon = tabIcon;
     }
 
     public int getTabFragmentLayout() {
@@ -38,5 +40,13 @@ public class TabFragmentPOJO {
 
     public void setTabTitle(String tabTitle) {
         this.tabTitle = tabTitle;
+    }
+
+    public Integer getTabIcon() {
+        return tabIcon;
+    }
+
+    public void setTabIcon(Integer tabIcon) {
+        this.tabIcon = tabIcon;
     }
 }

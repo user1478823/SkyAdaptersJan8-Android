@@ -29,6 +29,10 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return tabFragmentPOJOS[position].getTabTitle();
+        if (tabFragmentPOJOS[position].getTabTitle() != null) {
+            return tabFragmentPOJOS[position].getTabTitle();
+        } else {
+            return "";
+        }
     }
 }

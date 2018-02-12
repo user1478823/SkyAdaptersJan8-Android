@@ -50,6 +50,15 @@ public abstract class TabRvActivity extends AppCompatActivity {
                                                         getTabFragmentPOJOS());
         tabLayout.setupWithViewPager(viewPager);
         viewPager.setAdapter(adapter);
+
+        TabFragmentPOJO[] pojos = getTabFragmentPOJOS();
+
+        for (int i = 0; i < pojos.length; i++) {
+            TabFragmentPOJO tabFragmentPOJO = pojos[i];
+            if (tabFragmentPOJO.getTabIcon() != null) {
+                tabLayout.getTabAt(i).setIcon(tabFragmentPOJO.getTabIcon());
+            }
+        }
     }
 
     public abstract TabFragmentPOJO[] getTabFragmentPOJOS();
