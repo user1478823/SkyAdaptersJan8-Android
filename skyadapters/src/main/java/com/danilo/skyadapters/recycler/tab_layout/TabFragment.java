@@ -16,8 +16,7 @@ public class TabFragment extends Fragment {
     private TabFragmentPOJO tabFragmentPOJO;
 
     public TabFragment newInstance(TabFragmentPOJO tabFragmentPOJO){
-        this.tabFragmentPOJO = tabFragmentPOJO;
-        return new TabFragment();
+        return new TabFragment().setTabFragmentPOJO(tabFragmentPOJO);
     }
 
     @Nullable
@@ -31,5 +30,10 @@ public class TabFragment extends Fragment {
 
     public interface TabFragmentInterface {
         public void onCreateView(View fragmentView);
+    }
+
+    public TabFragment setTabFragmentPOJO(TabFragmentPOJO tabFragmentPOJO) {
+        this.tabFragmentPOJO = tabFragmentPOJO;
+        return this;
     }
 }
