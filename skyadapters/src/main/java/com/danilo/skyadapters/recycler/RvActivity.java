@@ -50,8 +50,8 @@ public abstract class RvActivity extends AppCompatActivity {
     private EndlessRecyclerOnScrollListener2 en = null;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        protected void onCreate(@Nullable Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
         ActivityPOJO aP = null;
         if (RvInterface.ActivityContent.class.isAssignableFrom(this.getClass())) {
             RvInterface.ActivityContent activityContent = ((RvInterface.ActivityContent) this);

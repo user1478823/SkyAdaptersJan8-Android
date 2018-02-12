@@ -7,6 +7,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
 import com.danilo.skyadapters.R;
+import com.danilo.skyadapters.recycler.RvInterface;
+import com.danilo.skyadapters.recycler.pojo.ActivityPOJO;
 import com.danilo.skyadapters.recycler.pojo.ToolbarPOJO;
 
 /**
@@ -18,7 +20,21 @@ public abstract class TabRvActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.tab_rv_activity_layout);
+
+        ActivityPOJO aP = null;
+        if (RvInterface.ActivityContent.class.isAssignableFrom(this.getClass())) {
+            RvInterface.ActivityContent activityContent = ((RvInterface.ActivityContent) this);
+            aP = activityContent.getActivityContent();
+        }
+        if (aP != null && aP.getTheme() != null) {
+            setTheme(aP.getTheme());
+        }
+
+        if (aP == null || aP.getView() == null) {
+            setContentView(aP.getView());
+        } else {
+            setContentView(R.layout.tab_rv_activity_layout);
+        }
 
         TabLayout tabLayout = findViewById(R.id.tab_tab_rv_activity);
         ViewPager viewPager = findViewById(R.id.view_pager_tab_rv_activity);
