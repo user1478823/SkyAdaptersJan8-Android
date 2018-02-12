@@ -31,9 +31,9 @@ public abstract class TabRvActivity extends AppCompatActivity {
         }
 
         if (aP == null || aP.getView() == null) {
-            setContentView(aP.getView());
-        } else {
             setContentView(R.layout.tab_rv_activity_layout);
+        } else {
+            setContentView(aP.getView());
         }
 
         TabLayout tabLayout = findViewById(R.id.tab_tab_rv_activity);
