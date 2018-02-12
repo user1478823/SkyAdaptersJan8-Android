@@ -19,6 +19,8 @@ import com.danilo.skyadapters.recycler.pojo.ActivityPOJO;
 public abstract class TabRvActivity extends AppCompatActivity {
 
     private Integer[] ids = new Integer[2];
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -33,8 +35,6 @@ public abstract class TabRvActivity extends AppCompatActivity {
             setTheme(aP.getTheme());
         }
 
-        TabLayout tabLayout = null;
-        ViewPager viewPager = null;
         if (aP == null || aP.getView() == null) {
             setContentView(R.layout.tab_rv_activity_layout);
             tabLayout = findViewById(R.id.tab_tab_rv_activity);
@@ -75,5 +75,21 @@ public abstract class TabRvActivity extends AppCompatActivity {
                 findIds((ViewGroup) view);
             }
         }
+    }
+
+    public TabLayout getTabLayout() {
+        return tabLayout;
+    }
+
+    public void setTabLayout(TabLayout tabLayout) {
+        this.tabLayout = tabLayout;
+    }
+
+    public ViewPager getViewPager() {
+        return viewPager;
+    }
+
+    public void setViewPager(ViewPager viewPager) {
+        this.viewPager = viewPager;
     }
 }
