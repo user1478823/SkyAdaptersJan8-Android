@@ -9,7 +9,7 @@ public class ActivityPOJO {
     private Integer view;
     private Integer theme;
 
-    public ActivityPOJO(int view, Integer theme) {
+    public ActivityPOJO(Integer view, Integer theme) {
         this.view = view;
         this.theme = theme;
         
