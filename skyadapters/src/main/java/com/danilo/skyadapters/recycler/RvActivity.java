@@ -296,7 +296,12 @@ public abstract class RvActivity extends AppCompatActivity {
                 ids[0] = view.getId();
             } else if (view instanceof RecyclerView) {
                 ids[1] = view.getId();
-            } else if (view instanceof ViewGroup) {
+            } else if (view instanceof DrawerLayout) {
+            drawerLayout = findViewById(viewGroup.getChildAt(i).getId());
+            findAllRvs(drawerLayout);
+            rv = findViewById(rvIds.get(0));
+            drawerRv = findViewById(rvIds.get(1));
+        } else if (view instanceof ViewGroup) {
                 findIds((ViewGroup) view);
             }
         }
@@ -308,12 +313,7 @@ public abstract class RvActivity extends AppCompatActivity {
             View view = viewGroup.getChildAt(i);
             if (view instanceof RecyclerView) {
                 rvIds.add(view.getId());
-            } else if (view instanceof DrawerLayout) {
-                drawerLayout = findViewById(viewGroup.getChildAt(i).getId());
-                findAllRvs(drawerLayout);
-                rv = findViewById(rvIds.get(0));
-                drawerRv = findViewById(rvIds.get(1));
-            }else if (view instanceof ViewGroup) {
+            } else if (view instanceof ViewGroup) {
                 findAllRvs((ViewGroup) view);
             }
         }
