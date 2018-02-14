@@ -321,6 +321,7 @@ public abstract class RvActivity extends AppCompatActivity {
         }
     }
 
+    public abstract void onBind(Object o, RvHolder holder, int position);
     public EndlessRecyclerOnScrollListener2 getEn() {
         return en;
     }
