@@ -45,7 +45,7 @@ public class RvAdapter extends RecyclerView.Adapter<RvHolder> {
     @Override
     public void onBindViewHolder(RvHolder holder, int position) {
         Object o = adapterList.get(holder.getAdapterPosition());
-        Log.d("==>> rvAdapterPosition:", String.valueOf(adapterList.get(holder.getAdapterPosition())));
+        Log.d("==>> rvAdapterPosition:", String.valueOf(holder.getAdapterPosition()));
         a.onBind(o, holder, holder.getAdapterPosition());
         //rvAdapterInterface.onBindViewHolder(adapterList.get(position), holder, position);
         if (a.getEn() != null && position == a.list.size() - a.getEn().getOnWhichPositionToDisableIsLoading()) {
