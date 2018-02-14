@@ -1,6 +1,7 @@
 package com.danilo.skyadapters.recycler;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,7 +44,9 @@ public class RvAdapter extends RecyclerView.Adapter<RvHolder> {
 
     @Override
     public void onBindViewHolder(RvHolder holder, int position) {
-        a.onBind(adapterList.get(holder.getAdapterPosition()), holder, holder.getAdapterPosition());
+        Object o = adapterList.get(holder.getAdapterPosition());
+        Log.d("==>> rvAdapterPosition:", String.valueOf(adapterList.get(holder.getAdapterPosition())));
+        a.onBind(o, holder, holder.getAdapterPosition());
         //rvAdapterInterface.onBindViewHolder(adapterList.get(position), holder, position);
         if (a.getEn() != null && position == a.list.size() - a.getEn().getOnWhichPositionToDisableIsLoading()) {
             a.getEn().setLoading(false);
