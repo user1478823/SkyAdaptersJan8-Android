@@ -53,6 +53,11 @@ public class RvAdapter extends RecyclerView.Adapter<RvHolder> {
         return adapterList.size();
     }
 
+    public void updateDataSet(List value) {
+        this.li.addAll(value);
+        notifyDataSetChanged();
+    }
+
     public interface RvAdapterInterface {
         public void onBindViewHolder(Object list, RvHolder holder, int position);
     }
