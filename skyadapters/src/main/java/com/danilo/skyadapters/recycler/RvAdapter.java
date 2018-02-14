@@ -59,8 +59,14 @@ public class RvAdapter extends RecyclerView.Adapter<RvHolder> {
     }
 
     public void updateDataSet(List value) {
+        /*for (int i = 0; i < value.size(); i++) {
+            this.adapterList.add(value.get(i));
+            notifyItemInserted();
+        }*/
         this.adapterList.addAll(value);
+        notifyItemRangeChanged(adapterList.size(), value.size());
         //notifyDataSetChanged();
+
     }
 
     public interface RvAdapterInterface {
