@@ -21,6 +21,7 @@ public class RvAdapter extends RecyclerView.Adapter<RvHolder> {
     private int customRow;
     private RvAdapterInterface rvAdapterInterface;
 
+
     public RvAdapter(RvActivity a, List list, List<Integer> ids, int customRow, RvAdapterInterface rvAdapterInterface) {
         this.a = a;
         this.adapterList = list;
@@ -55,7 +56,7 @@ public class RvAdapter extends RecyclerView.Adapter<RvHolder> {
     }
 
     public void updateDataSet(List value) {
-        this.li.addAll(value);
+        this.adapterList.addAll(value);
         notifyDataSetChanged();
     }
 
