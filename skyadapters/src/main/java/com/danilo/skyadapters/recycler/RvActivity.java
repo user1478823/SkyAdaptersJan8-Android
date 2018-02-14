@@ -243,7 +243,7 @@ public abstract class RvActivity extends AppCompatActivity {
                     adapter.notifyItemInserted(list.size()+1);
                 }
             }*/
-           list.addAll(value);
+           //list.addAll(value);
            adapter.updateDataSet(value);
         }
     }
