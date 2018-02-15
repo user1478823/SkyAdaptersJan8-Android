@@ -7,7 +7,9 @@ import com.danilo.skyadapters.recycler.RvActivity;
 import java.util.List;
 
 import io.reactivex.Observable;
+import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
@@ -44,5 +46,46 @@ public class RxBackground {
 
     public interface RxBackgroundInterface {
         public List getDoInBackground();
+    }
+
+    public interface RxDoInBackground {
+        public List doInBackground();
+        public void onResultReceived(List list);
+    }
+
+    public void doInBackground(final RxDoInBackground rxDoInBackground) {
+        Observable<List> observable = Observable.just("a")
+                .map(new Function<String, List>() {
+                    @Override
+                    public List apply(String s) throws Exception {
+                        return rxDoInBackground.doInBackground();
+                    }
+                })
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread());
+
+        Observer<List> observer = new Observer<List>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(List value) {
+                rxDoInBackground.onResultReceived(value);
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        };
+
+        observable.subscribe(observer);
     }
 }
