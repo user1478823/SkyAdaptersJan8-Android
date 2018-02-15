@@ -39,7 +39,9 @@ public class AlertAdapter {
         alert.show();
     }
 
-    public void buildRadioDialog(final String sharedPref, final String alertTitle, final CharSequence[] radioButtonsText) {
+    public void buildRadioDialog(final String sharedPref, final String alertTitle,
+                                 final CharSequence[] radioButtonsText, final boolean restartActivity,
+                                 final Integer resultCode) {
 
         final String savedTheme = PreferenceManager.getDefaultSharedPreferences(a).getString(sharedPref,
                 radioButtonsText[0].toString());
@@ -72,8 +74,12 @@ public class AlertAdapter {
                         if (!themeToSave[0].contains(savedTheme)){
                             sharedPreferences.edit().putString(sharedPref, themeToSave[0]).apply();
                             sharedPreferences.edit().putInt("RadioBtnPosition", selectedRadioBtn[0]).apply();
-
-                            a.setResult(1);
+                            if (resultCode != null) {
+                                a.setResult(resultCode);
+                            }
+                            if (restartActivity) {
+                                a.recreate();
+                            }
                         }
                     }
                 })
