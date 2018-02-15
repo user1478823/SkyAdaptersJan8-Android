@@ -101,7 +101,14 @@ public class RvAdapter extends RecyclerView.Adapter<RvAdapter.ViewHolder> {
             @Override
             public void onClick(View view) {
                 if (intents != null) {
-                    a.startActivityForResult(intents[holder.getAdapterPosition()], 0001);
+                    Intent intent = intents[holder.getAdapterPosition()];
+                    int activityForResult = intent.getIntExtra("activityForResult", 0);
+                    if (activityForResult != 0) {
+                        a.startActivityForResult(intent, 0001);
+                    } else {
+                        a.startActivity(intent);
+                    }
+
                 }
                 if (drawerAdapterInterface != null) {
                     drawerAdapterInterface.onDrawerItemClick(menu, position);
