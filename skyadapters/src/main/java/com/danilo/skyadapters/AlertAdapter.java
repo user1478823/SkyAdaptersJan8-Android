@@ -74,11 +74,11 @@ public class AlertAdapter {
                         if (!themeToSave[0].contains(savedTheme)){
                             sharedPreferences.edit().putString(sharedPref, themeToSave[0]).apply();
                             sharedPreferences.edit().putInt("RadioBtnPosition", selectedRadioBtn[0]).apply();
-                            if (resultCode != null) {
-                                a.setResult(resultCode);
-                            }
                             if (restartActivity) {
                                 a.recreate();
+                            }
+                            if (resultCode != null) {
+                                a.setResult(resultCode);
                             }
                         }
                     }
