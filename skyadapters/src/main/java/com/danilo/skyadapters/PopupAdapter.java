@@ -23,20 +23,20 @@ public class PopupAdapter {
         popup = new PopupMenu(c, imageBtn);
     }
 
-    public void buildPopup(int popup_menu_xml, final OnItemClickListener onItemClickListener) {
+    public void buildPopup(int popup_menu_xml, final PopupClickListener onItemClick) {
         //Inflating the Popup using xml file
         popup.getMenuInflater().inflate(popup_menu_xml, popup.getMenu());
         //registering popup with OnMenuItemClickListener
         popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             public boolean onMenuItemClick(MenuItem item) {
-                onItemClickListener.onItemClick(item.getTitle().toString());
+                onItemClick.onItemClick(item.getTitle().toString());
                 return true;
             }
         });
         popup.show();//showing popup menu
     }
 
-    public interface OnItemClickListener {
+    public interface PopupClickListener {
         void onItemClick(String popupTitle);
     }
 }
