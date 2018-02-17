@@ -23,7 +23,7 @@ public class PopupAdapter {
         popup = new PopupMenu(c, imageBtn);
     }
 
-    public void buildPopup(int popup_menu_xml, final PopupClickListener onItemClick) {
+    public PopupMenu buildPopup(int popup_menu_xml, final PopupClickListener onItemClick) {
         //Inflating the Popup using xml file
         popup.getMenuInflater().inflate(popup_menu_xml, popup.getMenu());
         //registering popup with OnMenuItemClickListener
@@ -34,6 +34,7 @@ public class PopupAdapter {
             }
         });
         popup.show();//showing popup menu
+        return popup;
     }
 
     public interface PopupClickListener {
